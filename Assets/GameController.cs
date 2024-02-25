@@ -22,31 +22,10 @@ public class GameController : MonoBehaviour
         //Expurn rndExp = new Expurn();
         Pugba rndPugba = new Pugba();
 
-        void CheckAllStats(Beast beast)
-        {
-            Debug.Log("Stats: ");
-            foreach (var stat in beast.Stats)
-            {
-                Debug.Log(stat);
-            }
 
 
-            Debug.Log("BaseStats: ");
-            foreach (var baseStat in beast.BaseStats.ActualBaseStats)
-            {
-                Debug.Log(baseStat);
-            }
-
-
-            Debug.Log("BaseStatsLimits: ");
-            foreach (var baseStatLimit in beast.BaseStats.BaseStatsLimits)
-            {
-                Debug.Log(baseStatLimit);
-            }
-        }
-
-        //CheckAllStats(rndExp);
-        CheckAllStats(rndPugba);
+        
+        rndPugba.CheckAllStats();
 
         
 

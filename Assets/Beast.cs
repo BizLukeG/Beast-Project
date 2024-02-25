@@ -52,4 +52,25 @@ public class Beast
         BaseStats = new BaseStatDistribution(maxBaseStats);
         createStats(BaseStats);
     }
+
+     public void CheckAllStats()
+    {
+        Debug.Log("Stats: ");
+        foreach (var stat in this.Stats)
+        {
+            Debug.Log(stat);
+        }
+
+        Debug.Log("BaseStats: ");
+        foreach (var baseStat in this.BaseStats.ActualBaseStats)
+        {
+            Debug.Log(baseStat);
+        }
+
+        Debug.Log("BaseStatsLimits: ");
+        foreach (var baseStatLimit in this.BaseStats.BaseStatsLimits)
+        {
+            Debug.Log(baseStatLimit);
+        }
+    }
 }
