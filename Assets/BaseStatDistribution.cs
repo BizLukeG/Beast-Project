@@ -7,14 +7,15 @@ using System.Linq;
 public class BaseStatDistribution
 {
     int maxBaseStats;
-    int[] baseStatsLimits;
-    int[] actualBaseStats;
+    public int[] BaseStatsLimits { get; set; }
+    public int[] ActualBaseStats { get; set; }
     //create getters for these
-    public int baseAtt;
-    public int baseDef;
-    public int baseSpAtt;
-    public int baseSpDef;
-    public int baseSpeed;
+    public int BaseAtt { get; set; }
+    public int BaseDef { get; set; }
+    public int BaseSpAtt { get; set; }
+    public int BaseSpDef { get; set; }
+    public int BaseSpeed { get; set; }
+    System.Random rnd = new System.Random();
 
     int baseAccuracy;
     int baseEvasion;
@@ -23,14 +24,13 @@ public class BaseStatDistribution
     {
 
         maxBaseStats = beastMaxBaseStats;
-        //this.System.rnd = new Random();
-        baseStatsLimits = createRandomlyDistributedBaseStatsMaxs(maxBaseStats);
-        actualBaseStats = createRandomActualBaseStats(baseStatsLimits);
-        baseAtt = actualBaseStats[0];
-        baseDef = actualBaseStats[1];
-        baseSpAtt = actualBaseStats[2];
-        baseSpDef = actualBaseStats[3];
-        baseSpeed = actualBaseStats[4];
+        BaseStatsLimits = createRandomlyDistributedBaseStatsMaxs(maxBaseStats);
+        ActualBaseStats = createRandomActualBaseStats(BaseStatsLimits);
+        BaseAtt = ActualBaseStats[0];
+        BaseDef = ActualBaseStats[1];
+        BaseSpAtt = ActualBaseStats[2];
+        BaseSpDef = ActualBaseStats[3];
+        BaseSpeed = ActualBaseStats[4];
 
        
         
@@ -39,10 +39,9 @@ public class BaseStatDistribution
 
     int[] createRandomlyDistributedBaseStatsMaxs(int maxBaseStats)
     {
-        System.Random rnd = new System.Random();
-        //Makes orginal random baseStateMaxs
+        
         int[] baseStatsMaxs = new int[5]; ;
-        //make baseStatsMaxs here and push in function then add to constructor after pushed
+        
         int baseStatMaxMultiplier;
         for (int i = 0; i < 5; i++)
         {
@@ -51,21 +50,23 @@ public class BaseStatDistribution
             baseStatMaxMultiplier = rnd.Next(5, 11);
             
             baseStatsMaxs[i] = baseStatMaxMultiplier;
+            Debug.Log("baseStatMaxMultiplier " + baseStatMaxMultiplier);
         }
-        //Finds the Adjustment Number
-        for (int i = 0; i == baseStatsMaxs.Length; i++)
+        
+        for (int i = 0; i < baseStatsMaxs.Length; i++)
         {
-            baseStatsMaxs[i] = (int)Math.Round(baseStatsMaxs[i] * (rnd.Next(5, 11) / 10f), MidpointRounding.AwayFromZero);
+            baseStatsMaxs[i] = (int)Math.Round((baseStatsMaxs[i] /10f) * (maxBaseStats / 5f) );
         }
-        //foreach (int baseStatMax in baseStatsMaxs)
-        //{
-        //    baseStatMax / 10 *= this.maxBaseStats / 5;
 
-        //}
-        Debug.Log("baseStatsMaxs " + baseStatsMaxs[0]);
-        Debug.Log("baseStatsMaxs " + baseStatsMaxs[3]);
+        foreach (int baseStatMax in baseStatsMaxs)
+        {
+            Debug.Log("baseStatMaxs: " + baseStatMax);
+
+        }
+        
         int baseStatsAdjustmentNum;
         int sumBaseStatsMaxs = baseStatsMaxs.Sum();
+        Debug.Log("sumBaseStatsMaxs " + sumBaseStatsMaxs);
         if (sumBaseStatsMaxs != maxBaseStats)
             {
             baseStatsAdjustmentNum = maxBaseStats - sumBaseStatsMaxs;
@@ -74,11 +75,11 @@ public class BaseStatDistribution
         {
             baseStatsAdjustmentNum = 0;
         }
-
+        Debug.Log("baseStatsAdjustmentNum " + baseStatsAdjustmentNum);
         //Makes baseStateMaxs adjustments using the Previously calculated adjustment number
         int maxAdjustment = (int)Math.Round(maxBaseStats / 5 * 1.5, MidpointRounding.AwayFromZero);
         int statAdjusted;
-        Console.WriteLine("max Adj:" + maxAdjustment);
+        Debug.Log("max Adj: " + maxAdjustment);
 
         do
         {
@@ -94,26 +95,29 @@ public class BaseStatDistribution
             }
             
         } while (baseStatsAdjustmentNum != 0);
+        
+        foreach (int baseStatMax in baseStatsMaxs)
+        {
+            Debug.Log("baseStatMaxsAfterAdjustment: " + baseStatMax);
 
-        Debug.Log("baseStatsMaxs2 " + baseStatsMaxs[0]);
-        Debug.Log("baseStatsMaxs2 " + baseStatsMaxs[3]);
+        }
+
+        
         return baseStatsMaxs;
     }
 
     int[] createRandomActualBaseStats(int[] baseStatsLimits)
     {
-        System.Random rnd = new System.Random();
+        
         int[] actualBaseStatsLimits = new int[baseStatsLimits.Length];
-        Debug.Log("baseStatsLimits: " + baseStatsLimits[0]);
-        float multiplier = (rnd.Next(5, 11) / 10f);
-        Debug.Log("multi: " + multiplier);        
-        Debug.Log("Calc " + (baseStatsLimits[0] * multiplier));
+       
         for (int i = 0; i < baseStatsLimits.Length; i++)
         {
-
+            float multiplier = (rnd.Next(5, 11) / 10f);
+            Debug.Log("multi: " + multiplier);
             actualBaseStatsLimits[i] = (int)Math.Round(baseStatsLimits[i] * multiplier, MidpointRounding.AwayFromZero);
         }
-        Debug.Log("actualBaseStats: " + actualBaseStatsLimits[0]);
+       
      
         return actualBaseStatsLimits;
     }
