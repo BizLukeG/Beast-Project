@@ -6,7 +6,7 @@ using System;
 public class Beast
 {
     //private by default
-    string name;
+    public string Name { get; set; }
     //public int Level { get; set; }
     public BeastID beastid;
     public int maxBaseStats { get; set; }
@@ -17,6 +17,7 @@ public class Beast
     int spAtt;
     public int SpDef { get; set; }
     int speed;
+    public int Level { get; set; }
 
     public Beast(/*int level*/)
     {
@@ -42,6 +43,7 @@ public class Beast
         Stats[3] = beastBaseStats.BaseSpDef * 2 + level;
         Stats[4] = beastBaseStats.BaseSpeed * 2 + level;
 
+        Level = level;
         Att = Stats[0];
         def = Stats[1];
         spAtt = Stats[2];
@@ -75,5 +77,8 @@ public class Beast
         {
             Debug.Log(baseStatLimit);
         }
+
+        Debug.Log("Name " + Name);
+        Debug.Log("Level " + Level);
     }
 }

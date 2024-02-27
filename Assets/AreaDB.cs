@@ -28,7 +28,7 @@ public class AreaDB
         {
             AreaID.Route101, new Area(){
                 LevelRange = new int[] {2,4},
-                AvailableBeasts = new Func<int, Beast>[] {BeastCreatorDB.BeastCreators[BeastID.Expurn]}
+                AvailableBeasts = Area.getRandomAvailableBeasts(4),
             }
         }
     };

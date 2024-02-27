@@ -5,7 +5,7 @@ using System;
 
 public enum BeastID
 {
-    Expurn, pugba, lustorm
+    expurn, pugba, lustorm
 }
 
 public class BeastCreatorDB : MonoBehaviour
@@ -13,9 +13,9 @@ public class BeastCreatorDB : MonoBehaviour
     public static Dictionary<BeastID, Func<int, Beast>> BeastCreators { get; set; } = new Dictionary<BeastID, Func<int, Beast>>()
     {
         //new Beast() with subSpecies as a property 
-        {BeastID.Expurn,
-            Expurn.CreateNewExpurn
-        }
+        {BeastID.expurn, Expurn.CreateNewExpurn},
+        {BeastID.pugba, Pugba.CreateNewPugba},
+        {BeastID.lustorm, Lustrom.CreateNewLustrom}
     };
 }
 

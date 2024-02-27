@@ -12,6 +12,7 @@ public class Expurn : Beast
     {
         
         createAllStats(MaxBaseStats, level);
+        Name = "Expurn";
         Ability = 30;
         NewAtt = Att + 5;
         

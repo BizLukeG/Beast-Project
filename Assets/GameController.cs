@@ -39,8 +39,26 @@ public class GameController : MonoBehaviour
 
         Debug.Log("Hello " + MoveDB.Moves[MoveID.smack].power);
 
-        AreaDB.Areas[AreaID.Route101].AvailableBeasts[0].Invoke(AreaDB.Areas[AreaID.Route101].LevelRange[0]).CheckAllStats();
-        AreaDB.Areas[AreaID.Route101].AvailableBeasts[0].Invoke(AreaDB.Areas[AreaID.Route101].LevelRange[0]).CheckAllStats();
+        Beast getBeastPerRoute(AreaID Route){
+            System.Random r = new System.Random();
+            int rLevel = r.Next(AreaDB.Areas[Route].LevelRange[0], AreaDB.Areas[Route].LevelRange[1]);
+            int rBeastIndex = r.Next(0, Enum.GetNames(typeof(BeastID)).Length);
+
+            return AreaDB.Areas[Route].AvailableBeasts[rBeastIndex].Invoke(rLevel);
+        }
+
+        //Debug.Log(getBeastPerRoute(AreaID.Route101).Name);
+        getBeastPerRoute(AreaID.Route101).CheckAllStats();
+        getBeastPerRoute(AreaID.Route101).CheckAllStats();
+
+        //AreaDB.Areas[AreaID.Route101].AvailableBeasts[0].Invoke(AreaDB.Areas[AreaID.Route101].LevelRange[0]).CheckAllStats();
+        //AreaDB.Areas[AreaID.Route101].AvailableBeasts[0].Invoke(AreaDB.Areas[AreaID.Route101].LevelRange[0]).CheckAllStats();
+
+
+        //foreach( var availableBeast in AreaDB.Areas[AreaID.Route101].AvailableBeasts)
+        //{
+        //    Debug.Log("Name: " + availableBeast.Invoke(AreaDB.Areas[AreaID.Route101].LevelRange[0]).Name);
+        //}
     }
 
     // Update is called once per frame
