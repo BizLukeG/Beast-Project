@@ -8,6 +8,7 @@ public class Beast
     //private by default
     string name;
     //public int Level { get; set; }
+    public BeastID beastid;
     public int maxBaseStats { get; set; }
     public BaseStatDistribution BaseStats { get; set; }
     public int[] Stats { get; set; }
@@ -29,16 +30,17 @@ public class Beast
         //spAtt = Stats[2];
         //SpDef = Stats[3];
         //speed = Stats[4];
+        //createAllStats(maxBaseStats);
     }
 
-    public void createStats(BaseStatDistribution beastBaseStats)
+    public void createStats(BaseStatDistribution beastBaseStats, int level)
     {
         Stats = new int[5];
-        Stats[0] = beastBaseStats.BaseAtt * 2;
-        Stats[1] = beastBaseStats.BaseDef * 2;
-        Stats[2] = beastBaseStats.BaseSpAtt * 2;
-        Stats[3] = beastBaseStats.BaseSpDef * 2;
-        Stats[4] = beastBaseStats.BaseSpeed * 2;
+        Stats[0] = beastBaseStats.BaseAtt * 2 + level;
+        Stats[1] = beastBaseStats.BaseDef * 2 + level;
+        Stats[2] = beastBaseStats.BaseSpAtt * 2 + level;
+        Stats[3] = beastBaseStats.BaseSpDef * 2 + level;
+        Stats[4] = beastBaseStats.BaseSpeed * 2 + level;
 
         Att = Stats[0];
         def = Stats[1];
@@ -48,9 +50,10 @@ public class Beast
         //return stats;
     }
 
-    public void createAllStats(int maxBaseStats){
+    public void createAllStats(int maxBaseStats, int level){
+        Debug.Log("maxBaseStats " + maxBaseStats);
         BaseStats = new BaseStatDistribution(maxBaseStats);
-        createStats(BaseStats);
+        createStats(BaseStats, level);
     }
 
      public void CheckAllStats()

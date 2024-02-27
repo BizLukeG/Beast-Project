@@ -5,15 +5,23 @@ using UnityEngine;
 public class Expurn : Beast
 {
     public int Ability { get; set; } = 20;
-    //public int Level { get; set; } = 20;
+    public int MaxBaseStats { get; } = 300;
     public int NewAtt { get; set; }
 
-    public Expurn(/*int level*/) : base()
+    public Expurn(int level) : base()
     {
-        maxBaseStats = 300;
-        createAllStats(300);
+        
+        createAllStats(MaxBaseStats, level);
         Ability = 30;
         NewAtt = Att + 5;
-        //Beast.Level = 4;
+        
+    }
+
+    static public Beast CreateNewExpurn(int level)
+    {
+        Beast rndExpern = new Expurn(level);
+        return rndExpern;
     }
 }
+
+//Need a seperate class for each type of beast but not each type of move because each subtype of Beast can vary but each subtype of move doesn't
