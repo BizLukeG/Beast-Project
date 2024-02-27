@@ -7,7 +7,8 @@ public class Beast
 {
     //private by default
     public string Name { get; set; }
-    //public int Level { get; set; }
+    public int MaxBaseStats { get; set;  }
+    public int Level { get; set; }
     public BeastID beastid;
     public int maxBaseStats { get; set; }
     public BaseStatDistribution BaseStats { get; set; }
@@ -17,22 +18,26 @@ public class Beast
     int spAtt;
     public int SpDef { get; set; }
     int speed;
-    public int Level { get; set; }
+    
 
-    public Beast(/*int level*/)
+    public Beast()
     {
-        //move into functions that update the beast properties on their own
-        //level = 20;
-        //maxBaseStats = 300;
-        //BaseStats = new BaseStatDistribution(maxBaseStats);
-        //Stats = createStats(BaseStats);
-        //Att = Stats[0];
-        //def = Stats[1];
-        //spAtt = Stats[2];
-        //SpDef = Stats[3];
-        //speed = Stats[4];
-        //createAllStats(maxBaseStats);
+
     }
+
+    public Beast(string name, int level, int maxBaseStats)
+    {
+        MaxBaseStats = maxBaseStats;
+        Level = level;
+        createAllStats();
+        Name = name;
+    }
+
+    //public Beast CreateNewBeast(string name, int level, int maxBaseStats)
+    //{
+    //    Beast beast = new Beast(name, level, maxBaseStats);
+    //    return beast;
+    //}
 
     public void createStats(BaseStatDistribution beastBaseStats, int level)
     {
@@ -52,10 +57,10 @@ public class Beast
         //return stats;
     }
 
-    public void createAllStats(int maxBaseStats, int level){
-        Debug.Log("maxBaseStats " + maxBaseStats);
-        BaseStats = new BaseStatDistribution(maxBaseStats);
-        createStats(BaseStats, level);
+    public void createAllStats(){
+        //Debug.Log("maxBaseStats " + MaxBaseStats);
+        BaseStats = new BaseStatDistribution(MaxBaseStats);
+        createStats(BaseStats, Level);
     }
 
      public void CheckAllStats()
@@ -80,5 +85,6 @@ public class Beast
 
         Debug.Log("Name " + Name);
         Debug.Log("Level " + Level);
+        Debug.Log("MBS " + MaxBaseStats);
     }
 }

@@ -39,15 +39,18 @@ public class GameController : MonoBehaviour
 
         Debug.Log("Hello " + MoveDB.Moves[MoveID.smack].power);
 
-        Beast getBeastPerRoute(AreaID Route){
+        Beast getBeastPerRoute(AreaID Route) {
             System.Random r = new System.Random();
             int rLevel = r.Next(AreaDB.Areas[Route].LevelRange[0], AreaDB.Areas[Route].LevelRange[1]);
             int rBeastIndex = r.Next(0, Enum.GetNames(typeof(BeastID)).Length);
+            Beast beast = new Beast(BeastBaseDB.BeastBases[(BeastID)rBeastIndex].Name, rLevel, BeastBaseDB.BeastBases[(BeastID)rBeastIndex].MaxBaseStats);
+            
 
-            return AreaDB.Areas[Route].AvailableBeasts[rBeastIndex].Invoke(rLevel);
+            return beast;
         }
 
-        //Debug.Log(getBeastPerRoute(AreaID.Route101).Name);
+        //Debug.Log("MBS " + getBeastPerRoute(AreaID.Route101).MaxBaseStats);
+        //getBeastPerRoute(AreaID.Route101).CheckAllStats();
         getBeastPerRoute(AreaID.Route101).CheckAllStats();
         getBeastPerRoute(AreaID.Route101).CheckAllStats();
 
@@ -59,6 +62,8 @@ public class GameController : MonoBehaviour
         //{
         //    Debug.Log("Name: " + availableBeast.Invoke(AreaDB.Areas[AreaID.Route101].LevelRange[0]).Name);
         //}
+
+
     }
 
     // Update is called once per frame

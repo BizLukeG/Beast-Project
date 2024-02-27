@@ -26,7 +26,8 @@ public class AreaDB
     public static Dictionary<AreaID, Area> Areas { get; set; } = new Dictionary<AreaID, Area>()
     {
         {
-            AreaID.Route101, new Area(){
+            AreaID.Route101, 
+            new Area(){
                 LevelRange = new int[] {2,4},
                 AvailableBeasts = Area.getRandomAvailableBeasts(4),
             }

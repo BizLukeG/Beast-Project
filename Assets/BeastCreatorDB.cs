@@ -8,14 +8,33 @@ public enum BeastID
     expurn, pugba, lustorm
 }
 
-public class BeastCreatorDB : MonoBehaviour
+public class BeastBaseDB : MonoBehaviour
 {
-    public static Dictionary<BeastID, Func<int, Beast>> BeastCreators { get; set; } = new Dictionary<BeastID, Func<int, Beast>>()
+    public static Dictionary<BeastID, Beast> BeastBases { get; set; } = new Dictionary<BeastID, Beast>()
     {
-        //new Beast() with subSpecies as a property 
-        {BeastID.expurn, Expurn.CreateNewExpurn},
-        {BeastID.pugba, Pugba.CreateNewPugba},
-        {BeastID.lustorm, Lustrom.CreateNewLustrom}
+        //beastBase to take values from 
+        {   
+            BeastID.expurn, 
+            new Beast(){
+                Name = "Expurn",
+                MaxBaseStats = 300,
+            }
+        },
+        {
+            BeastID.pugba,
+            new Beast(){
+                Name = "Pugba",
+                MaxBaseStats = 200,
+            }
+        },
+        {
+            BeastID.lustorm,
+            new Beast(){
+                Name = "Lustorm",
+                MaxBaseStats = 400,
+            }
+        },
+        
     };
 }
 
