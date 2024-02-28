@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour
         // Start is called before the first frame update
     void Start()
     {
+        BeastBaseDB.Initialize();
         
         Debug.Log("Howdy");
 
@@ -37,22 +38,39 @@ public class GameController : MonoBehaviour
         //rndExp.CheckAllStats();
         //rndExp2.CheckAllStats();
 
-        Debug.Log("Hello " + MoveDB.Moves[MoveID.smack].power);
+        //Debug.Log("Hello " + MoveDB.Moves[MoveID.Smack].Power);
 
         Beast getBeastPerRoute(AreaID Route) {
             System.Random r = new System.Random();
             int rLevel = r.Next(AreaDB.Areas[Route].LevelRange[0], AreaDB.Areas[Route].LevelRange[1]);
             int rBeastIndex = r.Next(0, Enum.GetNames(typeof(BeastID)).Length);
+            Debug.Log("NameIDLength " + Enum.GetNames(typeof(BeastID)).Length);
+            Debug.Log("rBeastIndex " + rBeastIndex);
+            Debug.Log("BeastID2 " + (BeastID)rBeastIndex);
+            Debug.Log("BeastName " + BeastBaseDB.BeastBases[(BeastID)rBeastIndex].Name);
             Beast beast = new Beast(BeastBaseDB.BeastBases[(BeastID)rBeastIndex].Name, rLevel, BeastBaseDB.BeastBases[(BeastID)rBeastIndex].MaxBaseStats);
-            
+            //beast.createMoveSet(beast.Name);
 
             return beast;
         }
 
         //Debug.Log("MBS " + getBeastPerRoute(AreaID.Route101).MaxBaseStats);
         //getBeastPerRoute(AreaID.Route101).CheckAllStats();
-        getBeastPerRoute(AreaID.Route101).CheckAllStats();
-        getBeastPerRoute(AreaID.Route101).CheckAllStats();
+
+        //Newest
+        //getBeastPerRoute(AreaID.Route101).CheckAllStats();
+        //getBeastPerRoute(AreaID.Route101).CheckAllStats();
+
+        //Debug.Log(getBeastPerRoute(AreaID.Route101)/*.MoveSet[0].Power*/);
+
+        Beast currentBeast = getBeastPerRoute(AreaID.Route101);
+        currentBeast.CheckAllStats();
+        //foreach (var move in currentBeast.MoveSet)
+        //{
+        //    Debug.Log("Power " + MoveDB.Moves[move].Power);
+        //}
+
+        
 
         //AreaDB.Areas[AreaID.Route101].AvailableBeasts[0].Invoke(AreaDB.Areas[AreaID.Route101].LevelRange[0]).CheckAllStats();
         //AreaDB.Areas[AreaID.Route101].AvailableBeasts[0].Invoke(AreaDB.Areas[AreaID.Route101].LevelRange[0]).CheckAllStats();

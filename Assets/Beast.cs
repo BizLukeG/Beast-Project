@@ -3,12 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+public enum Typing
+{
+   None, Rock, Aquatic, Corrupt , Mystic, Sacred, Glacial, Static, Nature, Native, Toxic, Hostile, Aerial
+}
+
 public class Beast
 {
     //private by default
-    public string Name { get; set; }
-    public int MaxBaseStats { get; set;  }
+    public BeastID Name { get; set; }
+    public int MaxBaseStats { get; set; }
     public int Level { get; set; }
+    public Typing Typing1 { get; set; }
+    public Typing Typing2 { get; set; }
+    public List<MoveID> MoveSet { get; set; } = new List<MoveID>();
+    public Dictionary<int, MoveID> LearnSet { get; set; }
     public BeastID beastid;
     public int maxBaseStats { get; set; }
     public BaseStatDistribution BaseStats { get; set; }
@@ -25,12 +34,14 @@ public class Beast
 
     }
 
-    public Beast(string name, int level, int maxBaseStats)
+    public Beast(BeastID name, int level, int maxBaseStats)
     {
         MaxBaseStats = maxBaseStats;
         Level = level;
-        createAllStats();
         Name = name;
+        createAllStats();
+        createMoveSet(name, level);
+        
     }
 
     //public Beast CreateNewBeast(string name, int level, int maxBaseStats)
@@ -54,6 +65,8 @@ public class Beast
         spAtt = Stats[2];
         SpDef = Stats[3];
         speed = Stats[4];
+
+        //MoveSet.Add(MoveDB.Moves[LearnSet[1]]);
         //return stats;
     }
 
@@ -63,7 +76,48 @@ public class Beast
         createStats(BaseStats, Level);
     }
 
-     public void CheckAllStats()
+    public void createMoveSet(BeastID name, int level){
+        //Debug.Log("Move " + MoveDB.Moves[BeastBaseDB.BeastBases[name].LearnSet[1]].Power);
+        //MoveSet.Add(MoveDB.Moves[BeastBaseDB.BeastBases[name].LearnSet[1]]);
+        //Debug.Log("MoveSet A " + MoveSet);
+        
+
+        foreach (var kvp in BeastBaseDB.BeastBases[name].LearnSet)
+        {
+            Debug.Log("MoveSetCount " + MoveSet.Count);
+            if (MoveSet.Count < 4)
+            {
+                if (kvp.Key <= level)
+                {
+                    MoveSet.Add(kvp.Value);
+                }
+
+            }
+            else
+            {
+                System.Random r = new System.Random();
+                int rInt = r.Next(0,4);
+                MoveSet.RemoveAt(rInt);
+                if (kvp.Key <= level)
+                {
+                    MoveSet.Add(kvp.Value);
+                }
+            }
+            
+        }
+        //Debug.Log("MoveSet B " + MoveSet);
+        foreach (var move in MoveSet)
+        {
+            Debug.Log("MoveSet B " + MoveDB.Moves[move].Power);
+        }
+
+
+        //BeastBaseDB.BeastBases[name].LearnSet[1]
+        //Debug.Log("Power " + MoveSet[0].Power);
+        //for
+    }
+
+    public void CheckAllStats()
     {
         Debug.Log("Stats: ");
         foreach (var stat in this.Stats)

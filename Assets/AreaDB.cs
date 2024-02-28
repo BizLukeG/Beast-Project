@@ -28,7 +28,7 @@ public class AreaDB
         {
             AreaID.Route101, 
             new Area(){
-                LevelRange = new int[] {2,4},
+                LevelRange = new int[] {7,9},
                 AvailableBeasts = Area.getRandomAvailableBeasts(4),
             }
         }

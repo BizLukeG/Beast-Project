@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Move 
 {
-    public int power { get; set; }
-    public int accuracy { get; set; }
-    public string typing { get; set; }
+    public int Power { get; set; }
+    public int Accuracy { get; set; }
+    public Typing Typing { get; set; }
+    
 
     public Move()
     {
