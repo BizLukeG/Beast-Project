@@ -77,9 +77,7 @@ public class Beast
     }
 
     public void createMoveSet(BeastID name, int level){
-        //Debug.Log("Move " + MoveDB.Moves[BeastBaseDB.BeastBases[name].LearnSet[1]].Power);
-        //MoveSet.Add(MoveDB.Moves[BeastBaseDB.BeastBases[name].LearnSet[1]]);
-        //Debug.Log("MoveSet A " + MoveSet);
+        
         
 
         foreach (var kvp in BeastBaseDB.BeastBases[name].LearnSet)
@@ -108,13 +106,11 @@ public class Beast
         //Debug.Log("MoveSet B " + MoveSet);
         foreach (var move in MoveSet)
         {
-            Debug.Log("MoveSet B " + MoveDB.Moves[move].Power);
+            Debug.Log("MoveSet B " + MoveDB.Moves[move].Name);
         }
 
 
-        //BeastBaseDB.BeastBases[name].LearnSet[1]
-        //Debug.Log("Power " + MoveSet[0].Power);
-        //for
+        
     }
 
     public void CheckAllStats()

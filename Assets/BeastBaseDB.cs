@@ -11,6 +11,17 @@ public enum BeastID
 public class BeastBaseDB : MonoBehaviour
 {
 
+    public static void Init()
+    {
+        foreach (var kvp in BeastBases)
+        {
+            var beastName = kvp.Key;
+            var beast = kvp.Value;
+
+            beast.Name = beastName;
+        }
+    }
+
     public static Dictionary<BeastID, Beast> BeastBases { get; set; } = new Dictionary<BeastID, Beast>()
     {
         //beastBase to take values from 
@@ -59,16 +70,6 @@ public class BeastBaseDB : MonoBehaviour
         
     };
 
-    public static void Initialize()
-    {
-        foreach (var kvp in BeastBases)
-        {
-            var beastName = kvp.Key;
-            var beast = kvp.Value;
-
-            beast.Name = beastName;
-        }
-    }
 }
 
 //dude does the object instantiation syntax because that is the only way to pass in info into the dictionary

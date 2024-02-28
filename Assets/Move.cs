@@ -7,6 +7,7 @@ public class Move
     public int Power { get; set; }
     public int Accuracy { get; set; }
     public Typing Typing { get; set; }
+    public MoveID Name { get; set; }
     
 
     public Move()
