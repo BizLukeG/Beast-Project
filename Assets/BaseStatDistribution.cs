@@ -15,6 +15,7 @@ public class BaseStatDistribution
     public int BaseSpAtt { get; set; }
     public int BaseSpDef { get; set; }
     public int BaseSpeed { get; set; }
+    public int BaseHP { get; set; }
     System.Random rnd = new System.Random();
 
     int baseAccuracy;
@@ -31,6 +32,7 @@ public class BaseStatDistribution
         BaseSpAtt = ActualBaseStats[2];
         BaseSpDef = ActualBaseStats[3];
         BaseSpeed = ActualBaseStats[4];
+        BaseHP = ActualBaseStats[5];
 
        
         
@@ -40,10 +42,10 @@ public class BaseStatDistribution
     int[] createRandomlyDistributedBaseStatsMaxs(int maxBaseStats)
     {
         
-        int[] baseStatsMaxs = new int[5]; ;
+        int[] baseStatsMaxs = new int[6]; ;
         
         int baseStatMaxMultiplier;
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 6; i++)
         {
             baseStatMaxMultiplier = 0;
 
@@ -55,7 +57,7 @@ public class BaseStatDistribution
         
         for (int i = 0; i < baseStatsMaxs.Length; i++)
         {
-            baseStatsMaxs[i] = (int)Math.Round((baseStatsMaxs[i] /10f) * (maxBaseStats / 5f) );
+            baseStatsMaxs[i] = (int)Math.Round((baseStatsMaxs[i] /10f) * (maxBaseStats / 6f) );
         }
 
         foreach (int baseStatMax in baseStatsMaxs)
@@ -83,7 +85,7 @@ public class BaseStatDistribution
 
         do
         {
-            statAdjusted = rnd.Next(0, 5);
+            statAdjusted = rnd.Next(0, 6);
             baseStatsMaxs[statAdjusted] += 1;
             if (baseStatsMaxs[statAdjusted] > maxAdjustment)
             {

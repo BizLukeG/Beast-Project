@@ -23,11 +23,17 @@ public class Beast
     public BaseStatDistribution BaseStats { get; set; }
     public int[] Stats { get; set; }
     public int Att { get; set; }
-    int def;
-    int spAtt;
+    public int Def { get; set; }
+    public int SpAtt { get; set; }
     public int SpDef { get; set; }
-    int speed;
-    
+    public int Speed { get; set; }
+    public int HP { get; set; }
+    public int CurrentAtt { get; set; }
+    public int CurrentDef { get; set; }
+    public int CurrentSpAtt { get; set; }
+    public int CurrentSpDef { get; set; }
+    public int CurrentSpeed { get; set; }
+    public int CurrentHP { get; set; }
 
     public Beast()
     {
@@ -52,19 +58,28 @@ public class Beast
 
     public void createStats(BaseStatDistribution beastBaseStats, int level)
     {
-        Stats = new int[5];
+        Stats = new int[6];
         Stats[0] = beastBaseStats.BaseAtt * 2 + level;
         Stats[1] = beastBaseStats.BaseDef * 2 + level;
         Stats[2] = beastBaseStats.BaseSpAtt * 2 + level;
         Stats[3] = beastBaseStats.BaseSpDef * 2 + level;
         Stats[4] = beastBaseStats.BaseSpeed * 2 + level;
+        Stats[5] = beastBaseStats.BaseHP * 2 + level;
 
         Level = level;
         Att = Stats[0];
-        def = Stats[1];
-        spAtt = Stats[2];
+        Def = Stats[1];
+        SpAtt = Stats[2];
         SpDef = Stats[3];
-        speed = Stats[4];
+        Speed = Stats[4];
+        HP = Stats[5];
+
+        CurrentAtt = Att;
+        CurrentDef = Def;
+        CurrentSpAtt = SpAtt;
+        CurrentSpDef = SpDef;
+        CurrentSpeed = Speed;
+        CurrentHP = HP;
 
         //MoveSet.Add(MoveDB.Moves[LearnSet[1]]);
         //return stats;
