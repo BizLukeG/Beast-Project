@@ -8,7 +8,7 @@ public enum BattleState
     Battle, BattleOver
 }
 
-public class BattleSystem : MonoBehaviour
+public class BattleSystem
 {
     static public bool isTrainerBattle { set; get; } = false;
     static public bool isWildBattle { set; get; } = false;
@@ -17,23 +17,26 @@ public class BattleSystem : MonoBehaviour
     static public BattleState BattleState { get; set; }
     static public Stack<BattleState> BattleStateStack = new Stack<BattleState>();
     static public Beast PlayerActiveBeast { get; set; }
-    static public Beast WildBeast { get; set; }
+    public Beast WildBeast { get; set; }
+    public GameObject EnemyBattleUnitUIGO;
+    public BattleUnitUI EnemyBattleUnitUI = new BattleUnitUI();
+    public BattleUnitUI PlayerBattleUnitUI = new BattleUnitUI();
+    public int NoMatter;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // Awake is called when Scene loads only works when inheriting from monoBehaviour
+    //void Awake()
+    //{
+    //    EnemyBattleUnitUI = new BattleUnitUI();
+    //    EnemyBattleUnitUIGO = GameObject.Find("EnemyUnitUI");
+    //    EnemyBattleUnitUI = EnemyBattleUnitUIGO.GetComponent<BattleUnitUI>(); 
+    //}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
 
-    public static void HandleBattleGameState()
+    public void HandleBattleGameState()
     {
-        
+        //EnemyBattleUnitUI = new BattleUnitUI();
+        Debug.Log("BattleUnitUI " + EnemyBattleUnitUI.Hi);
 
         if (BattleStateStack.Peek() == BattleState.Battle)
         {
@@ -48,7 +51,7 @@ public class BattleSystem : MonoBehaviour
         
     }
 
-    public static void HandleBattleBattleState()
+    public void HandleBattleBattleState()
     {
         if (isWildBattle)
         {
@@ -58,7 +61,8 @@ public class BattleSystem : MonoBehaviour
             Beast firstUnitToMove;
             Beast secondUnitToMove;
             Debug.Log($"WildBeastSpeed {WildBeast.CurrentSpeed} \nplayerActiveBeast {PlayerActiveBeast.CurrentSpeed}");
-            
+            EnemyBattleUnitUI.SetupEnemy(WildBeast);
+            PlayerBattleUnitUI.SetupPlayer(PlayerActiveBeast);
 
             if (WildBeast.Speed >= PlayerActiveBeast.Speed)
             {
@@ -92,7 +96,7 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    static void ExecuteMove(Beast firstMover, Beast secondMover)
+    void ExecuteMove(Beast firstMover, Beast secondMover)
     {
         
        int damage = (int)Math.Round(MoveDB.Moves[MovesQueue.Dequeue()].Power/100f * (firstMover.CurrentAtt - secondMover.CurrentDef), MidpointRounding.AwayFromZero);
@@ -123,7 +127,7 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    static bool IsBattleOver()
+    bool IsBattleOver()
     {
         if (WildBeast.CurrentHP <= 0)
         {

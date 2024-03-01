@@ -13,16 +13,23 @@ public class GameController : MonoBehaviour
 {
     GameState State;
     static public Stack<GameState> GameStateStack { get; set; } = new Stack<GameState>();
-
+    public GameObject BattleSystemGO;
+    public BattleSystem BattleSystem = new BattleSystem();
     //private void Awake()
     //{
     //    Beast Roger = new Beast();
     //    Console.WriteLine(Roger.stats);
     //}
-
+    void Awake()
+    {
+        //BattleSystem = new BattleSystem();
+        //BattleSystemGO = GameObject.Find("BattleSystem");
+        //BattleSystem = BattleSystemGO.GetComponent<BattleSystem>();
+    }
     // Start is called before the first frame update
     void Start()
     {
+        
         GameStateStack.Push(GameState.OverWorld);
         BeastBaseDB.Init();
         MoveDB.Init();
