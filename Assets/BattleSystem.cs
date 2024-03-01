@@ -17,10 +17,11 @@ public class BattleSystem
     static public BattleState BattleState { get; set; }
     static public Stack<BattleState> BattleStateStack = new Stack<BattleState>();
     static public Beast PlayerActiveBeast { get; set; }
-    public Beast WildBeast { get; set; }
+    static public Beast WildBeast { get; set; }
     public GameObject EnemyBattleUnitUIGO;
-    public BattleUnitUI EnemyBattleUnitUI = new BattleUnitUI();
-    public BattleUnitUI PlayerBattleUnitUI = new BattleUnitUI();
+    //public BattleUnitUI EnemyBattleUnitUI = new BattleUnitUI();
+    //public BattleUnitUI PlayerBattleUnitUI = new BattleUnitUI();
+    //public BattleUnitUI BattleUnitUI;
     public int NoMatter;
 
     // Awake is called when Scene loads only works when inheriting from monoBehaviour
@@ -33,10 +34,10 @@ public class BattleSystem
 
    
 
-    public void HandleBattleGameState()
+    static public void HandleBattleGameState()
     {
         //EnemyBattleUnitUI = new BattleUnitUI();
-        Debug.Log("BattleUnitUI " + EnemyBattleUnitUI.Hi);
+        //Debug.Log("BattleUnitUI " + EnemyBattleUnitUI.Hi);
 
         if (BattleStateStack.Peek() == BattleState.Battle)
         {
@@ -51,7 +52,7 @@ public class BattleSystem
         
     }
 
-    public void HandleBattleBattleState()
+    static public void HandleBattleBattleState()
     {
         if (isWildBattle)
         {
@@ -61,8 +62,8 @@ public class BattleSystem
             Beast firstUnitToMove;
             Beast secondUnitToMove;
             Debug.Log($"WildBeastSpeed {WildBeast.CurrentSpeed} \nplayerActiveBeast {PlayerActiveBeast.CurrentSpeed}");
-            EnemyBattleUnitUI.SetupEnemy(WildBeast);
-            PlayerBattleUnitUI.SetupPlayer(PlayerActiveBeast);
+            BattleUnitUI.SetupEnemy(WildBeast);
+            BattleUnitUI.SetupPlayer(PlayerActiveBeast);
 
             if (WildBeast.Speed >= PlayerActiveBeast.Speed)
             {
@@ -96,7 +97,7 @@ public class BattleSystem
         }
     }
 
-    void ExecuteMove(Beast firstMover, Beast secondMover)
+    static void ExecuteMove(Beast firstMover, Beast secondMover)
     {
         
        int damage = (int)Math.Round(MoveDB.Moves[MovesQueue.Dequeue()].Power/100f * (firstMover.CurrentAtt - secondMover.CurrentDef), MidpointRounding.AwayFromZero);
@@ -127,7 +128,7 @@ public class BattleSystem
         }
     }
 
-    bool IsBattleOver()
+    static bool IsBattleOver()
     {
         if (WildBeast.CurrentHP <= 0)
         {

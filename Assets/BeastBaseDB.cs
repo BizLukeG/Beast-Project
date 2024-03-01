@@ -19,6 +19,7 @@ public class BeastBaseDB : MonoBehaviour
             var beast = kvp.Value;
 
             beast.Name = beastName;
+            //beast.FrontSprite = Resources.Load<Sprite>("Sprites/Brown");
         }
     }
 
@@ -29,6 +30,7 @@ public class BeastBaseDB : MonoBehaviour
             BeastID.Expurn, 
             new Beast(){
                 //Name = "Expurn",
+                //FrontSprite = Resources.Load<Sprite>("Sprites/Brown"),
                 MaxBaseStats = 300,
                 Typing1 = Typing.Static,
                 Typing2 = Typing.Corrupt,
@@ -43,6 +45,7 @@ public class BeastBaseDB : MonoBehaviour
             BeastID.Pugba,
             new Beast(){
                 //Name = "Pugba",
+                FrontSprite = Resources.Load<Sprite>("Sprites/Brown"),
                 MaxBaseStats = 200,
                 Typing1 = Typing.Native,
                 Typing2 = Typing.None,
@@ -57,6 +60,7 @@ public class BeastBaseDB : MonoBehaviour
             BeastID.Lustorm,
             new Beast(){
                 //Name = "Lustorm",
+                FrontSprite = Resources.Load<Sprite>("Sprites/Brown"),
                 MaxBaseStats = 400,
                 Typing1 = Typing.Aerial,
                 Typing2 = Typing.None,

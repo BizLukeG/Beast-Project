@@ -34,6 +34,7 @@ public class Beast
     public int CurrentSpDef { get; set; }
     public int CurrentSpeed { get; set; }
     public int CurrentHP { get; set; }
+    public Sprite FrontSprite { get; set; } //= Resources.Load<Sprite>("Sprites/Brown");
 
     public Beast()
     {
@@ -47,7 +48,8 @@ public class Beast
         Name = name;
         createAllStats();
         createMoveSet(name, level);
-        
+        FrontSprite = Resources.Load<Sprite>($"Sprites/{name.ToString()} FrontSprite");
+
     }
 
     //public Beast CreateNewBeast(string name, int level, int maxBaseStats)
