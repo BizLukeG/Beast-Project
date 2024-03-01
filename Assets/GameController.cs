@@ -8,7 +8,7 @@ public enum GameState
     OverWorld, Battle
 }
 
-//MonoBehavior lets u attach a script to a game object in the UI also making it so that you can access Instance variables. (I think)
+//MonoBehavior lets u attach a script to a game object that makes and instance of it in the UI also making it so that you can access Instance variables. (I think)
 public class GameController : MonoBehaviour
 {
     GameState State;
