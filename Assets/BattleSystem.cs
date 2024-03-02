@@ -5,7 +5,7 @@ using System;
 
 public enum BattleState
 {
-    Battle, BattleOver
+    Battle, ActionSelection, MoveSelection, BattleOver
 }
 
 public class BattleSystem
@@ -34,15 +34,24 @@ public class BattleSystem
 
    
 
-    static public void HandleBattleGameState()
+    static public void HandleGameStateBattle()
     {
         //EnemyBattleUnitUI = new BattleUnitUI();
         //Debug.Log("BattleUnitUI " + EnemyBattleUnitUI.Hi);
 
         if (BattleStateStack.Peek() == BattleState.Battle)
         {
-            HandleBattleBattleState();
-        }else if(BattleStateStack.Peek() == BattleState.BattleOver)
+            HandleBattleStateBattle();
+        }else if (BattleStateStack.Peek() == BattleState.ActionSelection)
+        {
+            
+            ActionSelector.HandleBattleStateActionSelection();
+        }else if (BattleStateStack.Peek() == BattleState.MoveSelection)
+        {
+
+            MoveSelector.HandleBattleStateMoveSelection();
+        }
+        else if(BattleStateStack.Peek() == BattleState.BattleOver)
         {
             //maybe have to use GameController.GetComponent<GameController>() to get an instance of GameController
             GameController.GameStateStack.Pop();
@@ -52,7 +61,7 @@ public class BattleSystem
         
     }
 
-    static public void HandleBattleBattleState()
+    static public void HandleBattleStateBattle()
     {
         if (isWildBattle)
         {
@@ -64,6 +73,10 @@ public class BattleSystem
             Debug.Log($"WildBeastSpeed {WildBeast.CurrentSpeed} \nplayerActiveBeast {PlayerActiveBeast.CurrentSpeed}");
             BattleUnitUI.SetupEnemy(WildBeast);
             BattleUnitUI.SetupPlayer(PlayerActiveBeast);
+
+            BattleStateStack.Push(BattleState.ActionSelection);
+            
+            
 
             if (WildBeast.Speed >= PlayerActiveBeast.Speed)
             {

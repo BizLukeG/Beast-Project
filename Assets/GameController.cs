@@ -58,7 +58,7 @@ public class GameController : MonoBehaviour
         else if (GameStateStack.Peek() == GameState.Battle)
         {
             
-            BattleSystem.HandleBattleGameState();
+            BattleSystem.HandleGameStateBattle();
             Debug.Log("Battle");
             if (Input.GetKeyDown(KeyCode.J))
             {
