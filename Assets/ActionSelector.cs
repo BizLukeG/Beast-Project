@@ -34,7 +34,7 @@ public class ActionSelector
             if (currentAction == 0)
             {
                 // Fight
-                MoveSelector.SetMoveNames(BattleSystem.PlayerActiveBeast.MoveSet);
+                
                 BattleSystem.BattleStateStack.Push(BattleState.MoveSelection);
             }
             else if (currentAction == 1)

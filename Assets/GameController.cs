@@ -14,11 +14,16 @@ public class GameController : MonoBehaviour
     GameState State;
     static public Stack<GameState> GameStateStack { get; set; } = new Stack<GameState>();
     public GameObject BattleSystemGO;
+
     //public BattleSystem BattleSystem;
 
-    
+    // Awake is called when Scene loads only works when inheriting from monoBehaviour
     void Awake()
     {
+        BattleSystem.ActionSelectorGO = GameObject.Find("Battle Action Selector");
+        BattleSystem.ActionSelectorGO.SetActive(false);
+        BattleSystem.MoveSelectorGO = GameObject.Find("Battle Move Selector");
+        BattleSystem.MoveSelectorGO.SetActive(false);
         //BattleSystem = new BattleSystem();
         //BattleSystemGO = GameObject.Find("BattleSystem");
         //BattleSystem = BattleSystemGO.GetComponent<BattleSystem>();
@@ -47,7 +52,7 @@ public class GameController : MonoBehaviour
         if(GameStateStack.Peek() == GameState.OverWorld)
         {
             Debug.Log("OverWorld");
-            if (Input.GetKeyDown(KeyCode.K))
+            if (Input.GetKeyDown(KeyCode.X))
             {
                 BattleSystem.WildBeast = Area.getBeastPerRoute(AreaID.Route101);
                 BattleSystem.BattleStateStack.Push(BattleState.StartBattle);

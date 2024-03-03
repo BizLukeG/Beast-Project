@@ -38,7 +38,7 @@ public class MoveSelector
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            SelectedMove = BattleSystem.PlayerActiveBeast.MoveSet[currentMove];
+            
             BattleSystem.BattleStateStack.Push(BattleState.ExecuteMoves);
             //if (move.BP == 0) return;
             //dialogBox.EnableMoveSelector(false);

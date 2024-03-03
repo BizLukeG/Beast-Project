@@ -5,7 +5,7 @@ using System;
 
 public enum BattleState
 {
-    StartBattle, ActionSelection, MoveSelection, ExecuteMoves, BattleOver
+    StartBattle, ActionSelection, MoveSelection, ExecuteMoves, Dialog, BattleOver
 }
 
 public class BattleSystem
@@ -18,7 +18,11 @@ public class BattleSystem
     static public Stack<BattleState> BattleStateStack = new Stack<BattleState>();
     static public Beast PlayerActiveBeast { get; set; }
     static public Beast WildBeast { get; set; }
-    public GameObject EnemyBattleUnitUIGO;
+    static public GameObject ActionSelectorGO { get; set; }
+    static public GameObject MoveSelectorGO { get; set; }
+    static bool hold = true;
+    
+    //public GameObject EnemyBattleUnitUIGO;
     //public BattleUnitUI EnemyBattleUnitUI = new BattleUnitUI();
     //public BattleUnitUI PlayerBattleUnitUI = new BattleUnitUI();
     //public BattleUnitUI BattleUnitUI;
@@ -45,10 +49,12 @@ public class BattleSystem
         }else if (BattleStateStack.Peek() == BattleState.ActionSelection)
         {
             
+            ActionSelectorGO.SetActive(true);
             ActionSelector.HandleBattleStateActionSelection();
         }else if (BattleStateStack.Peek() == BattleState.MoveSelection)
         {
-
+            MoveSelectorGO.SetActive(true);
+            MoveSelector.SetMoveNames(PlayerActiveBeast.MoveSet);
             MoveSelector.HandleBattleStateMoveSelection();
         }
         else if (BattleStateStack.Peek() == BattleState.ExecuteMoves)
@@ -77,10 +83,16 @@ public class BattleSystem
             BattleUnitUI.SetupEnemy(WildBeast);
             BattleUnitUI.SetupPlayer(PlayerActiveBeast);
 
-            BattleStateStack.Push(BattleState.ActionSelection);
+            BattleDialogBox.DisplayBattleDialogText("A Wild Beast Appeared");
+
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                BattleStateStack.Push(BattleState.ActionSelection);
+            }
             
 
-         
+            //BattleStateStack.Push(BattleState.ActionSelection);
+            
         }
     }
 
