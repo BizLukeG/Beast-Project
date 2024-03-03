@@ -9,6 +9,7 @@ public class MoveSelector
      GameObject.Find("Move 3").GetComponent<TMPro.TextMeshProUGUI>(), GameObject.Find("Move 4").GetComponent<TMPro.TextMeshProUGUI>()
     };
     static Color highlightedColor = new Color(0.3f, 0.4f, 0.6f);
+    static public MoveID SelectedMove { get; set; }
 
     static public void HandleBattleStateMoveSelection()
     {
@@ -37,7 +38,8 @@ public class MoveSelector
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            var move = BattleSystem.PlayerActiveBeast.MoveSet[currentMove];
+            SelectedMove = BattleSystem.PlayerActiveBeast.MoveSet[currentMove];
+            BattleSystem.BattleStateStack.Push(BattleState.ExecuteMoves);
             //if (move.BP == 0) return;
             //dialogBox.EnableMoveSelector(false);
             //dialogBox.EnableDialogText(true);

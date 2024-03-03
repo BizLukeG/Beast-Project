@@ -5,7 +5,7 @@ using System;
 
 public enum BattleState
 {
-    Battle, ActionSelection, MoveSelection, BattleOver
+    StartBattle, ActionSelection, MoveSelection, ExecuteMoves, BattleOver
 }
 
 public class BattleSystem
@@ -39,9 +39,9 @@ public class BattleSystem
         //EnemyBattleUnitUI = new BattleUnitUI();
         //Debug.Log("BattleUnitUI " + EnemyBattleUnitUI.Hi);
 
-        if (BattleStateStack.Peek() == BattleState.Battle)
+        if (BattleStateStack.Peek() == BattleState.StartBattle)
         {
-            HandleBattleStateBattle();
+            HandleBattleStateStartBattle();
         }else if (BattleStateStack.Peek() == BattleState.ActionSelection)
         {
             
@@ -50,6 +50,11 @@ public class BattleSystem
         {
 
             MoveSelector.HandleBattleStateMoveSelection();
+        }
+        else if (BattleStateStack.Peek() == BattleState.ExecuteMoves)
+        {
+
+            ExecuteMoves();
         }
         else if(BattleStateStack.Peek() == BattleState.BattleOver)
         {
@@ -61,98 +66,111 @@ public class BattleSystem
         
     }
 
-    static public void HandleBattleStateBattle()
+    static public void HandleBattleStateStartBattle()
     {
         if (isWildBattle)
         {
             //WildBeast = Area.getBeastPerRoute(AreaID.Route101);
             PlayerActiveBeast = Player.Party[0];
-            System.Random r = new System.Random();
-            Beast firstUnitToMove;
-            Beast secondUnitToMove;
-            Debug.Log($"WildBeastSpeed {WildBeast.CurrentSpeed} \nplayerActiveBeast {PlayerActiveBeast.CurrentSpeed}");
+
+            
             BattleUnitUI.SetupEnemy(WildBeast);
             BattleUnitUI.SetupPlayer(PlayerActiveBeast);
 
             BattleStateStack.Push(BattleState.ActionSelection);
             
-            
-
-            if (WildBeast.Speed >= PlayerActiveBeast.Speed)
-            {
-                firstUnitToMove = WildBeast;
-                secondUnitToMove = PlayerActiveBeast;
-
-                int rInt = r.Next(0, 4);
-                MovesQueue.Enqueue(WildBeast.MoveSet[rInt]);
-
-                int rpInt = r.Next(0, 4);
-                MovesQueue.Enqueue(PlayerActiveBeast.MoveSet[rpInt]);
-            }
-            else
-            {
-                firstUnitToMove = PlayerActiveBeast;
-                secondUnitToMove = WildBeast;
-
-                int rpInt = r.Next(0, 4);
-                MovesQueue.Enqueue(PlayerActiveBeast.MoveSet[rpInt]);
-
-                int rInt = r.Next(0, 4);
-                MovesQueue.Enqueue(WildBeast.MoveSet[rInt]);
-            }
-            Debug.Log($"FirstUnitToMove {firstUnitToMove.Name} \nSecondUnitToMove {secondUnitToMove.Name}");
-
-            ExecuteMove(firstUnitToMove, secondUnitToMove);
-
-
 
          
         }
     }
 
-    static void ExecuteMove(Beast firstMover, Beast secondMover)
+    static void ExecuteMoves()
     {
-        
-       int damage = (int)Math.Round(MoveDB.Moves[MovesQueue.Dequeue()].Power/100f * (firstMover.CurrentAtt - secondMover.CurrentDef), MidpointRounding.AwayFromZero);
+        System.Random r = new System.Random();
+        Beast firstUnitToMove;
+        Beast secondUnitToMove;
+        Debug.Log($"WildBeastSpeed {WildBeast.CurrentSpeed} \nplayerActiveBeast {PlayerActiveBeast.CurrentSpeed}");
+
+        if (WildBeast.Speed >= PlayerActiveBeast.Speed)
+        {
+            firstUnitToMove = WildBeast;
+            secondUnitToMove = PlayerActiveBeast;
+
+            int rInt = r.Next(0, 4);
+            MovesQueue.Enqueue(WildBeast.MoveSet[rInt]);
+
+            MovesQueue.Enqueue(MoveSelector.SelectedMove);
+        }
+        else
+        {
+            firstUnitToMove = PlayerActiveBeast;
+            secondUnitToMove = WildBeast;
+
+
+            MovesQueue.Enqueue(MoveSelector.SelectedMove);
+
+            int rInt = r.Next(0, 4);
+            MovesQueue.Enqueue(WildBeast.MoveSet[rInt]);
+        }
+        Debug.Log($"FirstUnitToMove {firstUnitToMove.Name} \nSecondUnitToMove {secondUnitToMove.Name}");
+
+        int damage = (int)Math.Round(MoveDB.Moves[MovesQueue.Dequeue()].Power/100f * (firstUnitToMove.CurrentAtt - secondUnitToMove.CurrentDef), MidpointRounding.AwayFromZero);
        if (damage <= 0 ){
         damage = 1;
        }
 
-        secondMover.CurrentHP -= damage;
-        Debug.Log($"FirstMoverCA {firstMover.CurrentAtt} \n secondMoverCurrentDef {secondMover.CurrentDef} \n damage {damage} \n secondMoverHP {secondMover.CurrentHP}");
+        secondUnitToMove.CurrentHP -= damage;
+        Debug.Log($"FirstMoverCA {firstUnitToMove.CurrentAtt} \n secondMoverCurrentDef {secondUnitToMove.CurrentDef} \n damage {damage} \n secondMoverHP {secondUnitToMove.CurrentHP}");
+
+        BattleUnitUI.SetupEnemy(WildBeast);
+        BattleUnitUI.SetupPlayer(PlayerActiveBeast);
 
         if (IsBattleOver())
         {
-            return;
+            BattleStateStack.Push(BattleState.BattleOver);
+            HandleGameStateBattle();
         }
 
-        damage = (int)Math.Round(MoveDB.Moves[MovesQueue.Dequeue()].Power / 100f * (secondMover.CurrentAtt - firstMover.CurrentDef), MidpointRounding.AwayFromZero);
+        damage = (int)Math.Round(MoveDB.Moves[MovesQueue.Dequeue()].Power / 100f * (secondUnitToMove.CurrentAtt - firstUnitToMove.CurrentDef), MidpointRounding.AwayFromZero);
         if (damage <= 0)
         {
             damage = 1;
         }
-        
-        firstMover.CurrentHP -= damage;
-        Debug.Log($"SecondMoverCA {secondMover.CurrentAtt} \n FirstMoverCurrentDef {firstMover.CurrentDef} \n damage {damage} \n firstMoverHP {firstMover.CurrentHP}");
+
+        firstUnitToMove.CurrentHP -= damage;
+        Debug.Log($"SecondMoverCA {secondUnitToMove.CurrentAtt} \n FirstMoverCurrentDef {firstUnitToMove.CurrentDef} \n damage {damage} \n firstMoverHP {firstUnitToMove.CurrentHP}");
+
+        BattleUnitUI.SetupEnemy(WildBeast);
+        BattleUnitUI.SetupPlayer(PlayerActiveBeast);
 
         if (IsBattleOver())
         {
-            return;
+            BattleStateStack.Push(BattleState.BattleOver);
+            HandleGameStateBattle();
         }
+
+        Debug.Log("BSS Count " + BattleStateStack.Count);
+
+
+        while (BattleStateStack.Count > 2)
+        {
+            
+            BattleStateStack.Pop();
+            Debug.Log("BSS Count in While " + BattleStateStack.Count);
+        }
+            
     }
 
     static bool IsBattleOver()
     {
         if (WildBeast.CurrentHP <= 0)
         {
-            Debug.Log("Player wins ");
-            BattleStateStack.Push(BattleState.BattleOver);
+            Debug.Log("Player wins ");          
             return true;
         }
         else if (PlayerActiveBeast.CurrentHP <= 0)
         {
             Debug.Log("WildBeast wins ");
-            BattleStateStack.Push(BattleState.BattleOver);
             return true;
         }
         return false;

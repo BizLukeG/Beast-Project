@@ -50,7 +50,7 @@ public class GameController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.K))
             {
                 BattleSystem.WildBeast = Area.getBeastPerRoute(AreaID.Route101);
-                BattleSystem.BattleStateStack.Push(BattleState.Battle);
+                BattleSystem.BattleStateStack.Push(BattleState.StartBattle);
                 GameStateStack.Push(GameState.Battle);
                 BattleSystem.isWildBattle = true;
             }
