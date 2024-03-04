@@ -14,24 +14,29 @@ public class GameController : MonoBehaviour
     GameState State;
     static public Stack<GameState> GameStateStack { get; set; } = new Stack<GameState>();
     public GameObject BattleSystemGO;
+    BattleSystem BattleSystemMB;
 
     //public BattleSystem BattleSystem;
 
     // Awake is called when Scene loads only works when inheriting from monoBehaviour
     void Awake()
     {
-        BattleSystem.ActionSelectorGO = GameObject.Find("Battle Action Selector");
-        BattleSystem.ActionSelectorGO.SetActive(false);
-        BattleSystem.MoveSelectorGO = GameObject.Find("Battle Move Selector");
-        BattleSystem.MoveSelectorGO.SetActive(false);
+        //BattleSystem.ActionSelectorGO = GameObject.Find("Battle Action Selector");
+        //BattleSystem.ActionSelectorGO.SetActive(false);
+        //BattleSystem.MoveSelectorGO = GameObject.Find("Battle Move Selector");
+        //BattleSystem.MoveSelectorGO.SetActive(false);
+
         //BattleSystem = new BattleSystem();
         //BattleSystemGO = GameObject.Find("BattleSystem");
-        //BattleSystem = BattleSystemGO.GetComponent<BattleSystem>();
+        BattleSystemMB = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
+        
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+        BattleSystemMB.ActionSelectorMB.gameObject.SetActive(false);
+        BattleSystemMB.MoveSelectorMB.gameObject.SetActive(false);
+
         GameStateStack.Push(GameState.OverWorld);
         BeastBaseDB.Init();
         MoveDB.Init();
@@ -54,21 +59,18 @@ public class GameController : MonoBehaviour
             Debug.Log("OverWorld");
             if (Input.GetKeyDown(KeyCode.X))
             {
-                BattleSystem.WildBeast = Area.getBeastPerRoute(AreaID.Route101);
-                BattleSystem.BattleStateStack.Push(BattleState.StartBattle);
+                BattleSystemMB.WildBeast = Area.getBeastPerRoute(AreaID.Route101);
+                BattleSystemMB.BattleStateStack.Push(BattleState.StartBattle);
                 GameStateStack.Push(GameState.Battle);
-                BattleSystem.isWildBattle = true;
+                BattleSystemMB.isWildBattle = true;
             }
         }
         else if (GameStateStack.Peek() == GameState.Battle)
         {
             
-            BattleSystem.HandleGameStateBattle();
+            BattleSystemMB.HandleGameStateBattle();
             Debug.Log("Battle");
-            if (Input.GetKeyDown(KeyCode.J))
-            {
-                GameStateStack.Pop();
-            }
+            
             //Debug.Log("GS: " + GameStateStack.Peek());
         }
     }

@@ -2,23 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BattleDialogBox
+public class BattleDialogBox : MonoBehaviour
 {
-    static TMPro.TextMeshProUGUI battleDialogText = GameObject.Find("Battle Dialog Text").GetComponent<TMPro.TextMeshProUGUI>();
+    TMPro.TextMeshProUGUI battleDialogText;
 
-    public static void DisplayBattleDialogText(string dialog)
+    void Awake()
+    {
+        battleDialogText = GameObject.Find("Battle Dialog Text").GetComponent<TMPro.TextMeshProUGUI>();
+    }
+
+    public IEnumerator DisplayBattleDialogText(string dialog)
     {
         battleDialogText.text = "";
         //var timer = new System.Windows.Threading.DispatcherTimer();
-        int x = 0;
+        //int x = 0;
         foreach (var letter in dialog.ToCharArray())
         {
 
             battleDialogText.text += letter;
-            while(x < 5000000){
-                x++;
-            }
-            //yield return new WaitForSeconds(1f / lettersPerSecond);
+            
+            yield return new WaitForSeconds(1f / 4);
         }
         
     }

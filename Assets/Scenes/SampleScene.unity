@@ -670,6 +670,7 @@ GameObject:
   - component: {fileID: 184286112}
   - component: {fileID: 184286114}
   - component: {fileID: 184286113}
+  - component: {fileID: 184286115}
   m_Layer: 5
   m_Name: Battle Action Selector
   m_TagString: Untagged
@@ -738,6 +739,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 184286111}
   m_CullTransparentMesh: 1
+--- !u!114 &184286115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184286111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 500522371049b324dbc58d3c0faa0383, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &228253910
 GameObject:
   m_ObjectHideFlags: 0
@@ -929,7 +942,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: A Wild Beast Appeared
+  m_text: 'A Wild '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1985,6 +1998,7 @@ GameObject:
   - component: {fileID: 1012522479}
   - component: {fileID: 1012522481}
   - component: {fileID: 1012522480}
+  - component: {fileID: 1012522482}
   m_Layer: 5
   m_Name: Battle DialogBox
   m_TagString: Untagged
@@ -2050,6 +2064,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1012522478}
   m_CullTransparentMesh: 1
+--- !u!114 &1012522482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012522478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f03045fe69e7ad46bb25ee516634a37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1105426888
 GameObject:
   m_ObjectHideFlags: 0
@@ -2246,6 +2272,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1292632424}
+  - component: {fileID: 1292632425}
   m_Layer: 0
   m_Name: BattleSystem
   m_TagString: Untagged
@@ -2269,6 +2296,19 @@ Transform:
   - {fileID: 1252797221}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1292632425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1292632423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20bb1f9cddd48cb4a97cd4eecea74f11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NoMatter: 0
 --- !u!1 &1323778956
 GameObject:
   m_ObjectHideFlags: 0
@@ -2623,6 +2663,7 @@ GameObject:
   - component: {fileID: 1652074823}
   - component: {fileID: 1652074825}
   - component: {fileID: 1652074824}
+  - component: {fileID: 1652074826}
   m_Layer: 5
   m_Name: Battle Move Selector
   m_TagString: Untagged
@@ -2691,6 +2732,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1652074822}
   m_CullTransparentMesh: 1
+--- !u!114 &1652074826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652074822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eb0884add73c0648bb9a3bfaebc9cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1686269831
 GameObject:
   m_ObjectHideFlags: 0

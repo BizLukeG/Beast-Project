@@ -8,20 +8,23 @@ public enum BattleState
     StartBattle, ActionSelection, MoveSelection, ExecuteMoves, Dialog, BattleOver
 }
 
-public class BattleSystem
+public class BattleSystem : MonoBehaviour
 {
     static public bool isTrainerBattle { set; get; } = false;
-    static public bool isWildBattle { set; get; } = false;
+    public bool isWildBattle { set; get; } = false;
     //not making this static gave error saying it needs an object reference when accessing even in same class
     static Queue<MoveID> MovesQueue { set; get; } = new Queue<MoveID>();
     static public BattleState BattleState { get; set; }
-    static public Stack<BattleState> BattleStateStack = new Stack<BattleState>();
+    public Stack<BattleState> BattleStateStack = new Stack<BattleState>();
     static public Beast PlayerActiveBeast { get; set; }
-    static public Beast WildBeast { get; set; }
+    public Beast WildBeast { get; set; }
     static public GameObject ActionSelectorGO { get; set; }
     static public GameObject MoveSelectorGO { get; set; }
-    static bool hold = true;
-    
+    //static bool hold = true;
+    BattleDialogBox BattleDialogBoxMB;
+    public ActionSelector ActionSelectorMB;
+    public MoveSelector MoveSelectorMB;
+
     //public GameObject EnemyBattleUnitUIGO;
     //public BattleUnitUI EnemyBattleUnitUI = new BattleUnitUI();
     //public BattleUnitUI PlayerBattleUnitUI = new BattleUnitUI();
@@ -36,26 +39,34 @@ public class BattleSystem
     //    EnemyBattleUnitUI = EnemyBattleUnitUIGO.GetComponent<BattleUnitUI>(); 
     //}
 
-   
+    void Awake()
+    {
+        BattleDialogBoxMB = GameObject.Find("Battle DialogBox").GetComponent<BattleDialogBox>();
+        ActionSelectorMB = GameObject.Find("Battle Action Selector").GetComponent<ActionSelector>();
+        MoveSelectorMB = GameObject.Find("Battle Move Selector").GetComponent<MoveSelector>();
+    }
 
-    static public void HandleGameStateBattle()
+    public void HandleGameStateBattle()
     {
         //EnemyBattleUnitUI = new BattleUnitUI();
         //Debug.Log("BattleUnitUI " + EnemyBattleUnitUI.Hi);
 
         if (BattleStateStack.Peek() == BattleState.StartBattle)
         {
+            //can't use Coroutine on a static anything
+            //StartCoroutine(HandleBattleStateStartBattle());
             HandleBattleStateStartBattle();
-        }else if (BattleStateStack.Peek() == BattleState.ActionSelection)
+        }
+        else if (BattleStateStack.Peek() == BattleState.ActionSelection)
         {
             
-            ActionSelectorGO.SetActive(true);
-            ActionSelector.HandleBattleStateActionSelection();
+            ActionSelectorMB.gameObject.SetActive(true);
+            ActionSelectorMB.HandleBattleStateActionSelection();
         }else if (BattleStateStack.Peek() == BattleState.MoveSelection)
         {
-            MoveSelectorGO.SetActive(true);
-            MoveSelector.SetMoveNames(PlayerActiveBeast.MoveSet);
-            MoveSelector.HandleBattleStateMoveSelection();
+            MoveSelectorMB.gameObject.SetActive(true);
+            MoveSelectorMB.SetMoveNames(PlayerActiveBeast.MoveSet);
+            MoveSelectorMB.HandleBattleStateMoveSelection();
         }
         else if (BattleStateStack.Peek() == BattleState.ExecuteMoves)
         {
@@ -64,6 +75,10 @@ public class BattleSystem
         }
         else if(BattleStateStack.Peek() == BattleState.BattleOver)
         {
+            
+            BattleStateStack.Clear();
+                
+
             //maybe have to use GameController.GetComponent<GameController>() to get an instance of GameController
             GameController.GameStateStack.Pop();
             Debug.Log("Does this ever get called??");
@@ -72,7 +87,8 @@ public class BattleSystem
         
     }
 
-    static public void HandleBattleStateStartBattle()
+    //can't use Coroutine on a static anything
+    public void HandleBattleStateStartBattle()
     {
         if (isWildBattle)
         {
@@ -83,7 +99,7 @@ public class BattleSystem
             BattleUnitUI.SetupEnemy(WildBeast);
             BattleUnitUI.SetupPlayer(PlayerActiveBeast);
 
-            BattleDialogBox.DisplayBattleDialogText("A Wild Beast Appeared");
+            //yield return BattleDialogBoxMB.DisplayBattleDialogText("A Wild Beast Appeared");
 
             if (Input.GetKeyDown(KeyCode.X))
             {
@@ -96,7 +112,7 @@ public class BattleSystem
         }
     }
 
-    static void ExecuteMoves()
+    void ExecuteMoves()
     {
         System.Random r = new System.Random();
         Beast firstUnitToMove;
@@ -140,40 +156,44 @@ public class BattleSystem
         if (IsBattleOver())
         {
             BattleStateStack.Push(BattleState.BattleOver);
-            HandleGameStateBattle();
+            //HandleGameStateBattle();
         }
-
-        damage = (int)Math.Round(MoveDB.Moves[MovesQueue.Dequeue()].Power / 100f * (secondUnitToMove.CurrentAtt - firstUnitToMove.CurrentDef), MidpointRounding.AwayFromZero);
-        if (damage <= 0)
+        else
         {
-            damage = 1;
+            damage = (int)Math.Round(MoveDB.Moves[MovesQueue.Dequeue()].Power / 100f * (secondUnitToMove.CurrentAtt - firstUnitToMove.CurrentDef), MidpointRounding.AwayFromZero);
+            if (damage <= 0)
+            {
+                damage = 1;
+            }
+
+            firstUnitToMove.CurrentHP -= damage;
+            Debug.Log($"SecondMoverCA {secondUnitToMove.CurrentAtt} \n FirstMoverCurrentDef {firstUnitToMove.CurrentDef} \n damage {damage} \n firstMoverHP {firstUnitToMove.CurrentHP}");
+
+            BattleUnitUI.SetupEnemy(WildBeast);
+            BattleUnitUI.SetupPlayer(PlayerActiveBeast);
+
+            if (IsBattleOver())
+            {
+                BattleStateStack.Push(BattleState.BattleOver);
+
+            }
         }
 
-        firstUnitToMove.CurrentHP -= damage;
-        Debug.Log($"SecondMoverCA {secondUnitToMove.CurrentAtt} \n FirstMoverCurrentDef {firstUnitToMove.CurrentDef} \n damage {damage} \n firstMoverHP {firstUnitToMove.CurrentHP}");
-
-        BattleUnitUI.SetupEnemy(WildBeast);
-        BattleUnitUI.SetupPlayer(PlayerActiveBeast);
-
-        if (IsBattleOver())
-        {
-            BattleStateStack.Push(BattleState.BattleOver);
-            HandleGameStateBattle();
-        }
+       
 
         Debug.Log("BSS Count " + BattleStateStack.Count);
 
 
-        while (BattleStateStack.Count > 2)
+        while (BattleStateStack.Count > 2 && BattleStateStack.Peek() != BattleState.BattleOver)
         {
-            
+
             BattleStateStack.Pop();
             Debug.Log("BSS Count in While " + BattleStateStack.Count);
         }
-            
+
     }
 
-    static bool IsBattleOver()
+    bool IsBattleOver()
     {
         if (WildBeast.CurrentHP <= 0)
         {

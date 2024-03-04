@@ -3,18 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ActionSelector
+public class ActionSelector : MonoBehaviour
 {
     static int currentAction;
-    static TMPro.TextMeshProUGUI[] actionTexts = new TMPro.TextMeshProUGUI[] { GameObject.Find("Fight").GetComponent<TMPro.TextMeshProUGUI>(),  GameObject.Find("Bag").GetComponent<TMPro.TextMeshProUGUI>(),
-     GameObject.Find("Party").GetComponent<TMPro.TextMeshProUGUI>(), GameObject.Find("Run").GetComponent<TMPro.TextMeshProUGUI>()
-    };
-    static Color highlightedColor = new Color(0.3f, 0.4f, 0.6f)
-;
+    static TMPro.TextMeshProUGUI[] actionTexts;
+    static Color highlightedColor = new Color(0.3f, 0.4f, 0.6f);
+    BattleSystem BattleSystemMB;
+
+    void Awake()
+    {
+        actionTexts = new TMPro.TextMeshProUGUI[] { GameObject.Find("Fight").GetComponent<TMPro.TextMeshProUGUI>(),  GameObject.Find("Bag").GetComponent<TMPro.TextMeshProUGUI>(),
+        GameObject.Find("Party").GetComponent<TMPro.TextMeshProUGUI>(), GameObject.Find("Run").GetComponent<TMPro.TextMeshProUGUI>()
+        };
+        BattleSystemMB = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
+    }
 
 
-
-    static public void HandleBattleStateActionSelection(){
+    public void HandleBattleStateActionSelection(){
         Debug.Log("HBSAS");
         
         if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -35,7 +40,7 @@ public class ActionSelector
             {
                 // Fight
                 
-                BattleSystem.BattleStateStack.Push(BattleState.MoveSelection);
+                BattleSystemMB.BattleStateStack.Push(BattleState.MoveSelection);
             }
             else if (currentAction == 1)
             {

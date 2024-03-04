@@ -2,16 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveSelector 
+public class MoveSelector : MonoBehaviour
 {
     static int currentMove;
-    static TMPro.TextMeshProUGUI[] moveTexts = new TMPro.TextMeshProUGUI[] { GameObject.Find("Move 1").GetComponent<TMPro.TextMeshProUGUI>(),  GameObject.Find("Move 2").GetComponent<TMPro.TextMeshProUGUI>(),
-     GameObject.Find("Move 3").GetComponent<TMPro.TextMeshProUGUI>(), GameObject.Find("Move 4").GetComponent<TMPro.TextMeshProUGUI>()
-    };
+    TMPro.TextMeshProUGUI[] moveTexts;
     static Color highlightedColor = new Color(0.3f, 0.4f, 0.6f);
     static public MoveID SelectedMove { get; set; }
+    BattleSystem BattleSystemMB;
 
-    static public void HandleBattleStateMoveSelection()
+    void Awake()
+    {
+        moveTexts = new TMPro.TextMeshProUGUI[] { GameObject.Find("Move 1").GetComponent<TMPro.TextMeshProUGUI>(),  GameObject.Find("Move 2").GetComponent<TMPro.TextMeshProUGUI>(),
+            GameObject.Find("Move 3").GetComponent<TMPro.TextMeshProUGUI>(), GameObject.Find("Move 4").GetComponent<TMPro.TextMeshProUGUI>() };
+        
+        BattleSystemMB = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
+    }
+
+    public void HandleBattleStateMoveSelection()
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
@@ -39,7 +46,7 @@ public class MoveSelector
         if (Input.GetKeyDown(KeyCode.X))
         {
             
-            BattleSystem.BattleStateStack.Push(BattleState.ExecuteMoves);
+            BattleSystemMB.BattleStateStack.Push(BattleState.ExecuteMoves);
             //if (move.BP == 0) return;
             //dialogBox.EnableMoveSelector(false);
             //dialogBox.EnableDialogText(true);
@@ -53,7 +60,7 @@ public class MoveSelector
         }
     }
 
-    static public void UpdateMoveSelection(int selectedMove, MoveID moveID)
+    public void UpdateMoveSelection(int selectedMove, MoveID moveID)
     {
         for (int i = 0; i < moveTexts.Length; ++i)
         {
@@ -119,7 +126,7 @@ public class MoveSelector
     //        bpText.color = Color.black;
     }
 
-    static public void SetMoveNames(List<MoveID> moveIDs)
+    public void SetMoveNames(List<MoveID> moveIDs)
     {
         for (int i = 0; i < moveTexts.Length; ++i)
         {
