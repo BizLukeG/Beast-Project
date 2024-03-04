@@ -5,6 +5,7 @@ using UnityEngine;
 public class BattleDialogBox : MonoBehaviour
 {
     TMPro.TextMeshProUGUI battleDialogText;
+    public bool IsTyping { get; set; } = false;
 
     void Awake()
     {
@@ -13,6 +14,7 @@ public class BattleDialogBox : MonoBehaviour
 
     public IEnumerator DisplayBattleDialogText(string dialog)
     {
+        IsTyping = true;
         battleDialogText.text = "";
         //var timer = new System.Windows.Threading.DispatcherTimer();
         //int x = 0;
@@ -21,8 +23,9 @@ public class BattleDialogBox : MonoBehaviour
 
             battleDialogText.text += letter;
             
-            yield return new WaitForSeconds(1f / 4);
+            yield return new WaitForSeconds(1f / 30);
         }
-        
+        //yield return new WaitForSeconds(1f);
+        IsTyping = false;
     }
 }

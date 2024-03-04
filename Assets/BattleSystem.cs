@@ -5,7 +5,7 @@ using System;
 
 public enum BattleState
 {
-    StartBattle, ActionSelection, MoveSelection, ExecuteMoves, Dialog, BattleOver
+    StartBattle, Typing, FinishDialog, ActionSelection, MoveSelection, ExecuteMoves, Dialog, BattleOver
 }
 
 public class BattleSystem : MonoBehaviour
@@ -54,8 +54,9 @@ public class BattleSystem : MonoBehaviour
         if (BattleStateStack.Peek() == BattleState.StartBattle)
         {
             //can't use Coroutine on a static anything
-            //StartCoroutine(HandleBattleStateStartBattle());
-            HandleBattleStateStartBattle();
+            //SetUpBattle();
+            StartCoroutine(HandleBattleStateStartBattle());
+            //HandleBattleStateStartBattle();
         }
         else if (BattleStateStack.Peek() == BattleState.ActionSelection)
         {
@@ -83,13 +84,28 @@ public class BattleSystem : MonoBehaviour
             GameController.GameStateStack.Pop();
             Debug.Log("Does this ever get called??");
         }
+        else if (BattleStateStack.Peek() == BattleState.FinishDialog)
+        {
 
-        
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                BattleStateStack.Push(BattleState.ActionSelection);
+            }
+        }
+
+
     }
 
+    //public void SetUpBattle()
+    //{
+    //    StartCoroutine(HandleBattleStateStartBattle());
+    //}
+
     //can't use Coroutine on a static anything
-    public void HandleBattleStateStartBattle()
+    public IEnumerator HandleBattleStateStartBattle()
     {
+        BattleStateStack.Push(BattleState.Typing);
+
         if (isWildBattle)
         {
             //WildBeast = Area.getBeastPerRoute(AreaID.Route101);
@@ -99,18 +115,24 @@ public class BattleSystem : MonoBehaviour
             BattleUnitUI.SetupEnemy(WildBeast);
             BattleUnitUI.SetupPlayer(PlayerActiveBeast);
 
-            //yield return BattleDialogBoxMB.DisplayBattleDialogText("A Wild Beast Appeared");
+            yield return BattleDialogBoxMB.DisplayBattleDialogText("A Wild Beast Appeared");
+            //yield return new WaitUntil(() => BattleDialogBoxMB.IsTyping == false);
 
-            if (Input.GetKeyDown(KeyCode.X))
-            {
-                BattleStateStack.Push(BattleState.ActionSelection);
-            }
+            BattleStateStack.Push(BattleState.FinishDialog);
+
+            //if (Input.GetKeyDown(KeyCode.X))
+            //{
+            //    BattleStateStack.Push(BattleState.ActionSelection);
+            //}
             
 
             //BattleStateStack.Push(BattleState.ActionSelection);
             
         }
+
     }
+
+
 
     void ExecuteMoves()
     {
@@ -184,10 +206,10 @@ public class BattleSystem : MonoBehaviour
         Debug.Log("BSS Count " + BattleStateStack.Count);
 
 
-        while (BattleStateStack.Count > 2 && BattleStateStack.Peek() != BattleState.BattleOver)
+        if (BattleStateStack.Peek() != BattleState.BattleOver)
         {
-
-            BattleStateStack.Pop();
+            BattleStateStack.Clear();
+            BattleStateStack.Push(BattleState.ActionSelection);
             Debug.Log("BSS Count in While " + BattleStateStack.Count);
         }
 
