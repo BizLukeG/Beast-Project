@@ -47,7 +47,7 @@ public class BeastBaseDB : MonoBehaviour
                 //Name = "Pugba",
                 FrontSprite = Resources.Load<Sprite>("Sprites/Brown"),
                 MaxBaseStats = 200,
-                Typing1 = Typing.Native,
+                Typing1 = Typing.Rock,
                 Typing2 = Typing.None,
                 LearnSet = new Dictionary<int, MoveID>()
                 {

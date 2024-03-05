@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public enum Typing
-{
-   None, Rock, Aquatic, Corrupt , Mystic, Sacred, Glacial, Static, Nature, Native, Toxic, Hostile, Aerial
-}
+
 
 public class Beast
 {
@@ -154,4 +151,6 @@ public class Beast
         Debug.Log("Level " + Level);
         Debug.Log("MBS " + MaxBaseStats);
     }
+
+
 }

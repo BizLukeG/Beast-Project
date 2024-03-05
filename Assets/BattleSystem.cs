@@ -185,7 +185,11 @@ public class BattleSystem : MonoBehaviour
 
         //Calcs damage
         Move moveUsed = MoveDB.Moves[MovesQueue.Dequeue()];
-        int damage = (int)Math.Round(moveUsed.Power/100f * (firstUnitToMove.CurrentAtt - secondUnitToMove.CurrentDef), MidpointRounding.AwayFromZero);
+
+        float effectiveness = TypeChart.GetEffectiveness(moveUsed.Typing, BeastBaseDB.BeastBases[secondUnitToMove.Name].Typing1, BeastBaseDB.BeastBases[secondUnitToMove.Name].Typing2);
+        string effectivenessPhrase = TypeChart.GetEffectivenessPhrase(effectiveness);
+
+        int damage = (int)Math.Round(moveUsed.Power/100f * (firstUnitToMove.CurrentAtt - secondUnitToMove.CurrentDef) * effectiveness, MidpointRounding.AwayFromZero);
        if (damage <= 0 ){
         damage = 1;
        }
@@ -206,9 +210,19 @@ public class BattleSystem : MonoBehaviour
 
         yield return new WaitForSeconds(1.5f);
 
-        //displays stat changes
+        //displays stat change
         BattleUnitUI.SetupEnemy(WildBeast);
         BattleUnitUI.SetupPlayer(PlayerActiveBeast);
+
+        yield return new WaitForSeconds(1f);
+
+        if (effectiveness != 1)
+        {
+            yield return BattleDialogBoxMB.DisplayBattleDialogText($"{effectivenessPhrase}");
+            yield return new WaitForSeconds(1.5f);
+        }
+
+        
 
         if (IsBattleOver())
         {
@@ -224,7 +238,11 @@ public class BattleSystem : MonoBehaviour
         else
         {
             moveUsed = MoveDB.Moves[MovesQueue.Dequeue()];
-            damage = (int)Math.Round(moveUsed.Power / 100f * (secondUnitToMove.CurrentAtt - firstUnitToMove.CurrentDef), MidpointRounding.AwayFromZero);
+
+            effectiveness = TypeChart.GetEffectiveness(moveUsed.Typing, BeastBaseDB.BeastBases[firstUnitToMove.Name].Typing1, BeastBaseDB.BeastBases[firstUnitToMove.Name].Typing2);
+            effectivenessPhrase = TypeChart.GetEffectivenessPhrase(effectiveness);
+
+            damage = (int)Math.Round(moveUsed.Power / 100f * (secondUnitToMove.CurrentAtt - firstUnitToMove.CurrentDef) * effectiveness, MidpointRounding.AwayFromZero);
             if (damage <= 0)
             {
                 damage = 1;
@@ -240,9 +258,17 @@ public class BattleSystem : MonoBehaviour
             //hold = true;
             yield return new WaitForSeconds(1.5f);
 
-
             BattleUnitUI.SetupEnemy(WildBeast);
             BattleUnitUI.SetupPlayer(PlayerActiveBeast);
+
+            yield return new WaitForSeconds(1f);
+
+            if (effectiveness != 1)
+            {
+                yield return BattleDialogBoxMB.DisplayBattleDialogText($"{effectivenessPhrase}");
+                yield return new WaitForSeconds(1.5f);
+            }
+
 
             if (IsBattleOver())
             {
