@@ -5,7 +5,7 @@ using System;
 
 public enum BattleState
 {
-    StartBattle, Typing, FinishDialog, ActionSelection, MoveSelection, ExecuteMoves, Dialog, BattleOver
+    StartBattle, Typing, RunMoves, Hold, FinishDialog, ActionSelection, MoveSelection, ExecuteMoves, Dialog, BattleOver
 }
 
 public class BattleSystem : MonoBehaviour
@@ -20,10 +20,11 @@ public class BattleSystem : MonoBehaviour
     public Beast WildBeast { get; set; }
     static public GameObject ActionSelectorGO { get; set; }
     static public GameObject MoveSelectorGO { get; set; }
-    //static bool hold = true;
-    BattleDialogBox BattleDialogBoxMB;
+    bool hold = true;
+    public BattleDialogBox BattleDialogBoxMB;
     public ActionSelector ActionSelectorMB;
     public MoveSelector MoveSelectorMB;
+    
 
     //public GameObject EnemyBattleUnitUIGO;
     //public BattleUnitUI EnemyBattleUnitUI = new BattleUnitUI();
@@ -62,6 +63,7 @@ public class BattleSystem : MonoBehaviour
         {
             
             ActionSelectorMB.gameObject.SetActive(true);
+            BattleDialogBoxMB.DisplayBattleDialogTextNoAnimation("What will you do?");
             ActionSelectorMB.HandleBattleStateActionSelection();
         }else if (BattleStateStack.Peek() == BattleState.MoveSelection)
         {
@@ -72,7 +74,7 @@ public class BattleSystem : MonoBehaviour
         else if (BattleStateStack.Peek() == BattleState.ExecuteMoves)
         {
 
-            ExecuteMoves();
+            StartCoroutine(ExecuteMoves());
         }
         else if(BattleStateStack.Peek() == BattleState.BattleOver)
         {
@@ -84,13 +86,22 @@ public class BattleSystem : MonoBehaviour
             GameController.GameStateStack.Pop();
             Debug.Log("Does this ever get called??");
         }
-        else if (BattleStateStack.Peek() == BattleState.FinishDialog)
-        {
+        //else if (BattleStateStack.Peek() == BattleState.FinishDialog)
+        //{
 
+        //    if (Input.GetKeyDown(KeyCode.X))
+        //    {
+        //        BattleStateStack.Push(BattleState.ActionSelection);
+        //    }
+        //}
+        else if (BattleStateStack.Peek() == BattleState.Hold)
+        {
             if (Input.GetKeyDown(KeyCode.X))
             {
-                BattleStateStack.Push(BattleState.ActionSelection);
+                hold = false;
+                
             }
+            
         }
 
 
@@ -115,32 +126,40 @@ public class BattleSystem : MonoBehaviour
             BattleUnitUI.SetupEnemy(WildBeast);
             BattleUnitUI.SetupPlayer(PlayerActiveBeast);
 
-            yield return BattleDialogBoxMB.DisplayBattleDialogText("A Wild Beast Appeared");
+            yield return BattleDialogBoxMB.DisplayBattleDialogText("A Wild Beast Appeared. Press X To Continue");
             //yield return new WaitUntil(() => BattleDialogBoxMB.IsTyping == false);
 
-            BattleStateStack.Push(BattleState.FinishDialog);
+            BattleStateStack.Push(BattleState.Hold);
 
+            yield return new WaitUntil(() => hold == false);
+            hold = true;
+
+            BattleStateStack.Push(BattleState.ActionSelection);
             //if (Input.GetKeyDown(KeyCode.X))
             //{
             //    BattleStateStack.Push(BattleState.ActionSelection);
             //}
-            
+
 
             //BattleStateStack.Push(BattleState.ActionSelection);
-            
+
         }
 
     }
 
 
 
-    void ExecuteMoves()
+    IEnumerator ExecuteMoves()
     {
+        BattleStateStack.Push(BattleState.RunMoves);
+        ActionSelectorMB.gameObject.SetActive(false);
+        MoveSelectorMB.gameObject.SetActive(false);
         System.Random r = new System.Random();
         Beast firstUnitToMove;
         Beast secondUnitToMove;
         Debug.Log($"WildBeastSpeed {WildBeast.CurrentSpeed} \nplayerActiveBeast {PlayerActiveBeast.CurrentSpeed}");
-
+        
+        //Calcs who goes first
         if (WildBeast.Speed >= PlayerActiveBeast.Speed)
         {
             firstUnitToMove = WildBeast;
@@ -149,7 +168,7 @@ public class BattleSystem : MonoBehaviour
             int rInt = r.Next(0, 4);
             MovesQueue.Enqueue(WildBeast.MoveSet[rInt]);
 
-            MovesQueue.Enqueue(MoveSelector.SelectedMove);
+            MovesQueue.Enqueue(MoveSelectorMB.SelectedMove);
         }
         else
         {
@@ -157,47 +176,84 @@ public class BattleSystem : MonoBehaviour
             secondUnitToMove = WildBeast;
 
 
-            MovesQueue.Enqueue(MoveSelector.SelectedMove);
+            MovesQueue.Enqueue(MoveSelectorMB.SelectedMove);
 
             int rInt = r.Next(0, 4);
             MovesQueue.Enqueue(WildBeast.MoveSet[rInt]);
         }
         Debug.Log($"FirstUnitToMove {firstUnitToMove.Name} \nSecondUnitToMove {secondUnitToMove.Name}");
 
-        int damage = (int)Math.Round(MoveDB.Moves[MovesQueue.Dequeue()].Power/100f * (firstUnitToMove.CurrentAtt - secondUnitToMove.CurrentDef), MidpointRounding.AwayFromZero);
+        //Calcs damage
+        Move moveUsed = MoveDB.Moves[MovesQueue.Dequeue()];
+        int damage = (int)Math.Round(moveUsed.Power/100f * (firstUnitToMove.CurrentAtt - secondUnitToMove.CurrentDef), MidpointRounding.AwayFromZero);
        if (damage <= 0 ){
         damage = 1;
        }
 
+       //applies damage
         secondUnitToMove.CurrentHP -= damage;
         Debug.Log($"FirstMoverCA {firstUnitToMove.CurrentAtt} \n secondMoverCurrentDef {secondUnitToMove.CurrentDef} \n damage {damage} \n secondMoverHP {secondUnitToMove.CurrentHP}");
 
+        //displays move used
+        //goes back to update with runturn now the battlestate so nothing happens until this is over and then continues from here
+        yield return BattleDialogBoxMB.DisplayBattleDialogText($"{firstUnitToMove.Name} used {moveUsed.Name}");
+
+        //waits for x to be pressed to continue
+        //BattleStateStack.Push(BattleState.Hold);
+        //yield return new WaitUntil(() => hold == false);
+        //BattleStateStack.Pop();
+        //hold = true;
+
+        yield return new WaitForSeconds(1.5f);
+
+        //displays stat changes
         BattleUnitUI.SetupEnemy(WildBeast);
         BattleUnitUI.SetupPlayer(PlayerActiveBeast);
 
         if (IsBattleOver())
         {
+            yield return BattleDialogBoxMB.DisplayBattleDialogText("Battle is over. Press X To Continue");
+            BattleStateStack.Push(BattleState.Hold);
+            yield return new WaitUntil(() => hold == false);
+            BattleStateStack.Pop();
+            hold = true;
             BattleStateStack.Push(BattleState.BattleOver);
+            //yield return BattleDialogBoxMB.DisplayBattleDialogText("Battle is over");
             //HandleGameStateBattle();
         }
         else
         {
-            damage = (int)Math.Round(MoveDB.Moves[MovesQueue.Dequeue()].Power / 100f * (secondUnitToMove.CurrentAtt - firstUnitToMove.CurrentDef), MidpointRounding.AwayFromZero);
+            moveUsed = MoveDB.Moves[MovesQueue.Dequeue()];
+            damage = (int)Math.Round(moveUsed.Power / 100f * (secondUnitToMove.CurrentAtt - firstUnitToMove.CurrentDef), MidpointRounding.AwayFromZero);
             if (damage <= 0)
             {
                 damage = 1;
             }
-
+           
             firstUnitToMove.CurrentHP -= damage;
             Debug.Log($"SecondMoverCA {secondUnitToMove.CurrentAtt} \n FirstMoverCurrentDef {firstUnitToMove.CurrentDef} \n damage {damage} \n firstMoverHP {firstUnitToMove.CurrentHP}");
+
+            yield return BattleDialogBoxMB.DisplayBattleDialogText($"{secondUnitToMove.Name} used {moveUsed.Name}");
+            //BattleStateStack.Push(BattleState.Hold);
+            //yield return new WaitUntil(() => hold == false);
+            //BattleStateStack.Pop();
+            //hold = true;
+            yield return new WaitForSeconds(1.5f);
+
 
             BattleUnitUI.SetupEnemy(WildBeast);
             BattleUnitUI.SetupPlayer(PlayerActiveBeast);
 
             if (IsBattleOver())
             {
+                yield return BattleDialogBoxMB.DisplayBattleDialogText("Battle is over. Press X To Continue");
+                BattleStateStack.Push(BattleState.Hold);
+                yield return new WaitUntil(() => hold == false);
+                BattleStateStack.Pop();
+                hold = true;
                 BattleStateStack.Push(BattleState.BattleOver);
 
+                //yield return BattleDialogBoxMB.DisplayBattleDialogText("Battle is over");
             }
         }
 
@@ -208,6 +264,7 @@ public class BattleSystem : MonoBehaviour
 
         if (BattleStateStack.Peek() != BattleState.BattleOver)
         {
+            MovesQueue.Clear();
             BattleStateStack.Clear();
             BattleStateStack.Push(BattleState.ActionSelection);
             Debug.Log("BSS Count in While " + BattleStateStack.Count);

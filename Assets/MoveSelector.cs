@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class MoveSelector : MonoBehaviour
 {
-    static int currentMove;
+    int currentMove;
     TMPro.TextMeshProUGUI[] moveTexts;
     static Color highlightedColor = new Color(0.3f, 0.4f, 0.6f);
-    static public MoveID SelectedMove { get; set; }
+    public MoveID SelectedMove { get; set; }
     BattleSystem BattleSystemMB;
 
     void Awake()
@@ -42,6 +42,8 @@ public class MoveSelector : MonoBehaviour
                 currentMove -= 2;
         }
         UpdateMoveSelection(currentMove, BattleSystem.PlayerActiveBeast.MoveSet[currentMove]);
+
+        SelectedMove = BattleSystem.PlayerActiveBeast.MoveSet[currentMove];
 
         if (Input.GetKeyDown(KeyCode.X))
         {

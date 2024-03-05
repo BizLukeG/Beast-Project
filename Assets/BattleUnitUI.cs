@@ -38,7 +38,7 @@ public class BattleUnitUI
         GameObject.Find("Player HP").GetComponent<TMPro.TextMeshProUGUI>().text = "Player Cur.HP " + beast.CurrentHP.ToString();
         GameObject.Find("Player Att").GetComponent<TMPro.TextMeshProUGUI>().text = "Player Cur.Att " + beast.CurrentAtt.ToString();
         GameObject.Find("Player Def").GetComponent<TMPro.TextMeshProUGUI>().text = "Player Cur.Def " + beast.CurrentDef.ToString();
-        GameObject.Find("Player Name").GetComponent<TMPro.TextMeshProUGUI>().text = "Enemy Name " + beast.Name.ToString();
+        GameObject.Find("Player Name").GetComponent<TMPro.TextMeshProUGUI>().text = "Player Name " + beast.Name.ToString();
         GameObject.Find("Player Sprite").GetComponent<Image>().sprite = beast.FrontSprite;
 
     }

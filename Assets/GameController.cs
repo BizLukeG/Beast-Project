@@ -56,8 +56,9 @@ public class GameController : MonoBehaviour
     {
         if(GameStateStack.Peek() == GameState.OverWorld)
         {
+            BattleSystemMB.BattleDialogBoxMB.DisplayBattleDialogTextNoAnimation("Press C To Start New Battle");
             Debug.Log("OverWorld");
-            if (Input.GetKeyDown(KeyCode.X))
+            if (Input.GetKeyDown(KeyCode.C))
             {
                 BattleSystemMB.WildBeast = Area.getBeastPerRoute(AreaID.Route101);
                 BattleSystemMB.BattleStateStack.Push(BattleState.StartBattle);

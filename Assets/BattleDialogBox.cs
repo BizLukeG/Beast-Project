@@ -28,4 +28,11 @@ public class BattleDialogBox : MonoBehaviour
         //yield return new WaitForSeconds(1f);
         IsTyping = false;
     }
+
+    public void DisplayBattleDialogTextNoAnimation(string dialog)
+    {
+        
+        battleDialogText.text = dialog;
+        
+    }
 }
