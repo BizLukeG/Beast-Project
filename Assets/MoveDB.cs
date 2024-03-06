@@ -33,10 +33,10 @@ public class MoveDB
         {MoveID.Smack, new Move(){ Power = 20, Accuracy = 100, Typing = Typing.Native, Category = MoveCategory.Physical}},
         {MoveID.Pound, new Move(){ Power = 30, Accuracy = 100, Typing = Typing.Native, Category = MoveCategory.Physical}},
         {MoveID.Tackle, new Move(){ Power = 40, Accuracy = 100, Typing = Typing.Native, Category = MoveCategory.Physical}},
-        {MoveID.LeafStorm, new Move(){ Power = 50, Accuracy = 100, Typing = Typing.Nature, Category = MoveCategory.Physical}},
+        {MoveID.LeafStorm, new Move(){ Power = 50, Accuracy = 100, Typing = Typing.Nature, Category = MoveCategory.Special}},
         {MoveID.FlameWheel, new Move(){ Power = 60, Accuracy = 100, Typing = Typing.Sacred, Category = MoveCategory.Physical}},
         {MoveID.RockSlide, new Move(){ Power = 70, Accuracy = 100, Typing = Typing.Rock, Category = MoveCategory.Physical}},
-        {MoveID.Harden, new Move(){ Power = 0, Accuracy = 100, Typing = Typing.Rock, Category = MoveCategory.ModifyStats, BuffedStats = new List<StatID>{StatID.Defense}, NerfedStats = new List<StatID>{StatID.Attack}, TargetSelf = true}},
+        {MoveID.Harden, new Move(){ Power = 0, Accuracy = 100, Typing = Typing.Rock, Category = MoveCategory.ModifyStats, BuffedStats = new List<StatID>{StatID.Attack}, NerfedStats = new List<StatID>{StatID.Defense}, TargetSelf = true}},
 
     };
     

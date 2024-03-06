@@ -24,19 +24,20 @@ public class Beast
     //public int[] Stats { get; set; }
     public Dictionary<StatID, int> Stats { get; set; }
     public Dictionary<StatID, int> ModifiedStats { get; set; }
-    public int Att { get; set; }
-    public int Def { get; set; }
-    public int SpAtt { get; set; }
-    public int SpDef { get; set; }
-    public int Speed { get; set; }
-    public int HP { get; set; }
-    public int CurrentAtt { get; set; }
-    public int CurrentDef { get; set; }
-    public int CurrentSpAtt { get; set; }
-    public int CurrentSpDef { get; set; }
-    public int CurrentSpeed { get; set; }
-    public int CurrentHP { get; set; }
+    //public int Att { get; set; }
+    //public int Def { get; set; }
+    //public int SpAtt { get; set; }
+    //public int SpDef { get; set; }
+    //public int Speed { get; set; }
+    //public int HP { get; set; }
+    //public int CurrentAtt { get; set; }
+    //public int CurrentDef { get; set; }
+    //public int CurrentSpAtt { get; set; }
+    //public int CurrentSpDef { get; set; }
+    //public int CurrentSpeed { get; set; }
+    //public int CurrentHP { get; set; }
     public Sprite FrontSprite { get; set; } //= Resources.Load<Sprite>("Sprites/Brown");
+    public bool IsPlayerUnit { get; set; } = false;
 
     public Beast()
     {
@@ -162,7 +163,12 @@ public class Beast
 
     public void ResetStats()
     {
-        CurrentDef = Stats[StatID.Defense];
+        int HP = ModifiedStats[StatID.HP];
+        foreach (var kvp in Stats)
+        {
+            ModifiedStats[kvp.Key] = Stats[kvp.Key];
+        }
+        ModifiedStats[StatID.HP] = HP;
     }
 
     //public void CheckAllStats()
@@ -230,9 +236,19 @@ public class Beast
             }
                      
         }
+        int damage = 0;
+        float effectiveness = 1;
 
-        float effectiveness = TypeChart.GetEffectiveness(moveUsed.Typing, BeastBaseDB.BeastBases[defender.Name].Typing1, BeastBaseDB.BeastBases[defender.Name].Typing2);
-        int damage = (int)Math.Round(moveUsed.Power / 100f * (attacker.ModifiedStats[StatID.Attack] - defender.ModifiedStats[StatID.Defense]) * effectiveness, MidpointRounding.AwayFromZero);
+        if (moveUsed.Category == MoveCategory.Physical)
+        {
+            effectiveness = TypeChart.GetEffectiveness(moveUsed.Typing, BeastBaseDB.BeastBases[defender.Name].Typing1, BeastBaseDB.BeastBases[defender.Name].Typing2);
+            damage = (int)Math.Round(moveUsed.Power / 100f * (attacker.ModifiedStats[StatID.Attack] - defender.ModifiedStats[StatID.Defense]) * effectiveness, MidpointRounding.AwayFromZero);
+        }
+        else if (moveUsed.Category == MoveCategory.Special)
+        {
+            effectiveness = TypeChart.GetEffectiveness(moveUsed.Typing, BeastBaseDB.BeastBases[defender.Name].Typing1, BeastBaseDB.BeastBases[defender.Name].Typing2);
+            damage = (int)Math.Round(moveUsed.Power / 100f * (attacker.ModifiedStats[StatID.SpecialAttack] - defender.ModifiedStats[StatID.SpecialDefense]) * effectiveness, MidpointRounding.AwayFromZero);
+        }
 
         if (moveUsed.Category == MoveCategory.Physical || moveUsed.Category == MoveCategory.Special) {
             if (damage <= 0)

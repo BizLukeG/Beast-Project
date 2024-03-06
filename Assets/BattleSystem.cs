@@ -157,16 +157,16 @@ public class BattleSystem : MonoBehaviour
         System.Random r = new System.Random();
         Beast firstUnitToMove;
         Beast secondUnitToMove;
-        Debug.Log($"WildBeastSpeed {WildBeast.CurrentSpeed} \nplayerActiveBeast {PlayerActiveBeast.CurrentSpeed}");
+        Debug.Log($"WildBeastSpeed {WildBeast.ModifiedStats[StatID.Speed]} \nplayerActiveBeast {PlayerActiveBeast.ModifiedStats[StatID.Speed]}");
         
         //Calcs who goes first
-        if (WildBeast.Speed >= PlayerActiveBeast.Speed)
+        if (WildBeast.ModifiedStats[StatID.Speed] >= PlayerActiveBeast.ModifiedStats[StatID.Speed])
         {
             firstUnitToMove = WildBeast;
             secondUnitToMove = PlayerActiveBeast;
 
             int rInt = r.Next(0, 4);
-            MovesQueue.Enqueue(WildBeast.MoveSet[1/*rInt*/]);
+            MovesQueue.Enqueue(WildBeast.MoveSet[0/*rInt*/]);
 
             MovesQueue.Enqueue(MoveSelectorMB.SelectedMove);
         }
@@ -179,7 +179,7 @@ public class BattleSystem : MonoBehaviour
             MovesQueue.Enqueue(MoveSelectorMB.SelectedMove);
 
             int rInt = r.Next(0, 4);
-            MovesQueue.Enqueue(WildBeast.MoveSet[1/*rInt*/]);
+            MovesQueue.Enqueue(WildBeast.MoveSet[0/*rInt*/]);
         }
         Debug.Log($"FirstUnitToMove {firstUnitToMove.Name} \nSecondUnitToMove {secondUnitToMove.Name}");
 
@@ -203,7 +203,14 @@ public class BattleSystem : MonoBehaviour
 
         //displays move used
         //goes back to update with runturn now the battlestate so nothing happens until this is over and then continues from here
-        yield return BattleDialogBoxMB.DisplayBattleDialogText($"{firstUnitToMove.Name} used {moveUsed.Name}");
+        if (!firstUnitToMove.IsPlayerUnit)
+        {
+            yield return BattleDialogBoxMB.DisplayBattleDialogText($"foe {firstUnitToMove.Name} used {moveUsed.Name}");
+        }
+        else
+        {
+            yield return BattleDialogBoxMB.DisplayBattleDialogText($"{firstUnitToMove.Name} used {moveUsed.Name}");
+        }
 
         //waits for x to be pressed to continue
         //BattleStateStack.Push(BattleState.Hold);
@@ -252,12 +259,18 @@ public class BattleSystem : MonoBehaviour
             //{
             //    damage = 1;
             //}
-            
+
             //firstUnitToMove.CurrentHP -= damage;
 
             //Debug.Log($"SecondMoverCA {secondUnitToMove.CurrentAtt} \n FirstMoverCurrentDef {firstUnitToMove.CurrentDef} \n damage {damage} \n firstMoverHP {firstUnitToMove.CurrentHP}");
-
-            yield return BattleDialogBoxMB.DisplayBattleDialogText($"{secondUnitToMove.Name} used {moveUsed.Name}");
+            if (!secondUnitToMove.IsPlayerUnit)
+            {
+                yield return BattleDialogBoxMB.DisplayBattleDialogText($"Foe {secondUnitToMove.Name} used {moveUsed.Name}");
+            }else
+            {
+                yield return BattleDialogBoxMB.DisplayBattleDialogText($"{secondUnitToMove.Name} used {moveUsed.Name}");
+            }
+            
             //BattleStateStack.Push(BattleState.Hold);
             //yield return new WaitUntil(() => hold == false);
             //BattleStateStack.Pop();

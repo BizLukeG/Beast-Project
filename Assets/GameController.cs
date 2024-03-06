@@ -45,6 +45,7 @@ public class GameController : MonoBehaviour
 
         Beast playerBeast = Area.getBeastPerRoute(AreaID.Route101);
         //playerBeast.CheckAllStats();
+        playerBeast.IsPlayerUnit = true;
         Player.Party.Add(playerBeast);
         Debug.Log("Party Name " + Player.Party[0].Name);
 
@@ -56,9 +57,9 @@ public class GameController : MonoBehaviour
     {
         if(GameStateStack.Peek() == GameState.OverWorld)
         {
-            BattleSystemMB.BattleDialogBoxMB.DisplayBattleDialogTextNoAnimation("Press C To Start New Battle");
+            BattleSystemMB.BattleDialogBoxMB.DisplayBattleDialogTextNoAnimation("Press V To Start New Battle");
             Debug.Log("OverWorld");
-            if (Input.GetKeyDown(KeyCode.C))
+            if (Input.GetKeyDown(KeyCode.V))
             {
                 BattleSystemMB.WildBeast = Area.getBeastPerRoute(AreaID.Route101);
                 BattleSystemMB.BattleStateStack.Push(BattleState.StartBattle);
