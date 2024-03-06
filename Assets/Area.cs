@@ -36,8 +36,8 @@ public class Area
         Debug.Log("rBeastIndex " + rBeastIndex);
         Debug.Log("BeastID2 " + (BeastID)rBeastIndex);
         Debug.Log("BeastName " + BeastBaseDB.BeastBases[(BeastID)rBeastIndex].Name);
-        Beast beast = new Beast(BeastBaseDB.BeastBases[(BeastID)rBeastIndex].Name, rLevel, BeastBaseDB.BeastBases[(BeastID)rBeastIndex].MaxBaseStats);
-        //beast.createMoveSet(beast.Name);
+        Beast beast = new Beast(BeastID.Pugba, rLevel, BeastBaseDB.BeastBases[(BeastID)rBeastIndex].MaxBaseStats);
+        //BeastBaseDB.BeastBases[(BeastID)rBeastIndex].Name
 
         return beast;
     }

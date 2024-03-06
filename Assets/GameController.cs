@@ -44,7 +44,7 @@ public class GameController : MonoBehaviour
 
 
         Beast playerBeast = Area.getBeastPerRoute(AreaID.Route101);
-        playerBeast.CheckAllStats();
+        //playerBeast.CheckAllStats();
         Player.Party.Add(playerBeast);
         Debug.Log("Party Name " + Player.Party[0].Name);
 

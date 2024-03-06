@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-
+public enum StatID
+{
+    HP, Attack, Defense, SpecialAttack, SpecialDefense, Speed
+}
 
 public class Beast
 {
@@ -18,7 +21,9 @@ public class Beast
     public BeastID beastid;
     public int maxBaseStats { get; set; }
     public BaseStatDistribution BaseStats { get; set; }
-    public int[] Stats { get; set; }
+    //public int[] Stats { get; set; }
+    public Dictionary<StatID, int> Stats { get; set; }
+    public Dictionary<StatID, int> ModifiedStats { get; set; }
     public int Att { get; set; }
     public int Def { get; set; }
     public int SpAtt { get; set; }
@@ -57,28 +62,54 @@ public class Beast
 
     public void createStats(BaseStatDistribution beastBaseStats, int level)
     {
-        Stats = new int[6];
-        Stats[0] = beastBaseStats.BaseAtt * 2 + level;
-        Stats[1] = beastBaseStats.BaseDef * 2 + level;
-        Stats[2] = beastBaseStats.BaseSpAtt * 2 + level;
-        Stats[3] = beastBaseStats.BaseSpDef * 2 + level;
-        Stats[4] = beastBaseStats.BaseSpeed * 2 + level;
-        Stats[5] = beastBaseStats.BaseHP * 2 + level;
+        //Stats = new int[6];
+        //Stats[0] = beastBaseStats.BaseAtt * 2 + level;
+        //Stats[1] = beastBaseStats.BaseDef * 2 + level;
+        //Stats[2] = beastBaseStats.BaseSpAtt * 2 + level;
+        //Stats[3] = beastBaseStats.BaseSpDef * 2 + level;
+        //Stats[4] = beastBaseStats.BaseSpeed * 2 + level;
+        //Stats[5] = beastBaseStats.BaseHP * 2 + level;
+
+        Stats = new Dictionary<StatID, int>()
+        {
+            {StatID.HP, beastBaseStats.BaseHP * 2 + level},
+            {StatID.Attack, beastBaseStats.BaseAtt * 2 + level},
+            {StatID.Defense, beastBaseStats.BaseDef * 2 + level},
+            {StatID.SpecialAttack, beastBaseStats.BaseSpDef * 2 + level},
+            {StatID.SpecialDefense, beastBaseStats.BaseSpAtt * 2 + level},
+            {StatID.Speed, beastBaseStats.BaseSpeed * 2 + level}
+
+        };
+
+        ModifiedStats = new Dictionary<StatID, int>()
+        {
+            {StatID.HP, Stats[StatID.HP]},
+            {StatID.Attack, Stats[StatID.Attack]},
+            {StatID.Defense, Stats[StatID.Defense]},
+            {StatID.SpecialAttack, Stats[StatID.SpecialAttack]},
+            {StatID.SpecialDefense, Stats[StatID.SpecialDefense]},
+            {StatID.Speed, Stats[StatID.Speed]}
+
+        };
 
         Level = level;
-        Att = Stats[0];
-        Def = Stats[1];
-        SpAtt = Stats[2];
-        SpDef = Stats[3];
-        Speed = Stats[4];
-        HP = Stats[5];
 
-        CurrentAtt = Att;
-        CurrentDef = Def;
-        CurrentSpAtt = SpAtt;
-        CurrentSpDef = SpDef;
-        CurrentSpeed = Speed;
-        CurrentHP = HP;
+
+        //HP = Stats[StatID.HP];
+        //Att = Stats[StatID.Attack];
+        //Def = Stats[StatID.Defense];
+        //SpAtt = Stats[StatID.SpecialAttack];
+        //SpDef = Stats[StatID.SpecialDefense];
+        //Speed = Stats[StatID.Speed];
+        
+
+        //CurrentHP = HP;
+        //CurrentAtt = Att;
+        //CurrentDef = Def;
+        //CurrentSpAtt = SpAtt;
+        //CurrentSpDef = SpDef;
+        //CurrentSpeed = Speed;
+        
 
         //MoveSet.Add(MoveDB.Moves[LearnSet[1]]);
         //return stats;
@@ -127,30 +158,92 @@ public class Beast
         
     }
 
-    public void CheckAllStats()
+
+
+    public void ResetStats()
     {
-        Debug.Log("Stats: ");
-        foreach (var stat in this.Stats)
-        {
-            Debug.Log(stat);
-        }
-
-        Debug.Log("BaseStats: ");
-        foreach (var baseStat in this.BaseStats.ActualBaseStats)
-        {
-            Debug.Log(baseStat);
-        }
-
-        Debug.Log("BaseStatsLimits: ");
-        foreach (var baseStatLimit in this.BaseStats.BaseStatsLimits)
-        {
-            Debug.Log(baseStatLimit);
-        }
-
-        Debug.Log("Name " + Name);
-        Debug.Log("Level " + Level);
-        Debug.Log("MBS " + MaxBaseStats);
+        CurrentDef = Stats[StatID.Defense];
     }
 
+    //public void CheckAllStats()
+    //{
+    //    Debug.Log("Stats: ");
+    //    foreach (var stat in this.Stats)
+    //    {
+    //        Debug.Log(stat);
+    //    }
+
+    //    Debug.Log("BaseStats: ");
+    //    foreach (var baseStat in this.BaseStats.ActualBaseStats)
+    //    {
+    //        Debug.Log(baseStat);
+    //    }
+
+    //    Debug.Log("BaseStatsLimits: ");
+    //    foreach (var baseStatLimit in this.BaseStats.BaseStatsLimits)
+    //    {
+    //        Debug.Log(baseStatLimit);
+    //    }
+
+    //    Debug.Log("Name " + Name);
+    //    Debug.Log("Level " + Level);
+    //    Debug.Log("MBS " + MaxBaseStats);
+    //}
+
+    public static float DamageCalc(Move moveUsed, Beast firstUnitToMove, Beast secondUnitToMove, bool firstMove)
+    {
+        Beast attacker; Beast defender;
+        if (firstMove)
+        {
+            attacker = firstUnitToMove;
+            defender = secondUnitToMove;
+        }
+        else
+        {
+            attacker = secondUnitToMove;
+            defender = firstUnitToMove;
+        }
+        if (moveUsed.Category == MoveCategory.ModifyStats)
+        {
+            if(moveUsed.TargetSelf == true)
+            {
+               
+                foreach (var buffedStat in moveUsed.BuffedStats)
+                {
+                    attacker.ModifiedStats[buffedStat] += (int)Math.Round(.5 * attacker.ModifiedStats[buffedStat], MidpointRounding.AwayFromZero);
+                }
+                foreach (var nerfedStat in moveUsed.NerfedStats)
+                {
+                    attacker.ModifiedStats[nerfedStat] -= (int)Math.Round(.5 * attacker.ModifiedStats[nerfedStat], MidpointRounding.AwayFromZero);
+                }
+                    
+            }else if(moveUsed.TargetSelf == false)
+            {
+                foreach (var buffedStat in moveUsed.BuffedStats)
+                {
+                    defender.ModifiedStats[buffedStat] += (int)Math.Round(.5 * defender.ModifiedStats[buffedStat], MidpointRounding.AwayFromZero);
+                }
+                foreach (var nerfedStat in moveUsed.NerfedStats)
+                {
+                    defender.ModifiedStats[nerfedStat] -= (int)Math.Round(.5 * defender.ModifiedStats[nerfedStat], MidpointRounding.AwayFromZero);
+                }
+            }
+                     
+        }
+
+        float effectiveness = TypeChart.GetEffectiveness(moveUsed.Typing, BeastBaseDB.BeastBases[defender.Name].Typing1, BeastBaseDB.BeastBases[defender.Name].Typing2);
+        int damage = (int)Math.Round(moveUsed.Power / 100f * (attacker.ModifiedStats[StatID.Attack] - defender.ModifiedStats[StatID.Defense]) * effectiveness, MidpointRounding.AwayFromZero);
+
+        if (moveUsed.Category == MoveCategory.Physical || moveUsed.Category == MoveCategory.Special) {
+            if (damage <= 0)
+            damage = 1;
+        }
+        else { damage = 0; }
+
+        defender.ModifiedStats[StatID.HP] -= damage;
+
+        return effectiveness;
+    }
+    
 
 }

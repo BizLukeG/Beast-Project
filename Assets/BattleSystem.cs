@@ -166,7 +166,7 @@ public class BattleSystem : MonoBehaviour
             secondUnitToMove = PlayerActiveBeast;
 
             int rInt = r.Next(0, 4);
-            MovesQueue.Enqueue(WildBeast.MoveSet[rInt]);
+            MovesQueue.Enqueue(WildBeast.MoveSet[1/*rInt*/]);
 
             MovesQueue.Enqueue(MoveSelectorMB.SelectedMove);
         }
@@ -179,24 +179,27 @@ public class BattleSystem : MonoBehaviour
             MovesQueue.Enqueue(MoveSelectorMB.SelectedMove);
 
             int rInt = r.Next(0, 4);
-            MovesQueue.Enqueue(WildBeast.MoveSet[rInt]);
+            MovesQueue.Enqueue(WildBeast.MoveSet[1/*rInt*/]);
         }
         Debug.Log($"FirstUnitToMove {firstUnitToMove.Name} \nSecondUnitToMove {secondUnitToMove.Name}");
 
         //Calcs damage
         Move moveUsed = MoveDB.Moves[MovesQueue.Dequeue()];
-
-        float effectiveness = TypeChart.GetEffectiveness(moveUsed.Typing, BeastBaseDB.BeastBases[secondUnitToMove.Name].Typing1, BeastBaseDB.BeastBases[secondUnitToMove.Name].Typing2);
+        
+        //float effectiveness = TypeChart.GetEffectiveness(moveUsed.Typing, BeastBaseDB.BeastBases[secondUnitToMove.Name].Typing1, BeastBaseDB.BeastBases[secondUnitToMove.Name].Typing2);
+        float effectiveness = Beast.DamageCalc(moveUsed, firstUnitToMove, secondUnitToMove, true);
         string effectivenessPhrase = TypeChart.GetEffectivenessPhrase(effectiveness);
 
-        int damage = (int)Math.Round(moveUsed.Power/100f * (firstUnitToMove.CurrentAtt - secondUnitToMove.CurrentDef) * effectiveness, MidpointRounding.AwayFromZero);
-       if (damage <= 0 ){
-        damage = 1;
-       }
+        // int damage = (int)Math.Round(moveUsed.Power/100f * (firstUnitToMove.CurrentAtt - secondUnitToMove.CurrentDef) * effectiveness, MidpointRounding.AwayFromZero);
+        //if (damage <= 0 ){
+        // damage = 1;
+        //}
 
-       //applies damage
-        secondUnitToMove.CurrentHP -= damage;
-        Debug.Log($"FirstMoverCA {firstUnitToMove.CurrentAtt} \n secondMoverCurrentDef {secondUnitToMove.CurrentDef} \n damage {damage} \n secondMoverHP {secondUnitToMove.CurrentHP}");
+
+
+        //applies damage
+        //secondUnitToMove.CurrentHP -= damage;
+        //Debug.Log($"FirstMoverCA {firstUnitToMove.CurrentAtt} \n secondMoverCurrentDef {secondUnitToMove.CurrentDef} \n damage {damage} \n secondMoverHP {secondUnitToMove.CurrentHP}");
 
         //displays move used
         //goes back to update with runturn now the battlestate so nothing happens until this is over and then continues from here
@@ -231,6 +234,7 @@ public class BattleSystem : MonoBehaviour
             yield return new WaitUntil(() => hold == false);
             BattleStateStack.Pop();
             hold = true;
+            PlayerActiveBeast.ResetStats();
             BattleStateStack.Push(BattleState.BattleOver);
             //yield return BattleDialogBoxMB.DisplayBattleDialogText("Battle is over");
             //HandleGameStateBattle();
@@ -239,17 +243,19 @@ public class BattleSystem : MonoBehaviour
         {
             moveUsed = MoveDB.Moves[MovesQueue.Dequeue()];
 
-            effectiveness = TypeChart.GetEffectiveness(moveUsed.Typing, BeastBaseDB.BeastBases[firstUnitToMove.Name].Typing1, BeastBaseDB.BeastBases[firstUnitToMove.Name].Typing2);
+            //effectiveness = TypeChart.GetEffectiveness(moveUsed.Typing, BeastBaseDB.BeastBases[firstUnitToMove.Name].Typing1, BeastBaseDB.BeastBases[firstUnitToMove.Name].Typing2);
+            effectiveness = Beast.DamageCalc(moveUsed, firstUnitToMove, secondUnitToMove, false);
             effectivenessPhrase = TypeChart.GetEffectivenessPhrase(effectiveness);
 
-            damage = (int)Math.Round(moveUsed.Power / 100f * (secondUnitToMove.CurrentAtt - firstUnitToMove.CurrentDef) * effectiveness, MidpointRounding.AwayFromZero);
-            if (damage <= 0)
-            {
-                damage = 1;
-            }
-           
-            firstUnitToMove.CurrentHP -= damage;
-            Debug.Log($"SecondMoverCA {secondUnitToMove.CurrentAtt} \n FirstMoverCurrentDef {firstUnitToMove.CurrentDef} \n damage {damage} \n firstMoverHP {firstUnitToMove.CurrentHP}");
+            //damage = (int)Math.Round(moveUsed.Power / 100f * (secondUnitToMove.CurrentAtt - firstUnitToMove.CurrentDef) * effectiveness, MidpointRounding.AwayFromZero);
+            //if (damage <= 0)
+            //{
+            //    damage = 1;
+            //}
+            
+            //firstUnitToMove.CurrentHP -= damage;
+
+            //Debug.Log($"SecondMoverCA {secondUnitToMove.CurrentAtt} \n FirstMoverCurrentDef {firstUnitToMove.CurrentDef} \n damage {damage} \n firstMoverHP {firstUnitToMove.CurrentHP}");
 
             yield return BattleDialogBoxMB.DisplayBattleDialogText($"{secondUnitToMove.Name} used {moveUsed.Name}");
             //BattleStateStack.Push(BattleState.Hold);
@@ -277,6 +283,7 @@ public class BattleSystem : MonoBehaviour
                 yield return new WaitUntil(() => hold == false);
                 BattleStateStack.Pop();
                 hold = true;
+                PlayerActiveBeast.ResetStats();
                 BattleStateStack.Push(BattleState.BattleOver);
 
                 //yield return BattleDialogBoxMB.DisplayBattleDialogText("Battle is over");
@@ -300,12 +307,12 @@ public class BattleSystem : MonoBehaviour
 
     bool IsBattleOver()
     {
-        if (WildBeast.CurrentHP <= 0)
+        if (WildBeast.ModifiedStats[StatID.HP] <= 0)
         {
             Debug.Log("Player wins ");          
             return true;
         }
-        else if (PlayerActiveBeast.CurrentHP <= 0)
+        else if (PlayerActiveBeast.ModifiedStats[StatID.HP] <= 0)
         {
             Debug.Log("WildBeast wins ");
             return true;

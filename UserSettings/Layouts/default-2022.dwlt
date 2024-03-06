@@ -14,16 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PixelRect:
     serializedVersion: 2
-    x: -23.2
-    y: 68
+    x: 0
+    y: 43.2
     width: 1536
     height: 780.8
   m_ShowMode: 4
-  m_Title: Console
+  m_Title: Game
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
-  m_Maximized: 0
+  m_Maximized: 1
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 23322
+  controlID: 97
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 23323
+  controlID: 63
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 23324
+  controlID: 40
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: SceneView
+  m_Name: GameView
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -215,15 +215,15 @@ MonoBehaviour:
     y: 0
     width: 921.6
     height: 441.6
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
-  m_ActualView: {fileID: 14}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 14}
   - {fileID: 15}
   - {fileID: 16}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -261,7 +261,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: InspectorWindow
+  m_Name: Window
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -270,14 +270,14 @@ MonoBehaviour:
     y: 0
     width: 312
     height: 730.8
-  m_MinSize: {x: 275, y: 50}
+  m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 18}
+  m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 18}
   - {fileID: 19}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -338,9 +338,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: f2700000
-    m_LastClickedID: 28914
-    m_ExpandedIDs: 00000000f270000050ab000000ca9a3b
+    m_SelectedIDs: 8e730000
+    m_LastClickedID: 29582
+    m_ExpandedIDs: 0000000090730000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -368,7 +368,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000f2700000
+    m_ExpandedIDs: 0000000090730000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -393,8 +393,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 4cea0000
-    m_LastClickedInstanceID: 59980
+    m_SelectedInstanceIDs: 5cb90000
+    m_LastClickedInstanceID: 47452
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
@@ -420,7 +420,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
+    m_ScrollPosition: {x: 0, y: 28.90001}
     m_GridSize: 57
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 115
@@ -444,8 +444,8 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: -23.199951
-    y: 98.4
+    x: 0
+    y: 73.6
     width: 301.4
     height: 420.6
   m_SerializedDataModeController:
@@ -460,10 +460,10 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 32.399994}
-      m_SelectedIDs: 4cea0000
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: c84ffdff0e5cfdff3892fdff167cffff98ddffff7ce0fffff0faffff
+      m_ExpandedIDs: 1afbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -507,8 +507,8 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 279.2
-    y: 98.4
+    x: 302.4
+    y: 73.6
     width: 919.6
     height: 420.6
   m_SerializedDataModeController:
@@ -869,9 +869,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 474.12918, y: 344.10828, z: -1.0178162}
+    m_Target: {x: 515.6428, y: 333.2372, z: -0.82115006}
     speed: 2
-    m_Value: {x: 474.12918, y: 344.10828, z: -1.0178162}
+    m_Value: {x: 515.6428, y: 333.2372, z: -0.82115006}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -921,9 +921,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 528.3113
+    m_Target: 508.64478
     speed: 2
-    m_Value: 528.3113
+    m_Value: 508.64478
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1100,8 +1100,8 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: -23.199951
-    y: 540
+    x: 0
+    y: 515.2
     width: 1223
     height: 268.19998
   m_SerializedDataModeController:
@@ -1134,8 +1134,8 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1200.8
-    y: 98.4
+    x: 1224
+    y: 73.6
     width: 311
     height: 709.8
   m_SerializedDataModeController:
@@ -1195,14 +1195,14 @@ MonoBehaviour:
     m_LastAppliedPresetName: Default
     m_SaveData: []
     m_OverlaysVisible: 1
-  progressMessageClearTime: -1
+  progressMessageClearTime: 4974.0914935
   notificationClearTime: -1
-  timeSinceLastRotation: -1
+  timeSinceLastRotation: 4972.0930478
   currentBranchAndRemoteHasUpdate: 0
-  currentTrackingStatusHasUpdate: 1
-  currentStatusEntriesHasUpdate: 1
-  repositoryProgressHasUpdate: 1
-  appManagerProgressHasUpdate: 1
+  currentTrackingStatusHasUpdate: 0
+  currentStatusEntriesHasUpdate: 0
+  repositoryProgressHasUpdate: 0
+  appManagerProgressHasUpdate: 0
   changeTab: 2
   activeTab: 2
   initProjectView:
@@ -1535,18 +1535,227 @@ MonoBehaviour:
     currentLocksHasUpdate: 0
     commitBody: 
     commitMessage: 
-    currentBranch: battlesystem-features
+    currentBranch: switch-to-monobehaviour-system
     treeScroll: {x: 0, y: 0}
     treeChanges:
       assets:
-        keys: []
-        values: []
+        keys:
+        - 00000000000000001000000000000000
+        - 20bb1f9cddd48cb4a97cd4eecea74f11
+        - 5996725764ab02b4f8b9f686f0460334
+        - 956202c8e1bf7404992f2399be208e39
+        - 2fe6070a9c6e97e42928f8cbc7cc83a7
+        values:
+        - path: Assets
+          label: Assets
+          level: 0
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 1
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
+        - path: Assets\BattleSystem.cs
+          label: BattleSystem.cs
+          level: 1
+          isFolder: 0
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 1
+          isLocked: 0
+          gitStatusEntry:
+            path: Assets\BattleSystem.cs
+            fullPath: D:\Unity\Beast-Project\Assets\BattleSystem.cs
+            projectPath: Assets\BattleSystem.cs
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 3
+        - path: Assets\Beast.cs
+          label: Beast.cs
+          level: 1
+          isFolder: 0
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 1
+          isLocked: 0
+          gitStatusEntry:
+            path: Assets\Beast.cs
+            fullPath: D:\Unity\Beast-Project\Assets\Beast.cs
+            projectPath: Assets\Beast.cs
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 3
+        - path: Assets\BeastBaseDB.cs
+          label: BeastBaseDB.cs
+          level: 1
+          isFolder: 0
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 1
+          isLocked: 0
+          gitStatusEntry:
+            path: Assets\BeastBaseDB.cs
+            fullPath: D:\Unity\Beast-Project\Assets\BeastBaseDB.cs
+            projectPath: Assets\BeastBaseDB.cs
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 3
+        - path: Assets\TypeChart.cs
+          label: TypeChart.cs
+          level: 1
+          isFolder: 0
+          isContainer: 1
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 1
+          isLocked: 0
+          gitStatusEntry:
+            path: Assets\TypeChart.cs
+            fullPath: D:\Unity\Beast-Project\Assets\TypeChart.cs
+            projectPath: Assets\TypeChart.cs
+            originalPath: 
+            indexStatus: 1
+            workTreeStatus: 1
       folders:
-        keys: []
-        values: []
+        keys:
+        - Assets
+        values:
+        - path: Assets
+          label: Assets
+          level: 0
+          isFolder: 1
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 1
+          isLocked: 0
+          gitStatusEntry:
+            path: 
+            fullPath: 
+            projectPath: 
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 0
       checkedFileNodes:
-        keys: []
-        values: []
+        keys:
+        - Assets\BattleSystem.cs
+        - Assets\Beast.cs
+        - Assets\BeastBaseDB.cs
+        - Assets\TypeChart.cs
+        - Assets\TypeChart.cs.meta
+        values:
+        - path: Assets\BattleSystem.cs
+          label: BattleSystem.cs
+          level: 1
+          isFolder: 0
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 1
+          isLocked: 0
+          gitStatusEntry:
+            path: Assets\BattleSystem.cs
+            fullPath: D:\Unity\Beast-Project\Assets\BattleSystem.cs
+            projectPath: Assets\BattleSystem.cs
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 3
+        - path: Assets\Beast.cs
+          label: Beast.cs
+          level: 1
+          isFolder: 0
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 1
+          isLocked: 0
+          gitStatusEntry:
+            path: Assets\Beast.cs
+            fullPath: D:\Unity\Beast-Project\Assets\Beast.cs
+            projectPath: Assets\Beast.cs
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 3
+        - path: Assets\BeastBaseDB.cs
+          label: BeastBaseDB.cs
+          level: 1
+          isFolder: 0
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 1
+          isLocked: 0
+          gitStatusEntry:
+            path: Assets\BeastBaseDB.cs
+            fullPath: D:\Unity\Beast-Project\Assets\BeastBaseDB.cs
+            projectPath: Assets\BeastBaseDB.cs
+            originalPath: 
+            indexStatus: 0
+            workTreeStatus: 3
+        - path: Assets\TypeChart.cs
+          label: TypeChart.cs
+          level: 1
+          isFolder: 0
+          isContainer: 1
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 1
+          isLocked: 0
+          gitStatusEntry:
+            path: Assets\TypeChart.cs
+            fullPath: D:\Unity\Beast-Project\Assets\TypeChart.cs
+            projectPath: Assets\TypeChart.cs
+            originalPath: 
+            indexStatus: 1
+            workTreeStatus: 1
+        - path: Assets\TypeChart.cs.meta
+          label: TypeChart.cs.meta
+          level: 2
+          isFolder: 0
+          isContainer: 0
+          isCollapsed: 0
+          isHidden: 0
+          isActive: 0
+          treeIsCheckable: 1
+          checkState: 1
+          isLocked: 0
+          gitStatusEntry:
+            path: Assets\TypeChart.cs.meta
+            fullPath: D:\Unity\Beast-Project\Assets\TypeChart.cs.meta
+            projectPath: Assets\TypeChart.cs.meta
+            originalPath: 
+            indexStatus: 1
+            workTreeStatus: 1
       title: 
       pathSeparator: \
       displayRootNode: 0
@@ -1563,7 +1772,7 @@ MonoBehaviour:
         isHidden: 0
         isActive: 0
         treeIsCheckable: 1
-        checkState: 0
+        checkState: 1
         isLocked: 0
         gitStatusEntry:
           path: 
@@ -1572,6 +1781,114 @@ MonoBehaviour:
           originalPath: 
           indexStatus: 0
           workTreeStatus: 0
+      - path: Assets
+        label: Assets
+        level: 0
+        isFolder: 1
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 1
+        isLocked: 0
+        gitStatusEntry:
+          path: 
+          fullPath: 
+          projectPath: 
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 0
+      - path: Assets\BattleSystem.cs
+        label: BattleSystem.cs
+        level: 1
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 1
+        isLocked: 0
+        gitStatusEntry:
+          path: Assets\BattleSystem.cs
+          fullPath: D:\Unity\Beast-Project\Assets\BattleSystem.cs
+          projectPath: Assets\BattleSystem.cs
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 3
+      - path: Assets\Beast.cs
+        label: Beast.cs
+        level: 1
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 1
+        isLocked: 0
+        gitStatusEntry:
+          path: Assets\Beast.cs
+          fullPath: D:\Unity\Beast-Project\Assets\Beast.cs
+          projectPath: Assets\Beast.cs
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 3
+      - path: Assets\BeastBaseDB.cs
+        label: BeastBaseDB.cs
+        level: 1
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 1
+        isLocked: 0
+        gitStatusEntry:
+          path: Assets\BeastBaseDB.cs
+          fullPath: D:\Unity\Beast-Project\Assets\BeastBaseDB.cs
+          projectPath: Assets\BeastBaseDB.cs
+          originalPath: 
+          indexStatus: 0
+          workTreeStatus: 3
+      - path: Assets\TypeChart.cs
+        label: TypeChart.cs
+        level: 1
+        isFolder: 0
+        isContainer: 1
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 1
+        isLocked: 0
+        gitStatusEntry:
+          path: Assets\TypeChart.cs
+          fullPath: D:\Unity\Beast-Project\Assets\TypeChart.cs
+          projectPath: Assets\TypeChart.cs
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
+      - path: Assets\TypeChart.cs.meta
+        label: TypeChart.cs.meta
+        level: 2
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 1
+        checkState: 1
+        isLocked: 0
+        gitStatusEntry:
+          path: Assets\TypeChart.cs.meta
+          fullPath: D:\Unity\Beast-Project\Assets\TypeChart.cs.meta
+          projectPath: Assets\TypeChart.cs.meta
+          originalPath: 
+          indexStatus: 1
+          workTreeStatus: 1
       selectedNode:
         path: 
         label: 
@@ -1591,21 +1908,273 @@ MonoBehaviour:
           originalPath: 
           indexStatus: 0
           workTreeStatus: 0
-    gitStatusEntries: []
-    changedFilesText: No changed files
+    gitStatusEntries:
+    - path: Assets\BattleSystem.cs
+      fullPath: D:\Unity\Beast-Project\Assets\BattleSystem.cs
+      projectPath: Assets\BattleSystem.cs
+      originalPath: 
+      indexStatus: 0
+      workTreeStatus: 3
+    - path: Assets\Beast.cs
+      fullPath: D:\Unity\Beast-Project\Assets\Beast.cs
+      projectPath: Assets\Beast.cs
+      originalPath: 
+      indexStatus: 0
+      workTreeStatus: 3
+    - path: Assets\BeastBaseDB.cs
+      fullPath: D:\Unity\Beast-Project\Assets\BeastBaseDB.cs
+      projectPath: Assets\BeastBaseDB.cs
+      originalPath: 
+      indexStatus: 0
+      workTreeStatus: 3
+    - path: Assets\TypeChart.cs
+      fullPath: D:\Unity\Beast-Project\Assets\TypeChart.cs
+      projectPath: Assets\TypeChart.cs
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    - path: Assets\TypeChart.cs.meta
+      fullPath: D:\Unity\Beast-Project\Assets\TypeChart.cs.meta
+      projectPath: Assets\TypeChart.cs.meta
+      originalPath: 
+      indexStatus: 1
+      workTreeStatus: 1
+    changedFilesText: 5 changed files
     lastCurrentBranchChangedEvent:
-      updatedTimeString: 2024-03-02T17:39:00.156-06:00
+      updatedTimeString: 2024-03-05T01:52:43.072-06:00
       cacheType: 1
     lastStatusEntriesChangedEvent:
-      updatedTimeString: 2024-03-02T18:12:05.402-06:00
+      updatedTimeString: 2024-03-05T02:39:47.037-06:00
       cacheType: 6
     lastLocksChangedEvent:
       updatedTimeString: 0001-01-01T00:00:00.000+00:00
       cacheType: 7
   historyView:
-    currentLogHasUpdate: 1
-    currentTrackingStatusHasUpdate: 1
+    currentLogHasUpdate: 0
+    currentTrackingStatusHasUpdate: 0
     logEntries:
+    - commitID: 651786e2006d6bfae88cf05a4634bff121411f46
+      mergeA: 
+      mergeB: 
+      authorName: BizLukeG
+      authorEmail: bizlukeg@gmail.com
+      commitEmail: bizlukeg@gmail.com
+      commitName: BizLukeG
+      summary: Implement effectivness
+      description: in battle
+      timeString: 2024-03-05T02:40:05.000-06:00
+      commitTimeString: 2024-03-05T02:40:05.000-06:00
+      changes:
+      - path: Assets\BattleSystem.cs
+        fullPath: D:\Unity\Beast-Project\Assets\BattleSystem.cs
+        projectPath: Assets\BattleSystem.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\Beast.cs
+        fullPath: D:\Unity\Beast-Project\Assets\Beast.cs
+        projectPath: Assets\Beast.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\BeastBaseDB.cs
+        fullPath: D:\Unity\Beast-Project\Assets\BeastBaseDB.cs
+        projectPath: Assets\BeastBaseDB.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\TypeChart.cs
+        fullPath: D:\Unity\Beast-Project\Assets\TypeChart.cs
+        projectPath: Assets\TypeChart.cs
+        originalPath: 
+        indexStatus: 4
+        workTreeStatus: 0
+      - path: Assets\TypeChart.cs.meta
+        fullPath: D:\Unity\Beast-Project\Assets\TypeChart.cs.meta
+        projectPath: Assets\TypeChart.cs.meta
+        originalPath: 
+        indexStatus: 4
+        workTreeStatus: 0
+    - commitID: e96d1fda722cd5510206d8ffd5b9101abe547950
+      mergeA: 
+      mergeB: 
+      authorName: BizLukeG
+      authorEmail: bizlukeg@gmail.com
+      commitEmail: bizlukeg@gmail.com
+      commitName: BizLukeG
+      summary: basic battlesystem setup
+      description: this
+      timeString: 2024-03-04T21:18:32.000-06:00
+      commitTimeString: 2024-03-04T21:18:32.000-06:00
+      changes:
+      - path: Assets\BattleDialogBox.cs
+        fullPath: D:\Unity\Beast-Project\Assets\BattleDialogBox.cs
+        projectPath: Assets\BattleDialogBox.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\BattleSystem.cs
+        fullPath: D:\Unity\Beast-Project\Assets\BattleSystem.cs
+        projectPath: Assets\BattleSystem.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\BattleUnitUI.cs
+        fullPath: D:\Unity\Beast-Project\Assets\BattleUnitUI.cs
+        projectPath: Assets\BattleUnitUI.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\GameController.cs
+        fullPath: D:\Unity\Beast-Project\Assets\GameController.cs
+        projectPath: Assets\GameController.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\MoveSelector.cs
+        fullPath: D:\Unity\Beast-Project\Assets\MoveSelector.cs
+        projectPath: Assets\MoveSelector.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\Scenes\SampleScene.unity
+        fullPath: D:\Unity\Beast-Project\Assets\Scenes\SampleScene.unity
+        projectPath: Assets\Scenes\SampleScene.unity
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+    - commitID: 5c0b9611bc8ae59256f76ee45cd5a11923cbb847
+      mergeA: 
+      mergeB: 
+      authorName: BizLukeG
+      authorEmail: bizlukeg@gmail.com
+      commitEmail: bizlukeg@gmail.com
+      commitName: BizLukeG
+      summary: Made first Coroutine
+      description: 
+      timeString: 2024-03-04T17:26:50.000-06:00
+      commitTimeString: 2024-03-04T17:26:50.000-06:00
+      changes:
+      - path: Assets\BattleDialogBox.cs
+        fullPath: D:\Unity\Beast-Project\Assets\BattleDialogBox.cs
+        projectPath: Assets\BattleDialogBox.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\BattleSystem.cs
+        fullPath: D:\Unity\Beast-Project\Assets\BattleSystem.cs
+        projectPath: Assets\BattleSystem.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+    - commitID: 610b3116d4a40d6d39db16a6d7d95edc4b56a482
+      mergeA: 
+      mergeB: 
+      authorName: BizLukeG
+      authorEmail: bizlukeg@gmail.com
+      commitEmail: bizlukeg@gmail.com
+      commitName: BizLukeG
+      summary: Setup first MB instance
+      description: first monobehavior instance before coroutines
+      timeString: 2024-03-04T15:18:13.000-06:00
+      commitTimeString: 2024-03-04T15:18:13.000-06:00
+      changes:
+      - path: Assets\ActionSelector.cs
+        fullPath: D:\Unity\Beast-Project\Assets\ActionSelector.cs
+        projectPath: Assets\ActionSelector.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\BattleDialogBox.cs
+        fullPath: D:\Unity\Beast-Project\Assets\BattleDialogBox.cs
+        projectPath: Assets\BattleDialogBox.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\BattleSystem.cs
+        fullPath: D:\Unity\Beast-Project\Assets\BattleSystem.cs
+        projectPath: Assets\BattleSystem.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\GameController.cs
+        fullPath: D:\Unity\Beast-Project\Assets\GameController.cs
+        projectPath: Assets\GameController.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\MoveSelector.cs
+        fullPath: D:\Unity\Beast-Project\Assets\MoveSelector.cs
+        projectPath: Assets\MoveSelector.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\Scenes\SampleScene.unity
+        fullPath: D:\Unity\Beast-Project\Assets\Scenes\SampleScene.unity
+        projectPath: Assets\Scenes\SampleScene.unity
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+    - commitID: 2afc6c0116ab1584401f52b701bdb5d4e9aff795
+      mergeA: 
+      mergeB: 
+      authorName: BizLukeG
+      authorEmail: bizlukeg@gmail.com
+      commitEmail: bizlukeg@gmail.com
+      commitName: BizLukeG
+      summary: Start Implementing BattleDialogBox
+      description: 
+      timeString: 2024-03-02T23:00:23.000-06:00
+      commitTimeString: 2024-03-02T23:00:23.000-06:00
+      changes:
+      - path: Assets\ActionSelector.cs
+        fullPath: D:\Unity\Beast-Project\Assets\ActionSelector.cs
+        projectPath: Assets\ActionSelector.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\BattleDialogBox.cs
+        fullPath: D:\Unity\Beast-Project\Assets\BattleDialogBox.cs
+        projectPath: Assets\BattleDialogBox.cs
+        originalPath: 
+        indexStatus: 4
+        workTreeStatus: 0
+      - path: Assets\BattleDialogBox.cs.meta
+        fullPath: D:\Unity\Beast-Project\Assets\BattleDialogBox.cs.meta
+        projectPath: Assets\BattleDialogBox.cs.meta
+        originalPath: 
+        indexStatus: 4
+        workTreeStatus: 0
+      - path: Assets\BattleSystem.cs
+        fullPath: D:\Unity\Beast-Project\Assets\BattleSystem.cs
+        projectPath: Assets\BattleSystem.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\GameController.cs
+        fullPath: D:\Unity\Beast-Project\Assets\GameController.cs
+        projectPath: Assets\GameController.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\MoveSelector.cs
+        fullPath: D:\Unity\Beast-Project\Assets\MoveSelector.cs
+        projectPath: Assets\MoveSelector.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\Scenes\SampleScene.unity
+        fullPath: D:\Unity\Beast-Project\Assets\Scenes\SampleScene.unity
+        projectPath: Assets\Scenes\SampleScene.unity
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: UserSettings\Layouts\default-2022.dwlt
+        fullPath: D:\Unity\Beast-Project\UserSettings\Layouts\default-2022.dwlt
+        projectPath: UserSettings\Layouts\default-2022.dwlt
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
     - commitID: 15c042cf6121d07b1d0d62ee84d8fc032eb0ddaf
       mergeA: 
       mergeB: 
@@ -3336,14 +3905,236 @@ MonoBehaviour:
         workTreeStatus: 0
     statusAhead: 0
     lastLogChangedEvent:
-      updatedTimeString: 0001-01-01T00:00:00.000+00:00
+      updatedTimeString: 2024-03-05T18:22:59.069-06:00
       cacheType: 3
     lastTrackingStatusChangedEvent:
-      updatedTimeString: 0001-01-01T00:00:00.000+00:00
+      updatedTimeString: 2024-03-05T18:22:59.057-06:00
       cacheType: 5
     historyControl:
       scroll: {x: 0, y: 0}
       entries:
+      - commitID: 651786e2006d6bfae88cf05a4634bff121411f46
+        mergeA: 
+        mergeB: 
+        authorName: BizLukeG
+        authorEmail: bizlukeg@gmail.com
+        commitEmail: bizlukeg@gmail.com
+        commitName: BizLukeG
+        summary: Implement effectivness
+        description: in battle
+        timeString: 2024-03-05T02:40:05.000-06:00
+        commitTimeString: 2024-03-05T02:40:05.000-06:00
+        changes:
+        - path: Assets\BattleSystem.cs
+          fullPath: D:\Unity\Beast-Project\Assets\BattleSystem.cs
+          projectPath: Assets\BattleSystem.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\Beast.cs
+          fullPath: D:\Unity\Beast-Project\Assets\Beast.cs
+          projectPath: Assets\Beast.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\BeastBaseDB.cs
+          fullPath: D:\Unity\Beast-Project\Assets\BeastBaseDB.cs
+          projectPath: Assets\BeastBaseDB.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\TypeChart.cs
+          fullPath: D:\Unity\Beast-Project\Assets\TypeChart.cs
+          projectPath: Assets\TypeChart.cs
+          originalPath: 
+          indexStatus: 4
+          workTreeStatus: 0
+        - path: Assets\TypeChart.cs.meta
+          fullPath: D:\Unity\Beast-Project\Assets\TypeChart.cs.meta
+          projectPath: Assets\TypeChart.cs.meta
+          originalPath: 
+          indexStatus: 4
+          workTreeStatus: 0
+      - commitID: e96d1fda722cd5510206d8ffd5b9101abe547950
+        mergeA: 
+        mergeB: 
+        authorName: BizLukeG
+        authorEmail: bizlukeg@gmail.com
+        commitEmail: bizlukeg@gmail.com
+        commitName: BizLukeG
+        summary: basic battlesystem setup
+        description: this
+        timeString: 2024-03-04T21:18:32.000-06:00
+        commitTimeString: 2024-03-04T21:18:32.000-06:00
+        changes:
+        - path: Assets\BattleDialogBox.cs
+          fullPath: D:\Unity\Beast-Project\Assets\BattleDialogBox.cs
+          projectPath: Assets\BattleDialogBox.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\BattleSystem.cs
+          fullPath: D:\Unity\Beast-Project\Assets\BattleSystem.cs
+          projectPath: Assets\BattleSystem.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\BattleUnitUI.cs
+          fullPath: D:\Unity\Beast-Project\Assets\BattleUnitUI.cs
+          projectPath: Assets\BattleUnitUI.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\GameController.cs
+          fullPath: D:\Unity\Beast-Project\Assets\GameController.cs
+          projectPath: Assets\GameController.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\MoveSelector.cs
+          fullPath: D:\Unity\Beast-Project\Assets\MoveSelector.cs
+          projectPath: Assets\MoveSelector.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\Scenes\SampleScene.unity
+          fullPath: D:\Unity\Beast-Project\Assets\Scenes\SampleScene.unity
+          projectPath: Assets\Scenes\SampleScene.unity
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+      - commitID: 5c0b9611bc8ae59256f76ee45cd5a11923cbb847
+        mergeA: 
+        mergeB: 
+        authorName: BizLukeG
+        authorEmail: bizlukeg@gmail.com
+        commitEmail: bizlukeg@gmail.com
+        commitName: BizLukeG
+        summary: Made first Coroutine
+        description: 
+        timeString: 2024-03-04T17:26:50.000-06:00
+        commitTimeString: 2024-03-04T17:26:50.000-06:00
+        changes:
+        - path: Assets\BattleDialogBox.cs
+          fullPath: D:\Unity\Beast-Project\Assets\BattleDialogBox.cs
+          projectPath: Assets\BattleDialogBox.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\BattleSystem.cs
+          fullPath: D:\Unity\Beast-Project\Assets\BattleSystem.cs
+          projectPath: Assets\BattleSystem.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+      - commitID: 610b3116d4a40d6d39db16a6d7d95edc4b56a482
+        mergeA: 
+        mergeB: 
+        authorName: BizLukeG
+        authorEmail: bizlukeg@gmail.com
+        commitEmail: bizlukeg@gmail.com
+        commitName: BizLukeG
+        summary: Setup first MB instance
+        description: first monobehavior instance before coroutines
+        timeString: 2024-03-04T15:18:13.000-06:00
+        commitTimeString: 2024-03-04T15:18:13.000-06:00
+        changes:
+        - path: Assets\ActionSelector.cs
+          fullPath: D:\Unity\Beast-Project\Assets\ActionSelector.cs
+          projectPath: Assets\ActionSelector.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\BattleDialogBox.cs
+          fullPath: D:\Unity\Beast-Project\Assets\BattleDialogBox.cs
+          projectPath: Assets\BattleDialogBox.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\BattleSystem.cs
+          fullPath: D:\Unity\Beast-Project\Assets\BattleSystem.cs
+          projectPath: Assets\BattleSystem.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\GameController.cs
+          fullPath: D:\Unity\Beast-Project\Assets\GameController.cs
+          projectPath: Assets\GameController.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\MoveSelector.cs
+          fullPath: D:\Unity\Beast-Project\Assets\MoveSelector.cs
+          projectPath: Assets\MoveSelector.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\Scenes\SampleScene.unity
+          fullPath: D:\Unity\Beast-Project\Assets\Scenes\SampleScene.unity
+          projectPath: Assets\Scenes\SampleScene.unity
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+      - commitID: 2afc6c0116ab1584401f52b701bdb5d4e9aff795
+        mergeA: 
+        mergeB: 
+        authorName: BizLukeG
+        authorEmail: bizlukeg@gmail.com
+        commitEmail: bizlukeg@gmail.com
+        commitName: BizLukeG
+        summary: Start Implementing BattleDialogBox
+        description: 
+        timeString: 2024-03-02T23:00:23.000-06:00
+        commitTimeString: 2024-03-02T23:00:23.000-06:00
+        changes:
+        - path: Assets\ActionSelector.cs
+          fullPath: D:\Unity\Beast-Project\Assets\ActionSelector.cs
+          projectPath: Assets\ActionSelector.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\BattleDialogBox.cs
+          fullPath: D:\Unity\Beast-Project\Assets\BattleDialogBox.cs
+          projectPath: Assets\BattleDialogBox.cs
+          originalPath: 
+          indexStatus: 4
+          workTreeStatus: 0
+        - path: Assets\BattleDialogBox.cs.meta
+          fullPath: D:\Unity\Beast-Project\Assets\BattleDialogBox.cs.meta
+          projectPath: Assets\BattleDialogBox.cs.meta
+          originalPath: 
+          indexStatus: 4
+          workTreeStatus: 0
+        - path: Assets\BattleSystem.cs
+          fullPath: D:\Unity\Beast-Project\Assets\BattleSystem.cs
+          projectPath: Assets\BattleSystem.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\GameController.cs
+          fullPath: D:\Unity\Beast-Project\Assets\GameController.cs
+          projectPath: Assets\GameController.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\MoveSelector.cs
+          fullPath: D:\Unity\Beast-Project\Assets\MoveSelector.cs
+          projectPath: Assets\MoveSelector.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\Scenes\SampleScene.unity
+          fullPath: D:\Unity\Beast-Project\Assets\Scenes\SampleScene.unity
+          projectPath: Assets\Scenes\SampleScene.unity
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: UserSettings\Layouts\default-2022.dwlt
+          fullPath: D:\Unity\Beast-Project\UserSettings\Layouts\default-2022.dwlt
+          projectPath: UserSettings\Layouts\default-2022.dwlt
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
       - commitID: 15c042cf6121d07b1d0d62ee84d8fc032eb0ddaf
         mergeA: 
         mergeB: 
@@ -5303,14 +6094,14 @@ MonoBehaviour:
       m_Tooltip: 
   hasRemote: 1
   currentRemoteName: origin
-  currentBranch: battlesystem-features
+  currentBranch: switch-to-monobehaviour-system
   currentRemoteUrl: https://github.com/BizLukeG/Beast-Project
   statusAhead: 0
   statusBehind: 0
   hasItemsToCommit: 1
   isTrackingRemoteBranch: 1
   currentBranchContent:
-    m_Text: battlesystem-features
+    m_Text: switch-to-monobehaviour-system
     m_Image: {fileID: 0}
     m_Tooltip: Active branch
   currentRemoteUrlContent:
@@ -5318,13 +6109,13 @@ MonoBehaviour:
     m_Image: {fileID: 0}
     m_Tooltip: Url of the origin remote
   lastCurrentBranchAndRemoteChangedEvent:
-    updatedTimeString: 2024-03-02T19:35:16.037-06:00
+    updatedTimeString: 2024-03-05T18:01:13.200-06:00
     cacheType: 1
   lastTrackingStatusChangedEvent:
-    updatedTimeString: 2024-03-02T19:39:27.471-06:00
+    updatedTimeString: 2024-03-05T17:39:39.325-06:00
     cacheType: 5
   lastStatusEntriesChangedEvent:
-    updatedTimeString: 2024-03-02T19:39:27.391-06:00
+    updatedTimeString: 2024-03-05T18:22:36.435-06:00
     cacheType: 6
   pullButtonContent:
     m_Text: Pull
@@ -5342,7 +6133,7 @@ MonoBehaviour:
     m_Text: Fetch
     m_Image: {fileID: 0}
     m_Tooltip: 
-  repositoryProgressValue: 0
+  repositoryProgressValue: 1
   repositoryProgressMessage: 
   appManagerProgressValue: 1
   appManagerProgressMessage: 
