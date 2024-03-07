@@ -7,6 +7,7 @@ public class Condition
 {
     public string ActivationMessage { get; set; }
     public string FullyConfusedMessage { get; set; }
+    
 
     public Action<Beast> OnConditionActivated { set; get; }
 

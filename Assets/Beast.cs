@@ -219,26 +219,57 @@ public class Beast
         float effectiveness = 1;
         int confusedNum = 0;
 
+        //for(int i = 0; i < 10; i++)
+        //{
+        //    Debug.Log("confused test " + UnityEngine.Random.Range(1, 10));
+        //}
+
         if (attacker.Condition == ConditionID.Confused)
         {
-            confusedNum = /*UnityEngine.Random.Range(1, 2);*/ 2;
-            Debug.Log("confusedNum1 ");
-           
-        }
-        Debug.Log("confusedNum2 " + confusedNum);
-        if (confusedNum == 2)
-        {
-            BattleDialog.Enqueue($"{FoeString(defender)} {attacker.Name} {ConditionDB.Conditions[attacker.Condition].FullyConfusedMessage}");
+            Debug.Log("Condition Counter " + attacker.ConditionCounter);
+            if (attacker.ConditionCounter == 0)
+            {
+                confusedNum = 0;
+                BattleDialog.Enqueue($"{FoeString(attacker)} {attacker.Name} snapped out of confusion");
+                attacker.Condition = ConditionID.None;
 
-            damage = (int)Math.Round(moveUsed.Power / 100f * (attacker.ModifiedStats[StatID.Attack] - attacker.ModifiedStats[StatID.Defense]) * effectiveness, MidpointRounding.AwayFromZero);
+            }else if (attacker.ConditionCounter > 0)
+            {
+                confusedNum = UnityEngine.Random.Range(1, 3); /*2*/;
+                Debug.Log("confusedNum1 " + confusedNum);
+                BattleDialog.Enqueue($"{FoeString(attacker)} {attacker.Name} is {attacker.Condition.ToString()}");
+                attacker.ConditionCounter--;
+            }
+                      
+        }
+
+        Debug.Log("confusedNum2 " + confusedNum);
+        if(confusedNum != 2)
+        {
+            BattleDialog.Enqueue($"{FoeString(attacker)} {attacker.Name} used {moveUsed.Name}");
+        }
+        else if (confusedNum == 2)
+        {
+            BattleDialog.Enqueue($"{FoeString(attacker)} {attacker.Name} {ConditionDB.Conditions[attacker.Condition].FullyConfusedMessage}");
+
+            effectiveness = TypeChart.GetEffectiveness(moveUsed.Typing, BeastBaseDB.BeastBases[defender.Name].Typing1, BeastBaseDB.BeastBases[defender.Name].Typing2);
+
+            if (moveUsed.Category == MoveCategory.Physical)
+                damage = (int)Math.Round(moveUsed.Power / 100f * (attacker.ModifiedStats[StatID.Attack] - attacker.ModifiedStats[StatID.Defense]) * effectiveness, MidpointRounding.AwayFromZero);
+            else 
+                damage = (int)Math.Round(moveUsed.Power / 100f * (attacker.ModifiedStats[StatID.SpecialAttack] - defender.ModifiedStats[StatID.SpecialDefense]) * effectiveness, MidpointRounding.AwayFromZero);
+
+            Debug.Log("confusion damage " + damage);    
+
             if (damage <= 0)
             {
                 damage = 1;
             }
-                
+
             attacker.ModifiedStats[StatID.HP] -= damage;
         }
-        else if (moveUsed.Category == MoveCategory.Status)
+
+        if (moveUsed.Category == MoveCategory.Status)
         {
             if (defender.Status == StatusID.None)
             {
@@ -246,10 +277,23 @@ public class Beast
                 StatusDB.Statuses[defender.Status].OnStatusActivated(defender);
                 BattleDialog.Enqueue($"{FoeString(defender)} {defender.Name} {StatusDB.Statuses[defender.Status].ActivationMessage}");
             }
+            else
+            {
+                BattleDialog.Enqueue($"{FoeString(defender)} {defender.Name} is already {defender.Status.ToString()}");
+            }
         }else if(moveUsed.Category == MoveCategory.Condition)
         {
-            defender.Condition = moveUsed.Condition;
-            BattleDialog.Enqueue($"{FoeString(defender)} {defender.Name} {ConditionDB.Conditions[defender.Condition].ActivationMessage}");
+            if( defender.Condition != moveUsed.Condition)
+            {
+                defender.Condition = moveUsed.Condition;
+                ConditionDB.Conditions[defender.Condition].OnConditionActivated(defender);
+                BattleDialog.Enqueue($"{FoeString(defender)} {defender.Name} {ConditionDB.Conditions[defender.Condition].ActivationMessage}");
+            }
+            else
+            {
+                BattleDialog.Enqueue($"{FoeString(defender)} {defender.Name} is already {defender.Condition.ToString()}");
+            }
+            
         }
         else if (moveUsed.Category == MoveCategory.ModifyStats)
         {

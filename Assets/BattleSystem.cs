@@ -213,7 +213,7 @@ public class BattleSystem : MonoBehaviour
         //    yield return BattleDialogBoxMB.DisplayBattleDialogText($"{firstUnitToMove.Name} used {moveUsed.Name}");
         //}
 
-        yield return BattleDialogBoxMB.DisplayBattleDialogText($"{Beast.FoeString(firstUnitToMove)} {firstUnitToMove.Name} used {moveUsed.Name}");
+        //yield return BattleDialogBoxMB.DisplayBattleDialogText($"{Beast.FoeString(firstUnitToMove)} {firstUnitToMove.Name} used {moveUsed.Name}");
 
         //waits for x to be pressed to continue
         //BattleStateStack.Push(BattleState.Hold);
@@ -221,7 +221,7 @@ public class BattleSystem : MonoBehaviour
         //BattleStateStack.Pop();
         //hold = true;
 
-        yield return new WaitForSeconds(1.5f);
+        //yield return new WaitForSeconds(1.5f);
 
         while (Beast.BattleDialog.Count > 0)
         {
@@ -280,13 +280,13 @@ public class BattleSystem : MonoBehaviour
             //    yield return BattleDialogBoxMB.DisplayBattleDialogText($"{secondUnitToMove.Name} used {moveUsed.Name}");
             //}
 
-            yield return BattleDialogBoxMB.DisplayBattleDialogText($"{Beast.FoeString(secondUnitToMove)} {secondUnitToMove.Name} used {moveUsed.Name}");
+            //yield return BattleDialogBoxMB.DisplayBattleDialogText($"{Beast.FoeString(secondUnitToMove)} {secondUnitToMove.Name} used {moveUsed.Name}");
 
             //BattleStateStack.Push(BattleState.Hold);
             //yield return new WaitUntil(() => hold == false);
             //BattleStateStack.Pop();
             //hold = true;
-            yield return new WaitForSeconds(1.5f);
+            //yield return new WaitForSeconds(1.5f);
 
             while (Beast.BattleDialog.Count > 0)
             {
