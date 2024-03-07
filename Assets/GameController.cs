@@ -14,7 +14,9 @@ public class GameController : MonoBehaviour
     GameState State;
     static public Stack<GameState> GameStateStack { get; set; } = new Stack<GameState>();
     public GameObject BattleSystemGO;
-    BattleSystem BattleSystemMB;
+    public BattleSystem BattleSystemMB;
+
+    //public static GameController Instance { get; private set; }
 
     //public BattleSystem BattleSystem;
 

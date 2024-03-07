@@ -5,9 +5,10 @@ using System;
 
 public class Condition 
 {
-    public string ActivationMessage { get; set; } 
+    public string ActivationMessage { get; set; }
+    public string FullyConfusedMessage { get; set; }
 
-   public Action<Beast> OnConditionActivated { set; get; }
+    public Action<Beast> OnConditionActivated { set; get; }
 
     public Func<Beast, bool> OnBeforeMove { get; set; }
 }

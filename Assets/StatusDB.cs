@@ -11,6 +11,7 @@ public class StatusDB
         {
             StatusID.Burned,
             new Status(){
+                ActivationMessage = "has been burned.",
                 //Name = "Expurn",
                 //FrontSprite = Resources.Load<Sprite>("Sprites/Brown"),
                 OnStatusActivated = (Beast beast) => {

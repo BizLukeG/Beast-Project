@@ -12,6 +12,7 @@ public class ConditionDB
             ConditionID.Confused,
             new Condition(){
                 ActivationMessage = "has been confused.",
+                FullyConfusedMessage = "hurt itself in confusion.",
 
                 OnConditionActivated = (Beast beast) => {
                     //beast.Condition = ConditionID.Confused;

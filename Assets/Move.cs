@@ -17,6 +17,7 @@ public class Move
     //public Nerf NerfStat { get; set; }
     public bool TargetSelf {get; set;}
     public StatusID Status { get; set; }
+    public ConditionID Condition { get; set; }
 
     public Move()
     {

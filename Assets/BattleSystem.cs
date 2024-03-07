@@ -24,7 +24,7 @@ public class BattleSystem : MonoBehaviour
     public BattleDialogBox BattleDialogBoxMB;
     public ActionSelector ActionSelectorMB;
     public MoveSelector MoveSelectorMB;
-    public Queue<string> BattleDialog { set; get; } = new Queue<string>();
+    //public Queue<string> BattleDialog { set; get; } = new Queue<string>();
 
 
     //public GameObject EnemyBattleUnitUIGO;
@@ -196,10 +196,6 @@ public class BattleSystem : MonoBehaviour
         // damage = 1;
         //}
 
-        //while (BattleDialog.Count > 0)
-        //{
-            //yield return BattleDialogBoxMB.DisplayBattleDialogText($"{BattleDialog.Dequeue}");
-        //}
 
 
         //applies damage
@@ -208,14 +204,16 @@ public class BattleSystem : MonoBehaviour
 
         //displays move used
         //goes back to update with runturn now the battlestate so nothing happens until this is over and then continues from here
-        if (!firstUnitToMove.IsPlayerUnit)
-        {
-            yield return BattleDialogBoxMB.DisplayBattleDialogText($"Foe {firstUnitToMove.Name} used {moveUsed.Name}");
-        }
-        else
-        {
-            yield return BattleDialogBoxMB.DisplayBattleDialogText($"{firstUnitToMove.Name} used {moveUsed.Name}");
-        }
+        //if (!firstUnitToMove.IsPlayerUnit)
+        //{
+        //    yield return BattleDialogBoxMB.DisplayBattleDialogText($"Foe {firstUnitToMove.Name} used {moveUsed.Name}");
+        //}
+        //else
+        //{
+        //    yield return BattleDialogBoxMB.DisplayBattleDialogText($"{firstUnitToMove.Name} used {moveUsed.Name}");
+        //}
+
+        yield return BattleDialogBoxMB.DisplayBattleDialogText($"{Beast.FoeString(firstUnitToMove)} {firstUnitToMove.Name} used {moveUsed.Name}");
 
         //waits for x to be pressed to continue
         //BattleStateStack.Push(BattleState.Hold);
@@ -224,6 +222,12 @@ public class BattleSystem : MonoBehaviour
         //hold = true;
 
         yield return new WaitForSeconds(1.5f);
+
+        while (Beast.BattleDialog.Count > 0)
+        {
+            yield return BattleDialogBoxMB.DisplayBattleDialogText(Beast.BattleDialog.Dequeue());
+            yield return new WaitForSeconds(1.5f);
+        }
 
         //displays stat change
         BattleUnitUI.SetupEnemy(WildBeast);
@@ -268,19 +272,27 @@ public class BattleSystem : MonoBehaviour
             //firstUnitToMove.CurrentHP -= damage;
 
             //Debug.Log($"SecondMoverCA {secondUnitToMove.CurrentAtt} \n FirstMoverCurrentDef {firstUnitToMove.CurrentDef} \n damage {damage} \n firstMoverHP {firstUnitToMove.CurrentHP}");
-            if (!secondUnitToMove.IsPlayerUnit)
-            {
-                yield return BattleDialogBoxMB.DisplayBattleDialogText($"Foe {secondUnitToMove.Name} used {moveUsed.Name}");
-            }else
-            {
-                yield return BattleDialogBoxMB.DisplayBattleDialogText($"{secondUnitToMove.Name} used {moveUsed.Name}");
-            }
-            
+            //if (!secondUnitToMove.IsPlayerUnit)
+            //{
+            //    yield return BattleDialogBoxMB.DisplayBattleDialogText($"Foe {secondUnitToMove.Name} used {moveUsed.Name}");
+            //}else
+            //{
+            //    yield return BattleDialogBoxMB.DisplayBattleDialogText($"{secondUnitToMove.Name} used {moveUsed.Name}");
+            //}
+
+            yield return BattleDialogBoxMB.DisplayBattleDialogText($"{Beast.FoeString(secondUnitToMove)} {secondUnitToMove.Name} used {moveUsed.Name}");
+
             //BattleStateStack.Push(BattleState.Hold);
             //yield return new WaitUntil(() => hold == false);
             //BattleStateStack.Pop();
             //hold = true;
             yield return new WaitForSeconds(1.5f);
+
+            while (Beast.BattleDialog.Count > 0)
+            {
+                yield return BattleDialogBoxMB.DisplayBattleDialogText(Beast.BattleDialog.Dequeue());
+                yield return new WaitForSeconds(1.5f);
+            }
 
             BattleUnitUI.SetupEnemy(WildBeast);
             BattleUnitUI.SetupPlayer(PlayerActiveBeast);
@@ -337,4 +349,9 @@ public class BattleSystem : MonoBehaviour
         }
         return false;
     }
+
+    //string FindIfFoe(beas)
+    //{   
+    //    if(b)
+    //}
 }
