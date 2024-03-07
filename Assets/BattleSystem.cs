@@ -24,7 +24,8 @@ public class BattleSystem : MonoBehaviour
     public BattleDialogBox BattleDialogBoxMB;
     public ActionSelector ActionSelectorMB;
     public MoveSelector MoveSelectorMB;
-    
+    public Queue<string> BattleDialog { set; get; } = new Queue<string>();
+
 
     //public GameObject EnemyBattleUnitUIGO;
     //public BattleUnitUI EnemyBattleUnitUI = new BattleUnitUI();
@@ -195,6 +196,10 @@ public class BattleSystem : MonoBehaviour
         // damage = 1;
         //}
 
+        //while (BattleDialog.Count > 0)
+        //{
+            //yield return BattleDialogBoxMB.DisplayBattleDialogText($"{BattleDialog.Dequeue}");
+        //}
 
 
         //applies damage
@@ -205,7 +210,7 @@ public class BattleSystem : MonoBehaviour
         //goes back to update with runturn now the battlestate so nothing happens until this is over and then continues from here
         if (!firstUnitToMove.IsPlayerUnit)
         {
-            yield return BattleDialogBoxMB.DisplayBattleDialogText($"foe {firstUnitToMove.Name} used {moveUsed.Name}");
+            yield return BattleDialogBoxMB.DisplayBattleDialogText($"Foe {firstUnitToMove.Name} used {moveUsed.Name}");
         }
         else
         {

@@ -16,6 +16,7 @@ public class Move
     //public Buff BuffStat { get; set; }
     //public Nerf NerfStat { get; set; }
     public bool TargetSelf {get; set;}
+    public StatusID Status { get; set; }
 
     public Move()
     {

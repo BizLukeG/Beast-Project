@@ -38,6 +38,10 @@ public class Beast
     //public int CurrentHP { get; set; }
     public Sprite FrontSprite { get; set; } //= Resources.Load<Sprite>("Sprites/Brown");
     public bool IsPlayerUnit { get; set; } = false;
+    public StatusID Status { get; set; } = StatusID.None;
+    public ConditionID Condition { get; set; } = ConditionID.None;
+    public int StatusCounter { get; set; } = 0;
+    public int ConditionCounter { get; set; } = 0;
 
     public Beast()
     {
@@ -209,6 +213,16 @@ public class Beast
             attacker = secondUnitToMove;
             defender = firstUnitToMove;
         }
+        if(moveUsed.Category == MoveCategory.Status)
+        {
+            if (defender.Status == StatusID.None)
+            {
+                defender.Status = moveUsed.Status;
+                StatusDB.Statuses[defender.Status].OnStatusActivated(defender);
+                //BattleSystem.
+            }
+        }
+
         if (moveUsed.Category == MoveCategory.ModifyStats)
         {
             if(moveUsed.TargetSelf == true)

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum MoveID
 {
-    Smack, Pound, Tackle, LeafStorm, FlameWheel, RockSlide, Harden
+    Smack, Pound, Tackle, LeafStorm, FlameWheel, RockSlide, Harden, Agility, Scorch
 }
 
 public enum MoveCategory
@@ -12,6 +12,16 @@ public enum MoveCategory
     Physical, Special, Status, ModifyStats
 }
 
+//need a statusDB class
+public enum StatusID
+{
+    None, Burned, Poisoned, Asleep, Paralyzed, Frozen, Flinched
+}
+
+public enum ConditionID
+{
+    None, Confused
+}
 
 public class MoveDB
 {
@@ -37,7 +47,8 @@ public class MoveDB
         {MoveID.FlameWheel, new Move(){ Power = 60, Accuracy = 100, Typing = Typing.Sacred, Category = MoveCategory.Physical}},
         {MoveID.RockSlide, new Move(){ Power = 70, Accuracy = 100, Typing = Typing.Rock, Category = MoveCategory.Physical}},
         {MoveID.Harden, new Move(){ Power = 0, Accuracy = 100, Typing = Typing.Rock, Category = MoveCategory.ModifyStats, BuffedStats = new List<StatID>{StatID.Attack}, NerfedStats = new List<StatID>{StatID.Defense}, TargetSelf = true}},
-
+        {MoveID.Agility, new Move(){ Power = 0, Accuracy = 100, Typing = Typing.Rock, Category = MoveCategory.ModifyStats, BuffedStats = new List<StatID>{StatID.Speed}, TargetSelf = true}},
+        {MoveID.Scorch, new Move(){ Power = 0, Accuracy = 100, Typing = Typing.Sacred, Category = MoveCategory.Status, Status = StatusID.Burned}},
     };
     
 }
