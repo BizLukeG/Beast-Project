@@ -217,57 +217,49 @@ public class Beast
 
         int damage = 0;
         float effectiveness = 1;
-        int confusedNum = 0;
+        //int confusedNum = 0;
+        bool IsBeforeMoveActivated = false;
 
-        //for(int i = 0; i < 10; i++)
-        //{
-        //    Debug.Log("confused test " + UnityEngine.Random.Range(1, 10));
-        //}
-
-        if (attacker.Condition == ConditionID.Confused)
+        
+        if (attacker.Condition != ConditionID.None)
         {
-            Debug.Log("Condition Counter " + attacker.ConditionCounter);
-            if (attacker.ConditionCounter == 0)
-            {
-                confusedNum = 0;
-                BattleDialog.Enqueue($"{FoeString(attacker)} {attacker.Name} snapped out of confusion");
-                attacker.Condition = ConditionID.None;
-
-            }else if (attacker.ConditionCounter > 0)
-            {
-                confusedNum = UnityEngine.Random.Range(1, 3); /*2*/;
-                Debug.Log("confusedNum1 " + confusedNum);
-                BattleDialog.Enqueue($"{FoeString(attacker)} {attacker.Name} is {attacker.Condition.ToString()}");
-                attacker.ConditionCounter--;
-            }
-                      
+            //Debug.Log("DamageCalc1");
+            IsBeforeMoveActivated = ConditionDB.Conditions[attacker.Condition].OnBeforeMove(attacker);
         }
 
-        Debug.Log("confusedNum2 " + confusedNum);
-        if(confusedNum != 2)
+
+        //Debug.Log("confusedNum2 " + confusedNum);
+        if (!IsBeforeMoveActivated)
         {
             BattleDialog.Enqueue($"{FoeString(attacker)} {attacker.Name} used {moveUsed.Name}");
+
+        }else if (attacker.Condition == ConditionID.Confused){
+
+                BattleDialog.Enqueue($"{FoeString(attacker)} {attacker.Name} {ConditionDB.Conditions[attacker.Condition].FullyConfusedMessage}");
+
+                effectiveness = TypeChart.GetEffectiveness(moveUsed.Typing, BeastBaseDB.BeastBases[defender.Name].Typing1, BeastBaseDB.BeastBases[defender.Name].Typing2);
+
+                if (moveUsed.Category == MoveCategory.Physical)
+                {
+                    damage = (int)Math.Round(moveUsed.Power / 100f * (attacker.ModifiedStats[StatID.Attack] - attacker.ModifiedStats[StatID.Defense]) * effectiveness, MidpointRounding.AwayFromZero);
+                }
+                else
+                {
+
+                    damage = (int)Math.Round(moveUsed.Power / 100f * (attacker.ModifiedStats[StatID.SpecialAttack] - attacker.ModifiedStats[StatID.SpecialDefense]) * effectiveness, MidpointRounding.AwayFromZero);
+                    //Debug.Log($"confusion damage breakdown: Power {moveUsed.Power}, SpA: {attacker.ModifiedStats[StatID.SpecialAttack]}, SpD ");
+                }
+
+                Debug.Log("confusion damage " + damage);
+
+                if (damage <= 0)
+                {
+                    damage = 1;
+                }
+
+                attacker.ModifiedStats[StatID.HP] -= damage;
         }
-        else if (confusedNum == 2)
-        {
-            BattleDialog.Enqueue($"{FoeString(attacker)} {attacker.Name} {ConditionDB.Conditions[attacker.Condition].FullyConfusedMessage}");
-
-            effectiveness = TypeChart.GetEffectiveness(moveUsed.Typing, BeastBaseDB.BeastBases[defender.Name].Typing1, BeastBaseDB.BeastBases[defender.Name].Typing2);
-
-            if (moveUsed.Category == MoveCategory.Physical)
-                damage = (int)Math.Round(moveUsed.Power / 100f * (attacker.ModifiedStats[StatID.Attack] - attacker.ModifiedStats[StatID.Defense]) * effectiveness, MidpointRounding.AwayFromZero);
-            else 
-                damage = (int)Math.Round(moveUsed.Power / 100f * (attacker.ModifiedStats[StatID.SpecialAttack] - defender.ModifiedStats[StatID.SpecialDefense]) * effectiveness, MidpointRounding.AwayFromZero);
-
-            Debug.Log("confusion damage " + damage);    
-
-            if (damage <= 0)
-            {
-                damage = 1;
-            }
-
-            attacker.ModifiedStats[StatID.HP] -= damage;
-        }
+                
 
         if (moveUsed.Category == MoveCategory.Status)
         {
@@ -295,6 +287,7 @@ public class Beast
             }
             
         }
+
         else if (moveUsed.Category == MoveCategory.ModifyStats)
         {
             
@@ -340,11 +333,13 @@ public class Beast
             damage = 1;
         }
         else { damage = 0; }
-        
-        if (confusedNum != 2)
+
+        if (!IsBeforeMoveActivated)
         {
+            Debug.Log("DamageCalc3");
             defender.ModifiedStats[StatID.HP] -= damage;
         }
+        
 
         
 
