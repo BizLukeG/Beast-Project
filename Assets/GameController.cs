@@ -42,6 +42,7 @@ public class GameController : MonoBehaviour
         GameStateStack.Push(GameState.OverWorld);
         BeastBaseDB.Init();
         MoveDB.Init();
+        ConditionDB.Init();
         Debug.Log("Howdy");
 
 

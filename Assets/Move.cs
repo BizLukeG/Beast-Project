@@ -18,6 +18,7 @@ public class Move
     public bool TargetSelf {get; set;}
     public StatusID Status { get; set; }
     public ConditionID Condition { get; set; }
+    public int StatusPriority { get; set; }
 
     public Move()
     {

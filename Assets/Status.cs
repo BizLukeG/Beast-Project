@@ -9,6 +9,7 @@ public class Status
    StatusID Name { set; get; }
    public string Abbreviation { set; get; }
    public string ActivationMessage { set; get; } //Beast was burned
+   public string BeforeTurnMessage { set; get; }
    
 
    public Action<Beast> OnStatusActivated { get; set; }

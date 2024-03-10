@@ -115,7 +115,7 @@ public class BaseStatDistribution
        
         for (int i = 0; i < baseStatsLimits.Length; i++)
         {
-            float multiplier = (rnd.Next(5, 11) / 10f);
+            float multiplier = (rnd.Next(/*5*/8, 11) / 10f);
             Debug.Log("multi: " + multiplier);
             actualBaseStatsLimits[i] = (int)Math.Round(baseStatsLimits[i] * multiplier, MidpointRounding.AwayFromZero);
         }

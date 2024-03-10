@@ -21,10 +21,29 @@ public class StatusDB
             }
         },
         {
-            StatusID.Poisoned,
+            StatusID.Paralyzed,
             new Status(){
                 //Name = "Pugba",
-                
+                ActivationMessage = "has been paralyzed",
+                BeforeTurnMessage = "was fully paralyzed",
+                OnStatusActivated = (Beast beast) => {
+                    beast.Status = StatusID.Paralyzed;
+                    beast.ModifiedStats[StatID.Speed] = (int)Math.Round(.5 * beast.ModifiedStats[StatID.Speed], MidpointRounding.AwayFromZero);
+                },
+                OnBeforeMove = (Beast beast) =>
+                {
+                    int fullParaNum = UnityEngine.Random.Range(1, 3);
+                    
+                    if(fullParaNum == 2)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+
             }
         },
         {

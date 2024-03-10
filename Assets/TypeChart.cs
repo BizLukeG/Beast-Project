@@ -56,11 +56,11 @@ public class TypeChart
         switch (effectiveness)
         {
                 case .5f:
-                    return "It was not very effective.";
+                    return "It was Not Very Effective";
                 case 2f:
-                    return "It was super effective.";
+                    return "It was Super Effective";
                 case 4f:
-                    return "It was extremly effective.";
+                    return "It was Extremly Effective";
                 default:
                     return "";
                    
