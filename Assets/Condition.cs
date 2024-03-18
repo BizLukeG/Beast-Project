@@ -14,7 +14,7 @@ public class Condition
 
     public Action<Beast> OnRemoveCondition { get; set; }
 
-    public Action<Beast> OnConditionActivated { get; set; }
+    public Action<Beast> OnConditionActivated { get; set; } = (Beast beast) => { };
 
     public Func<Beast, bool> OnBeforeMove { get; set; }
 }

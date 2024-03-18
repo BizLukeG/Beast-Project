@@ -71,6 +71,11 @@ public class ConditionDB
             new Condition()
             {
                 FullyFlinchedMessage = "Flinched",
+                //OnConditionActivated = (Beast beast) => {
+                    
+                //    beast.ConditionCounter = UnityEngine.Random.Range(1,5);
+                    
+                //},
                 OnBeforeMove = (Beast beast) =>
                 {
                     
