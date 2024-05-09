@@ -7,6 +7,9 @@ public class StatusDB
 {
     public static Dictionary<StatusID, Status> Statuses { get; set; } = new Dictionary<StatusID, Status>()
     {
+
+        //Beast have multiple conditions and can have conditions and statuses, but can't have multiple statuses at the same time
+
         //beastBase to take values from 
         {
             StatusID.Burned,
@@ -49,8 +52,38 @@ public class StatusDB
         {
             StatusID.Asleep,
             new Status(){
-                //Name = "Lustorm",
-               
+                ActivationMessage = "was put to sleep.",
+                Priority = 1,
+
+                OnStatusActivated = (Beast defender) => {
+                    //beast.Status = StatusID.Paralyzed;
+                    defender.NewStatusCounter = UnityEngine.Random.Range(1,5);
+                    Debug.Log("statCounter def " + defender.NewStatusCounter);
+
+                    defender.NewBeastStatuses.Add(StatusID.Asleep);
+
+                    Beast.BattleDialog.Enqueue($"{Beast.FoeString(defender)} {defender.Name} was put to sleep");
+
+                },
+                OnBeforeMove = (Beast attacker) =>
+                {
+                   Debug.Log("statCounter att " + attacker.NewStatusCounter);
+
+                    if (attacker.NewStatusCounter == 0)
+                    {
+                       
+                        Beast.BattleDialog.Enqueue($"{Beast.FoeString(attacker)} {attacker.Name} woke up");
+                        attacker.NewBeastStatuses.Remove(StatusID.Asleep);
+                        return false;
+                    }else
+                    {
+                                                
+                            Beast.BattleDialog.Enqueue($"{Beast.FoeString(attacker)} {attacker.Name} is deeply asleep");
+                            return true;
+                        
+                    }
+                }
+
             }
         },
 

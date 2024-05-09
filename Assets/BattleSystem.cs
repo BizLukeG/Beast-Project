@@ -188,6 +188,8 @@ public class BattleSystem : MonoBehaviour
         Move moveUsed = MoveDB.Moves[MovesQueue.Dequeue()];
         
         //float effectiveness = TypeChart.GetEffectiveness(moveUsed.Typing, BeastBaseDB.BeastBases[secondUnitToMove.Name].Typing1, BeastBaseDB.BeastBases[secondUnitToMove.Name].Typing2);
+        
+        //gets effectiveness and also does the damage to be displayed later
         float effectiveness = Beast.DamageCalc(moveUsed, firstUnitToMove, secondUnitToMove, true);
         string effectivenessPhrase = TypeChart.GetEffectivenessPhrase(effectiveness);
 

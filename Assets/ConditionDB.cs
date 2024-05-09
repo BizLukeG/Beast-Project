@@ -19,6 +19,8 @@ public class ConditionDB
 
     public static Dictionary<ConditionID, Condition> Conditions { get; set; } = new Dictionary<ConditionID, Condition>()
     {
+        //Beast have multiple conditions and can have conditions and statuses, but can't have multiple statuses at the same time
+        
         //beastBase to take values from 
         {
             ConditionID.Confused,
@@ -28,20 +30,32 @@ public class ConditionDB
                 FullyConfusedMessage = "hurt itself in Confusion",
                 Priority = 3,
 
-                OnConditionActivated = (Beast beast) => {
+                //change name to on conditionApplied seems better and then if fully confused the be Condition Activated
+                OnConditionActivated = (Beast defender, Beast attacker) => {
                     //beast.Condition = ConditionID.Confused;
-                    beast.ConditionCounter = UnityEngine.Random.Range(1,5);
+
+                    //confusionCounter needs to be on the instance of beast to keep track of each beast's confusion turns
+                    //determines how many moves beast will be confused for
+                    defender.confusionCounter = UnityEngine.Random.Range(1,5);
+                    Beast.BattleDialog.Enqueue($"{Beast.FoeString(defender)} {defender.Name} was confused");
+
+                    //beast.ConditionCounter = UnityEngine.Random.Range(1,5);
+                    Debug.Log("Count Howdy ");
+                    //NewBeastCondtions and NewBeastStatuses need to be on the instance of beast to keep track of each beast's conditions/statuses
+                    defender.NewBeastConditions.Add(ConditionID.Confused);
                     //beast.ModifiedStats[StatID.Attack] = (int)Math.Round(.5 * beast.ModifiedStats[StatID.Attack], MidpointRounding.AwayFromZero);
                 },
-                OnBeforeMove = (Beast beast) =>
+                OnBeforeMove = (Beast attacker, Beast defender) =>
                 {
                     Debug.Log("OnBeforeMove1 ");
                     int confusedNum;
 
-                    if (beast.ConditionCounter == 0)
+                    //confusionCounter needs to be on the instance of beast to keep track of each beast's confusion turns
+                    if (attacker.confusionCounter == 0/*beast.ConditionCounter == 0*/)
                     {
-                        confusedNum = 0;
-                        
+                        //confusedNum = 0;
+                        Beast.BattleDialog.Enqueue($"{Beast.FoeString(attacker)} {attacker.Name} is no longer confused");
+                        attacker.NewBeastConditions.Remove(ConditionID.Confused);
                         return false;
                     }else
                     {
@@ -52,10 +66,14 @@ public class ConditionDB
                         //beast.ConditionCounter--;
                         if(confusedNum == 2)
                         {
+                            //Beast.statusConditionActivated = true;
+                            Beast.BattleDialog.Enqueue($"{Beast.FoeString(attacker)} {attacker.Name} is confused");
+                            Beast.BattleDialog.Enqueue($"{Beast.FoeString(attacker)} {attacker.Name} hurt itself in confusion");
                             return true;
                         }
                         else
                         {
+                            Beast.BattleDialog.Enqueue($"{Beast.FoeString(attacker)} {attacker.Name} is confused");
                             return false;
                         }
                     }
@@ -68,29 +86,83 @@ public class ConditionDB
         },
         {
             ConditionID.Flinched,
-            new Condition()
-            {
-                FullyFlinchedMessage = "Flinched",
-                //OnConditionActivated = (Beast beast) => {
-                    
-                //    beast.ConditionCounter = UnityEngine.Random.Range(1,5);
-                    
-                //},
-                OnBeforeMove = (Beast beast) =>
-                {
-                    
-                    int flinchNum = UnityEngine.Random.Range(1, 3);
-                    if (flinchNum == 2)
+            new Condition(){
+                
+                Priority = 2,
+
+                //change name to on conditionApplied seems better and then if fully confused the be Condition Activated
+                OnConditionActivated = (Beast defender, Beast attacker) => {
+                   
+                    Debug.Log("Count Howdy ");
+
+                    if((attacker.ModifiedStats[StatID.Speed] > defender.ModifiedStats[StatID.Speed]))
                     {
-                        return true;
+                        defender.NewBeastConditions.Add(ConditionID.Flinched);
                     }
-                    return false;
+                    
+                    
+                },
+                OnBeforeMove = (Beast attacker, Beast defender) =>
+                {
+                    Debug.Log("OnBeforeMove1 ");
+                    int confusedNum;
+
+                    
+                    
+                        Debug.Log("OnBeforeMove2 ");
+                        confusedNum = UnityEngine.Random.Range(1, 3); 
+                        //Debug.Log("confusedNum1 " + confusedNum);
+                        //Beast.BattleDialog.Enqueue($"{Beast.FoeString(beast)} {beast.Name} is {beast.Condition.ToString()}");
+                        //beast.ConditionCounter--;
+                        
+                        Debug.Log("Speed atk " + attacker.ModifiedStats[StatID.Speed]);
+                        Debug.Log("Speed def " + defender.ModifiedStats[StatID.Speed]);
+
+                        if(confusedNum == 2)
+                        {
+                            
+                            Beast.BattleDialog.Enqueue($"{Beast.FoeString(attacker)} {attacker.Name} flinched");
+                            
+                            return true;
+                        }
+                        else
+                        {
+                            
+                            return false;
+                        }
+                    
                 },
                 OnRemoveCondition = (Beast beast) =>
                 {
-                    beast.BeastConditions.Remove(ConditionID.Flinched);
+                    beast.BeastConditions.Remove(ConditionID.Confused);
                 },
             }
+
+            //ConditionID.Flinched,
+            //new Condition()
+            //{
+            //    FullyFlinchedMessage = "Flinched",
+            //    Priority = 1,
+            //    //OnConditionActivated = (Beast beast) => {
+                    
+            //    //    beast.ConditionCounter = UnityEngine.Random.Range(1,5);
+                    
+            //    //},
+            //    OnBeforeMove = (Beast beast) =>
+            //    {
+                    
+            //        int flinchNum = UnityEngine.Random.Range(2, 3);
+            //        if (flinchNum == 2)
+            //        {
+            //            return true;
+            //        }
+            //        return false;
+            //    },
+            //    OnRemoveCondition = (Beast beast) =>
+            //    {
+            //        beast.BeastConditions.Remove(ConditionID.Flinched);
+            //    },
+            //}
         }
 
     };

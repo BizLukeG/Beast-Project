@@ -10,9 +10,10 @@ public class Status
    public string Abbreviation { set; get; }
    public string ActivationMessage { set; get; } //Beast was burned
    public string BeforeTurnMessage { set; get; }
-   
+   public int Priority { get; set; }
 
-   public Action<Beast> OnStatusActivated { get; set; }
+
+    public Action<Beast> OnStatusActivated { get; set; }
 
    public Action<Beast> OnAfterFullTurn { get; set; }
 
