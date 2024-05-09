@@ -23,22 +23,50 @@ public class StatusDB
                 },
             }
         },
+        //{
+        //    StatusID.Paralyzed,
+        //    new Status(){
+        //        //Name = "Pugba",
+        //        ActivationMessage = "has been paralyzed",
+        //        BeforeTurnMessage = "was fully paralyzed",
+        //        OnStatusActivated = (Beast beast) => {
+        //            beast.Status = StatusID.Paralyzed;
+        //            beast.ModifiedStats[StatID.Speed] = (int)Math.Round(.5 * beast.ModifiedStats[StatID.Speed], MidpointRounding.AwayFromZero);
+        //        },
+        //        OnBeforeMove = (Beast beast) =>
+        //        {
+        //            int fullParaNum = UnityEngine.Random.Range(1, 3);
+                    
+        //            if(fullParaNum == 2)
+        //            {
+        //                return true;
+        //            }
+        //            else
+        //            {
+        //                return false;
+        //            }
+        //        }
+
+        //    }
+        //},
         {
             StatusID.Paralyzed,
             new Status(){
-                //Name = "Pugba",
-                ActivationMessage = "has been paralyzed",
-                BeforeTurnMessage = "was fully paralyzed",
-                OnStatusActivated = (Beast beast) => {
-                    beast.Status = StatusID.Paralyzed;
-                    beast.ModifiedStats[StatID.Speed] = (int)Math.Round(.5 * beast.ModifiedStats[StatID.Speed], MidpointRounding.AwayFromZero);
+                Priority = 5,
+
+                OnStatusActivated = (Beast defender) => {
+
+                    defender.NewBeastStatuses.Add(StatusID.Paralyzed);
+                    defender.ModifiedStats[StatID.Speed] = (int)Math.Round(.5 * defender.ModifiedStats[StatID.Speed], MidpointRounding.AwayFromZero);
+                    Beast.BattleDialog.Enqueue($"{Beast.FoeString(defender)} {defender.Name} was paralyzed");
                 },
-                OnBeforeMove = (Beast beast) =>
+                OnBeforeMove = (Beast attacker) =>
                 {
                     int fullParaNum = UnityEngine.Random.Range(1, 3);
-                    
+
                     if(fullParaNum == 2)
                     {
+                        Beast.BattleDialog.Enqueue($"{Beast.FoeString(attacker)} {attacker.Name} is fully paralyzed");
                         return true;
                     }
                     else

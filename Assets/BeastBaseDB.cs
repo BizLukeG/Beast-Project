@@ -51,7 +51,7 @@ public class BeastBaseDB : MonoBehaviour
                 Typing2 = Typing.None,
                 LearnSet = new Dictionary<int, MoveID>()
                 {
-                    { 1, MoveID./*Smack*/LeafStorm }, {3, MoveID.SleepPowder}, {4, MoveID.ConfuseRay}, {5, MoveID.Bite}/*, {5, MoveID.LeafStorm},  {6, MoveID.FlameWheel}, {7, MoveID.RockSlide}*/
+                    { 1, MoveID./*Smack*/Bite }, {3, MoveID.SleepPowder}, {4, MoveID.ConfuseRay}, {5, MoveID.ThunderWave}/*, {5, MoveID.LeafStorm},  {6, MoveID.FlameWheel}, {7, MoveID.RockSlide}*/
 
                 }
             }

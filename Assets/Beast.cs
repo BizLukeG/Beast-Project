@@ -262,7 +262,7 @@ public class Beast
         //no more conditions or statuses are left
         //might need to have a BeastConditions List and then a TempBeastConditionsList. The Temp list used in the while loop to remove conditions and statuses until none are left so that orginal isn't
         //affected by the removal process in the loop
-        while (!statusConditionActivated && attacker.TempNewBeastConditions.Count > 0 || attacker.TempNewBeastStatuses.Count > 0 /*&& !statusConditionActivated*/) {
+        while (statusConditionActivated == false && (attacker.TempNewBeastConditions.Count > 0 || attacker.TempNewBeastStatuses.Count > 0) /*&& !statusConditionActivated*/) {
             //check for lowest prio in attacker's BeastConditions
             Debug.Log("Count Con" + attacker.TempNewBeastConditions.Count);
             Debug.Log("Count Stat" + attacker.TempNewBeastStatuses.Count);
@@ -290,17 +290,18 @@ public class Beast
             }
             //need to check status for lowest prio also then compare the results PrioResponse of Condition and Statuses to see which is smaller and continue the process after
             //StatusID PrioStatusResponse = attacker.TempNewBeastStatuses.Aggregate((smallest, next) => StatusDB.Statuses[next].Priority < StatusDB.Statuses[smallest].Priority ? next : smallest);
-            Debug.Log("conditionPrio" + conditionPrio);
-            Debug.Log("statusPrio" + statusPrio);
+            Debug.Log("while conditionPrio" + conditionPrio);
+            Debug.Log("while statusPrio" + statusPrio);
 
             if (conditionPrio > statusPrio) {
                 //StatusDB.Statuses[PrioStatusResponse].Priority < ConditionDB.Conditions[PrioResponse].Priority
 
                 //could set statusConditionActivated = to this since it returns a bool
                 //see if condition fully activates
-                Debug.Log("prio " + prioStatusResponse);
+                Debug.Log("while prioStatusResponse " + prioStatusResponse);
+                //Debug.Log("while statusConditionActivated " + statusConditionActivated);
                 statusConditionActivated = StatusDB.Statuses[prioStatusResponse].OnBeforeMove(attacker);
-
+                Debug.Log("while statusConditionActivated " + statusConditionActivated);
                 //remove the condition so that the next loop can check the next lowest prio
                 attacker.TempNewBeastStatuses.Remove(prioStatusResponse);
             }
@@ -308,12 +309,18 @@ public class Beast
             {
                 //see if condition fully activates
                 statusConditionActivated = ConditionDB.Conditions[prioConditionResponse].OnBeforeMove(attacker, defender);
-                Debug.Log("prio " + prioConditionResponse);
+                Debug.Log("while prioConditionResponse " + prioConditionResponse);
+                Debug.Log("while statusConditionActivated " + statusConditionActivated);
                 //remove the condition so that the next loop can check the next lowest prio
                 attacker.TempNewBeastConditions.Remove(prioConditionResponse);
             }
 
-            attacker.NewBeastConditions.Remove(ConditionID.Flinched);
+            if (attacker.NewBeastConditions.Contains(ConditionID.Flinched))
+            {
+                Debug.Log("while contatins flinch");
+                attacker.NewBeastConditions.Remove(ConditionID.Flinched);
+            }
+            
             //if statusConditionActivated = true (set from condition/status database) then loop will exit
         }
         
@@ -474,7 +481,7 @@ public class Beast
 
             if (moveUsed.Category == MoveCategory.Status)
             {
-                if (!defender.NewBeastStatuses.Contains(moveUsed.Status)/*defender.Status == StatusID.None*/)
+                if (defender.NewBeastStatuses.Count == 0/*defender.Status == StatusID.None*/)
                 {
                     //defender.Status = moveUsed.Status;
                     StatusDB.Statuses[moveUsed.Status].OnStatusActivated(defender);
@@ -483,7 +490,7 @@ public class Beast
                 }
                 else
                 {
-                    BattleDialog.Enqueue($"{FoeString(defender)} {defender.Name} is already {defender.Status.ToString()}");
+                    BattleDialog.Enqueue($"{FoeString(defender)} {defender.Name} is already {defender.NewBeastStatuses[0].ToString()}");
                 }
             }
             else if (moveUsed.Category == MoveCategory.Condition)
