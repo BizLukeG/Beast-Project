@@ -323,7 +323,27 @@ public class BattleSystem : MonoBehaviour
             }
         }
 
-       
+        Debug.Log("While BattleSystem Count " + Beast.BattleDialog.Count);
+        Beast.DamageCalcAfterTurn(WildBeast, PlayerActiveBeast);
+        while (Beast.BattleDialog.Count > 0)
+        {
+            Debug.Log("While BattleDialog ");
+            yield return BattleDialogBoxMB.DisplayBattleDialogText(Beast.BattleDialog.Dequeue());
+            yield return new WaitForSeconds(1.5f);
+        }
+        BattleUnitUI.SetupEnemy(WildBeast);
+        if (IsBattleOver())
+        {
+            yield return BattleDialogBoxMB.DisplayBattleDialogText("Battle is over. Press X To Continue");
+            BattleStateStack.Push(BattleState.Hold);
+            yield return new WaitUntil(() => hold == false);
+            BattleStateStack.Pop();
+            hold = true;
+            PlayerActiveBeast.ResetStats();
+            BattleStateStack.Push(BattleState.BattleOver);
+
+            //yield return BattleDialogBoxMB.DisplayBattleDialogText("Battle is over");
+        }
 
         Debug.Log("BSS Count " + BattleStateStack.Count);
 
@@ -342,6 +362,7 @@ public class BattleSystem : MonoBehaviour
     {
         if (WildBeast.ModifiedStats[StatID.HP] <= 0)
         {
+            WildBeast.AfterTurnDamage = 0;
             Debug.Log("Player wins ");          
             return true;
         }

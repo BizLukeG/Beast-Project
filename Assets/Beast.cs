@@ -53,6 +53,8 @@ public class Beast
     public List<ConditionID> TempNewBeastConditions { get; set; } = new List<ConditionID>();
     public List<StatusID> TempNewBeastStatuses { get; set; } = new List<StatusID>();
     public int NewStatusCounter { get; set; } = 0;
+    public int AfterTurnDamage { get; set; } = 0;
+    public string AfterTurnDamageName { get; set; }
 
     public Beast()
     {
@@ -452,7 +454,15 @@ public class Beast
 
     }
 
-    //damageCalcAfterTurn
+    public static void DamageCalcAfterTurn(Beast enemy, Beast player)
+    {
+        Debug.Log("While DamageCalcAfterTurn " + enemy.AfterTurnDamage);
+        if (enemy.AfterTurnDamage != 0)
+        {
+            enemy.ModifiedStats[StatID.HP] -= enemy.AfterTurnDamage;
+            BattleDialog.Enqueue($"{FoeString(enemy)} {enemy.Name} was hurt by {enemy.AfterTurnDamageName}");
+        }
+    }
     //if beast.AfterTurn damage
 
     public static string FoeString(Beast beast)

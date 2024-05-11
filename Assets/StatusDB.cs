@@ -30,11 +30,14 @@ public class StatusDB
                     
                     if(randNum > moveUsed.SecondaryEffectChance)
                     {
+                        
                         Debug.Log("while burned ");
                         if(defender.NewBeastStatuses.Count == 0){
                             defender.NewBeastStatuses.Add(StatusID.Burned);
                             defender.ModifiedStats[StatID.Attack] = (int)Math.Round(.5 * defender.ModifiedStats[StatID.Attack], MidpointRounding.AwayFromZero);
                             Beast.BattleDialog.Enqueue($"{Beast.FoeString(defender)} {defender.Name} was burned");
+                            defender.AfterTurnDamage = (int)Math.Round(defender.ModifiedStats[StatID.HP]*(1/8f), MidpointRounding.AwayFromZero);
+                            defender.AfterTurnDamageName = "burn";
                         }
                     }
                 },
