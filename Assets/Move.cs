@@ -19,6 +19,10 @@ public class Move
     public StatusID Status { get; set; }
     public ConditionID Condition { get; set; }
     public int StatusPriority { get; set; }
+    public StatusID SecondaryEffectStatus { get; set; }
+    public ConditionID SecondaryEffectCondition { get; set; }
+    public MoveCategory SecondaryEffectCategory { get; set; }
+    public int SecondaryEffectChance { get; set; }
 
     public Move()
     {

@@ -14,41 +14,32 @@ public class StatusDB
         {
             StatusID.Burned,
             new Status(){
-                ActivationMessage = "has been burned.",
-                //Name = "Expurn",
-                //FrontSprite = Resources.Load<Sprite>("Sprites/Brown"),
-                OnStatusActivated = (Beast beast) => {
-                    beast.Status = StatusID.Burned;
-                    beast.ModifiedStats[StatID.Attack] = (int)Math.Round(.5 * beast.ModifiedStats[StatID.Attack], MidpointRounding.AwayFromZero);
+                Priority = 5,
+                OnStatusActivated = (Beast defender) => {
+                    defender.NewBeastStatuses.Add(StatusID.Burned);
+                    defender.ModifiedStats[StatID.Attack] = (int)Math.Round(.5 * defender.ModifiedStats[StatID.Attack], MidpointRounding.AwayFromZero);
+                    Beast.BattleDialog.Enqueue($"{Beast.FoeString(defender)} {defender.Name} was burned");
+                },
+                OnBeforeMove = (Beast attacker) =>
+                {
+                        return false;                  
+                },
+                OnSecondaryEffect = (Beast defender, Move moveUsed) =>
+                {
+                    int randNum= UnityEngine.Random.Range(1, 101);
+                    
+                    if(randNum > moveUsed.SecondaryEffectChance)
+                    {
+                        Debug.Log("while burned ");
+                        if(defender.NewBeastStatuses.Count == 0){
+                            defender.NewBeastStatuses.Add(StatusID.Burned);
+                            defender.ModifiedStats[StatID.Attack] = (int)Math.Round(.5 * defender.ModifiedStats[StatID.Attack], MidpointRounding.AwayFromZero);
+                            Beast.BattleDialog.Enqueue($"{Beast.FoeString(defender)} {defender.Name} was burned");
+                        }
+                    }
                 },
             }
         },
-        //{
-        //    StatusID.Paralyzed,
-        //    new Status(){
-        //        //Name = "Pugba",
-        //        ActivationMessage = "has been paralyzed",
-        //        BeforeTurnMessage = "was fully paralyzed",
-        //        OnStatusActivated = (Beast beast) => {
-        //            beast.Status = StatusID.Paralyzed;
-        //            beast.ModifiedStats[StatID.Speed] = (int)Math.Round(.5 * beast.ModifiedStats[StatID.Speed], MidpointRounding.AwayFromZero);
-        //        },
-        //        OnBeforeMove = (Beast beast) =>
-        //        {
-        //            int fullParaNum = UnityEngine.Random.Range(1, 3);
-                    
-        //            if(fullParaNum == 2)
-        //            {
-        //                return true;
-        //            }
-        //            else
-        //            {
-        //                return false;
-        //            }
-        //        }
-
-        //    }
-        //},
         {
             StatusID.Paralyzed,
             new Status(){
@@ -109,6 +100,43 @@ public class StatusDB
                             Beast.BattleDialog.Enqueue($"{Beast.FoeString(attacker)} {attacker.Name} is deeply asleep");
                             return true;
                         
+                    }
+                }
+
+            }
+        },
+        {
+            StatusID.Frozen,
+            new Status(){
+                
+                Priority = 1,
+
+                OnStatusActivated = (Beast defender) => {
+                    //beast.Status = StatusID.Paralyzed;
+                    defender.NewStatusCounter = UnityEngine.Random.Range(1,5);
+                    Debug.Log("statCounter def " + defender.NewStatusCounter);
+
+                    defender.NewBeastStatuses.Add(StatusID.Frozen);
+
+                    Beast.BattleDialog.Enqueue($"{Beast.FoeString(defender)} {defender.Name} was Frozen");
+
+                },
+                OnBeforeMove = (Beast attacker) =>
+                {
+                   Debug.Log("statCounter att " + attacker.NewStatusCounter);
+
+                    if (attacker.NewStatusCounter == 0)
+                    {
+
+                        Beast.BattleDialog.Enqueue($"{Beast.FoeString(attacker)} {attacker.Name} thawed");
+                        attacker.NewBeastStatuses.Remove(StatusID.Frozen);
+                        return false;
+                    }else
+                    {
+
+                            Beast.BattleDialog.Enqueue($"{Beast.FoeString(attacker)} {attacker.Name} is frozen solid");
+                            return true;
+
                     }
                 }
 

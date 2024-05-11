@@ -237,13 +237,14 @@ public class BattleSystem : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        if (effectiveness != 1)
-        {
-            yield return BattleDialogBoxMB.DisplayBattleDialogText($"{effectivenessPhrase}");
-            yield return new WaitForSeconds(1.5f);
-        }
+        //take out and queue into Beast.BattleDialog at the end of damageCalc
+        //if (effectiveness != 1)
+        //{
+        //    yield return BattleDialogBoxMB.DisplayBattleDialogText($"{effectivenessPhrase}");
+        //    yield return new WaitForSeconds(1.5f);
+        //}
 
-        
+
 
         if (IsBattleOver())
         {
@@ -301,11 +302,11 @@ public class BattleSystem : MonoBehaviour
 
             yield return new WaitForSeconds(1f);
 
-            if (effectiveness != 1)
-            {
-                yield return BattleDialogBoxMB.DisplayBattleDialogText($"{effectivenessPhrase}");
-                yield return new WaitForSeconds(1.5f);
-            }
+            //if (effectiveness != 1)
+            //{
+            //    yield return BattleDialogBoxMB.DisplayBattleDialogText($"{effectivenessPhrase}");
+            //    yield return new WaitForSeconds(1.5f);
+            //}
 
 
             if (IsBattleOver())

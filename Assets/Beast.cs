@@ -324,154 +324,7 @@ public class Beast
             //if statusConditionActivated = true (set from condition/status database) then loop will exit
         }
         
-
         Debug.Log("Response " + Response);
-
-        //check beast conditions and statuses to see if it gets to do its move or not
-
-        //ConditionDB.Conditions[sortedCondition].OnBeforeMove(attacker);
-
-
-
-        //foreach (var beastCondition in attacker.BeastConditions)
-        //{
-        //    Debug.Log("beastCondition " + beastCondition);
-        //}
-
-        //if (attacker.BeastConditions.Count > 0)
-        //{
-
-        //    List<int> priorities = new List<int>();
-        //    foreach (var condition in attacker.BeastConditions)
-        //    {
-        //        priorities.Add(ConditionDB.Conditions[condition].Priority);
-        //    }
-
-
-        //    List<int> sortedPriorities = new List<int>();
-        //    for (int i = 1; i < 7; i++)
-        //    {
-        //        foreach (var priority in priorities)
-        //        {
-        //            Debug.Log("conditionPriority " + priority);
-        //            if (priority == i)
-        //            {
-        //                sortedPriorities.Add(priority);
-        //                break;
-        //            }
-        //        }
-        //    }
-
-        //    //List<ConditionID> sortedConditions = new List<ConditionID>();
-        //    foreach (var sortedPriority in sortedPriorities)
-        //    {
-        //        Debug.Log("sortedConditionPriority " + sortedPriority);
-        //        foreach (var condition in attacker.BeastConditions)
-        //        {
-        //            if (ConditionDB.Conditions[condition].Priority == sortedPriority)
-        //            {
-        //                sortedConditions.Add(condition);
-        //                break;
-        //            }
-        //        }
-
-        //    }
-        //    foreach (var sortedCondition in sortedConditions)
-        //    {
-        //        if (ConditionDB.Conditions[sortedCondition].OnBeforeMove(attacker))
-        //        {
-        //            ActivatedCondition = sortedCondition;
-        //            break;
-        //        }
-        //    }
-
-
-        //}
-
-        //foreach (var sortedCondition in sortedConditions)
-        //{
-        //    Debug.Log("sortedCondition " + sortedCondition);
-        //}
-
-        //Debug.Log("activatedCondition " + ActivatedCondition);
-
-        ////check Sleep / Frozen
-        //if (ActivatedStatus == StatusID.Asleep)
-        //{
-        //    BattleDialog.Enqueue($"{FoeString(attacker)} {attacker.Name} {StatusDB.Statuses[ActivatedStatus].BeforeTurnMessage}");
-        //}
-
-
-        //if (sortedConditions.Contains(ConditionID.Confused))
-        //{
-
-        //    //BattleDialog.Enqueue($"{FoeString(attacker)} {attacker.Name} {ConditionDB.Conditions[ConditionID.Confused].CurrentlyConfusedMessage}");
-
-        //    if (attacker.ConditionCounter == 0)
-        //    {
-        //        ConditionDB.Conditions[ConditionID.Confused].OnRemoveCondition(attacker);
-        //        BattleDialog.Enqueue($"{FoeString(attacker)} {attacker.Name} snapped out of Confusion");
-        //    }
-        //    else
-        //    {
-        //        BattleDialog.Enqueue($"{FoeString(attacker)} {attacker.Name} {ConditionDB.Conditions[ConditionID.Confused].CurrentlyConfusedMessage}");
-        //        attacker.ConditionCounter--;
-        //    }
-
-        //}
-
-        //if (sortedConditions.Contains(ConditionID.Enamored))
-        //{
-        //    BattleDialog.Enqueue($"{FoeString(attacker)} {attacker.Name} {ConditionDB.Conditions[ConditionID.Enamored].CurrentlyEnamoredMessage}");
-        //}
-
-
-        //if(ActivatedStatus != StatusID.None)
-        //{
-        //    if(ActivatedStatus == StatusID.Paralyzed)
-        //    {
-        //        BattleDialog.Enqueue($"{FoeString(attacker)} {attacker.Name} {StatusDB.Statuses[ActivatedStatus].BeforeTurnMessage}");
-        //    }
-
-        //}
-        //else if (ActivatedCondition != ConditionID.None)
-        //{
-        //    if(ActivatedCondition == ConditionID.Flinched && attacker == secondUnitToMove)
-        //    {
-        //        BattleDialog.Enqueue($"{FoeString(attacker)} {attacker.Name} {ConditionDB.Conditions[ActivatedCondition].FullyFlinchedMessage}");
-        //        ConditionDB.Conditions[ActivatedCondition].OnRemoveCondition(attacker);
-        //    }
-
-        //    if(ActivatedCondition == ConditionID.Confused)
-        //    {
-
-
-
-        //            BattleDialog.Enqueue($"{FoeString(attacker)} {attacker.Name} {ConditionDB.Conditions[ActivatedCondition].FullyConfusedMessage}");
-
-        //            if (moveUsed.Category == MoveCategory.Physical)
-        //            {
-        //                damage = (int)Math.Round(moveUsed.Power / 100f * (attacker.ModifiedStats[StatID.Attack] - attacker.ModifiedStats[StatID.Defense]) * effectiveness, MidpointRounding.AwayFromZero);
-        //            }
-        //            else
-        //            {
-
-        //                damage = (int)Math.Round(moveUsed.Power / 100f * (attacker.ModifiedStats[StatID.SpecialAttack] - attacker.ModifiedStats[StatID.SpecialDefense]) * effectiveness, MidpointRounding.AwayFromZero);
-        //                //Debug.Log($"confusion damage breakdown: Power {moveUsed.Power}, SpA: {attacker.ModifiedStats[StatID.SpecialAttack]}, SpD ");
-        //            }
-
-        //            Debug.Log("confusion damage " + damage);
-
-        //            if (damage <= 0)
-        //            {
-        //                damage = 1;
-        //            }
-
-
-        //    }
-        //}
-        //else
-        //{
 
         //if statusConditionActivated is true skip turn essentailly
         if (!statusConditionActivated)
@@ -557,8 +410,27 @@ public class Beast
                 damage = (int)Math.Round(moveUsed.Power / 100f * (attacker.ModifiedStats[StatID.SpecialAttack] - defender.ModifiedStats[StatID.SpecialDefense]) * effectiveness, MidpointRounding.AwayFromZero);
             }
 
+            if (effectiveness != 1)
+            {
+                string effectivenessPhrase = TypeChart.GetEffectivenessPhrase(effectiveness);
+                BattleDialog.Enqueue($"{effectivenessPhrase}");
+            }
+
             if (moveUsed.Category == MoveCategory.Physical || moveUsed.Category == MoveCategory.Special)
             {
+
+                if (moveUsed.SecondaryEffectCategory == MoveCategory.Condition)
+                {
+                    ConditionDB.Conditions[moveUsed.SecondaryEffectCondition].OnSecondaryEffect(defender, moveUsed);
+                }
+                else if (moveUsed.SecondaryEffectCategory == MoveCategory.Status)
+                {
+                    StatusDB.Statuses[moveUsed.SecondaryEffectStatus].OnSecondaryEffect(defender, moveUsed);
+                }
+                //check if move has a secondary effect and if it does call OnSecondaryEffectChance(). Then in the condition or status DB inside OnSecondaryEffectChance roll to see if the
+                //secondary effect should be applied
+                //Move DB SecondaryEffectCategory = MoveCategory.Condition or MoveCategory.Status and SecondaryEffectCondition = ConditionID.Burned or SecondaryEffectStatus = StatusID.Paralyzed
+                //OnSecondaryEffectChance() should give beast.AfterTurn damage a damage number to apply in damageCalcAfterTurn
 
                 if (damage <= 0)
                     damage = 1;
@@ -575,10 +447,14 @@ public class Beast
         if(attacker.confusionCounter != 0) attacker.confusionCounter--;
         statusConditionActivated = false;
 
+
         return effectiveness;
 
     }
-    
+
+    //damageCalcAfterTurn
+    //if beast.AfterTurn damage
+
     public static string FoeString(Beast beast)
     {
         if (beast.IsPlayerUnit)

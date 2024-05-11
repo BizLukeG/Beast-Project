@@ -17,6 +17,8 @@ public class Status
 
    public Action<Beast> OnAfterFullTurn { get; set; }
 
+    public Action<Beast, Move > OnSecondaryEffect { get; set; }
+
     public Func<Beast, bool> OnBeforeMove { get; set; }
 }
 

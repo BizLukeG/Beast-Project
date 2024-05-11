@@ -137,33 +137,44 @@ public class ConditionDB
                     beast.BeastConditions.Remove(ConditionID.Confused);
                 },
             }
+            
+        },{
+            ConditionID.Enamored,
+            new Condition(){
 
-            //ConditionID.Flinched,
-            //new Condition()
-            //{
-            //    FullyFlinchedMessage = "Flinched",
-            //    Priority = 1,
-            //    //OnConditionActivated = (Beast beast) => {
-                    
-            //    //    beast.ConditionCounter = UnityEngine.Random.Range(1,5);
-                    
-            //    //},
-            //    OnBeforeMove = (Beast beast) =>
-            //    {
-                    
-            //        int flinchNum = UnityEngine.Random.Range(2, 3);
-            //        if (flinchNum == 2)
-            //        {
-            //            return true;
-            //        }
-            //        return false;
-            //    },
-            //    OnRemoveCondition = (Beast beast) =>
-            //    {
-            //        beast.BeastConditions.Remove(ConditionID.Flinched);
-            //    },
-            //}
-        }
+                Priority = 4,
+
+                OnConditionActivated = (Beast defender, Beast attacker) => {
+                   
+                    defender.NewBeastConditions.Add(ConditionID.Enamored);
+                    Beast.BattleDialog.Enqueue($"{Beast.FoeString(defender)} {defender.Name} fell in love with{Beast.FoeString(attacker)} {attacker.Name}");
+                },
+                OnBeforeMove = (Beast attacker, Beast defender) =>
+                {
+
+                    int enamNum;
+
+                        enamNum = UnityEngine.Random.Range(1, 3); 
+                        
+                        if(enamNum == 2)
+                        {
+                            Beast.BattleDialog.Enqueue($"{Beast.FoeString(attacker)} {attacker.Name} is in love");
+                            Beast.BattleDialog.Enqueue($"{Beast.FoeString(attacker)} {attacker.Name} is immbolized by love");
+
+                            return true;
+                        }
+                        else
+                        {
+                            Beast.BattleDialog.Enqueue($"{Beast.FoeString(attacker)} {attacker.Name} is in love");
+                            return false;
+                        }
+
+                },
+               
+            }
+
+        },
+
 
     };
 }
