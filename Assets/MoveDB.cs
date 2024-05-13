@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum MoveID
 {
-    Smack, Pound, Tackle, LeafStorm, FlameWheel, RockSlide, Harden, Agility, Scorch, ConfuseRay, ThunderWave, Bite, SleepPowder, Attract, Freeze, FlameBurst, Psybeam
+    Smack, Pound, Tackle, LeafStorm, FlameWheel, RockSlide, Harden, Agility, Scorch, ConfuseRay, ThunderWave, Bite, SleepPowder, Attract, Freeze, FlameBurst, Psybeam, PoisonSting
 }
 
 public enum MoveCategory
@@ -59,6 +59,7 @@ public class MoveDB
         {MoveID.Freeze, new Move(){ Power = 0, Accuracy = 100, Typing = Typing.Nature, Category = MoveCategory.Status, Status = StatusID.Frozen}},
         {MoveID.FlameBurst, new Move(){ Power = 60, Accuracy = 100, Typing = Typing.Sacred, Category = MoveCategory.Physical, SecondaryEffectCategory = MoveCategory.Status, SecondaryEffectStatus = StatusID.Burned, SecondaryEffectChance = 50}},
         {MoveID.Psybeam, new Move(){ Power = 60, Accuracy = 100, Typing = Typing.Native, Category = MoveCategory.Special, SecondaryEffectCategory = MoveCategory.Condition, SecondaryEffectCondition = ConditionID.Confused, SecondaryEffectChance = 50}},
+        {MoveID.PoisonSting, new Move(){ Power = 60, Accuracy = 100, Typing = Typing.Toxic, Category = MoveCategory.Special, SecondaryEffectCategory = MoveCategory.Status, SecondaryEffectStatus = StatusID.Poisoned, SecondaryEffectChance = 50}},
     };
     
 }

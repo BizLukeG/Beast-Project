@@ -145,6 +145,38 @@ public class StatusDB
 
             }
         },
+        {
+            StatusID.Poisoned,
+            new Status(){
+                Priority = 5,
+                OnStatusActivated = (Beast defender) => {
+                    defender.NewBeastStatuses.Add(StatusID.Poisoned);
+                    defender.AfterTurnDamage = (int)Math.Round(defender.ModifiedStats[StatID.HP]*(1/8f), MidpointRounding.AwayFromZero);
+                    Beast.BattleDialog.Enqueue($"{Beast.FoeString(defender)} {defender.Name} was poisoned");
+                },
+                OnBeforeMove = (Beast attacker) =>
+                {
+                        return false;
+                },
+                OnSecondaryEffect = (Beast defender, Beast attacker, Move moveUsed) =>
+                {
+                    int randNum = UnityEngine.Random.Range(1, 101);
+
+                    if(randNum < moveUsed.SecondaryEffectChance)
+                    {
+
+                        Debug.Log("while poisoned ");
+                        //if(defender.NewBeastStatuses.Count == 0){
+                            defender.NewBeastStatuses.Add(StatusID.Poisoned);                          
+                            Beast.BattleDialog.Enqueue($"{Beast.FoeString(defender)} {defender.Name} was poisoned");
+                            defender.AfterTurnDamage = (int)Math.Round(defender.ModifiedStats[StatID.HP]*(1/8f), MidpointRounding.AwayFromZero);
+                            defender.AfterTurnDamageName = "poison";
+                        //}
+                    }
+                },
+            }
+        },
+
 
     };
 }
