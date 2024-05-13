@@ -55,6 +55,7 @@ public class Beast
     public int NewStatusCounter { get; set; } = 0;
     public int AfterTurnDamage { get; set; } = 0;
     public string AfterTurnDamageName { get; set; }
+    public static bool ConfusionDamage { get; set; }
 
     public Beast()
     {
@@ -317,11 +318,11 @@ public class Beast
                 attacker.TempNewBeastConditions.Remove(prioConditionResponse);
             }
 
-            if (attacker.NewBeastConditions.Contains(ConditionID.Flinched))
-            {
-                Debug.Log("while contatins flinch");
-                attacker.NewBeastConditions.Remove(ConditionID.Flinched);
-            }
+            //if (attacker.NewBeastConditions.Contains(ConditionID.Flinched))
+            //{
+            //    Debug.Log("while contains flinch");
+            //    attacker.NewBeastConditions.Remove(ConditionID.Flinched);
+            //}
             
             //if statusConditionActivated = true (set from condition/status database) then loop will exit
         }
@@ -421,13 +422,13 @@ public class Beast
             if (moveUsed.Category == MoveCategory.Physical || moveUsed.Category == MoveCategory.Special)
             {
 
-                if (moveUsed.SecondaryEffectCategory == MoveCategory.Condition)
+                if (moveUsed.SecondaryEffectCategory == MoveCategory.Condition && !defender.NewBeastConditions.Contains(moveUsed.SecondaryEffectCondition))
                 {
-                    ConditionDB.Conditions[moveUsed.SecondaryEffectCondition].OnSecondaryEffect(defender, moveUsed);
+                    ConditionDB.Conditions[moveUsed.SecondaryEffectCondition].OnSecondaryEffect(defender, attacker, moveUsed);
                 }
-                else if (moveUsed.SecondaryEffectCategory == MoveCategory.Status)
+                else if (moveUsed.SecondaryEffectCategory == MoveCategory.Status && defender.NewBeastStatuses.Count == 0)
                 {
-                    StatusDB.Statuses[moveUsed.SecondaryEffectStatus].OnSecondaryEffect(defender, moveUsed);
+                    StatusDB.Statuses[moveUsed.SecondaryEffectStatus].OnSecondaryEffect(defender, attacker, moveUsed);
                 }
                 //check if move has a secondary effect and if it does call OnSecondaryEffectChance(). Then in the condition or status DB inside OnSecondaryEffectChance roll to see if the
                 //secondary effect should be applied
@@ -444,6 +445,14 @@ public class Beast
         }
         //       }
 
+        if (ConfusionDamage)
+        {
+            damage = (int)Math.Round(moveUsed.Power / 100f * attacker.ModifiedStats[StatID.Attack] - attacker.ModifiedStats[StatID.Defense]);
+            if (damage <= 0)
+                damage = 1;
+            attacker.ModifiedStats[StatID.HP] -= damage;
+            ConfusionDamage = false;
+        }
         
         if(attacker.NewStatusCounter != 0) attacker.NewStatusCounter--;
         if(attacker.confusionCounter != 0) attacker.confusionCounter--;

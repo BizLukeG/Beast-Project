@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum MoveID
 {
-    Smack, Pound, Tackle, LeafStorm, FlameWheel, RockSlide, Harden, Agility, Scorch, ConfuseRay, ThunderWave, Bite, SleepPowder, Attract, Freeze, FlameBurst
+    Smack, Pound, Tackle, LeafStorm, FlameWheel, RockSlide, Harden, Agility, Scorch, ConfuseRay, ThunderWave, Bite, SleepPowder, Attract, Freeze, FlameBurst, Psybeam
 }
 
 public enum MoveCategory
@@ -53,11 +53,12 @@ public class MoveDB
         {MoveID.Scorch, new Move(){ Power = 0, Accuracy = 100, Typing = Typing.Sacred, Category = MoveCategory.Status, Status = StatusID.Burned}},
         {MoveID.ConfuseRay, new Move(){ Power = 0, Accuracy = 100, Typing = Typing.Native, Category = MoveCategory.Condition, Condition = ConditionID.Confused}},
         {MoveID.ThunderWave, new Move(){ Power = 0, Accuracy = 100, Typing = Typing.Static, Category = MoveCategory.Status, Status = StatusID.Paralyzed}},
-        {MoveID.Bite, new Move(){ Power = 0, Accuracy = 100, Typing = Typing.Corrupt, Category = MoveCategory.Condition, Condition = ConditionID.Flinched}},
+        {MoveID.Bite, new Move(){ Power = 60, Accuracy = 100, Typing = Typing.Corrupt, Category = MoveCategory.Physical, SecondaryEffectCategory = MoveCategory.Condition, SecondaryEffectCondition = ConditionID.Flinched, SecondaryEffectChance = 50}},
         {MoveID.SleepPowder, new Move(){ Power = 0, Accuracy = 100, Typing = Typing.Nature, Category = MoveCategory.Status, Status = StatusID.Asleep}},
         {MoveID.Attract, new Move(){ Power = 0, Accuracy = 100, Typing = Typing.Nature, Category = MoveCategory.Condition, Condition = ConditionID.Enamored}},
         {MoveID.Freeze, new Move(){ Power = 0, Accuracy = 100, Typing = Typing.Nature, Category = MoveCategory.Status, Status = StatusID.Frozen}},
         {MoveID.FlameBurst, new Move(){ Power = 60, Accuracy = 100, Typing = Typing.Sacred, Category = MoveCategory.Physical, SecondaryEffectCategory = MoveCategory.Status, SecondaryEffectStatus = StatusID.Burned, SecondaryEffectChance = 50}},
+        {MoveID.Psybeam, new Move(){ Power = 60, Accuracy = 100, Typing = Typing.Native, Category = MoveCategory.Special, SecondaryEffectCategory = MoveCategory.Condition, SecondaryEffectCondition = ConditionID.Confused, SecondaryEffectChance = 50}},
     };
     
 }

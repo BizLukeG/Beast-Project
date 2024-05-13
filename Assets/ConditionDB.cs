@@ -66,6 +66,7 @@ public class ConditionDB
                         //beast.ConditionCounter--;
                         if(confusedNum == 2)
                         {
+                            Beast.ConfusionDamage = true;
                             //Beast.statusConditionActivated = true;
                             Beast.BattleDialog.Enqueue($"{Beast.FoeString(attacker)} {attacker.Name} is confused");
                             Beast.BattleDialog.Enqueue($"{Beast.FoeString(attacker)} {attacker.Name} hurt itself in confusion");
@@ -76,6 +77,22 @@ public class ConditionDB
                             Beast.BattleDialog.Enqueue($"{Beast.FoeString(attacker)} {attacker.Name} is confused");
                             return false;
                         }
+                    }
+                },
+                OnSecondaryEffect = (Beast defender, Beast attacker, Move moveUsed) =>
+                {
+                    int randNum= UnityEngine.Random.Range(1, 101);
+
+                    if(randNum < moveUsed.SecondaryEffectChance)
+                    {
+
+                        Debug.Log("while confused ");
+                        //if(!defender.NewBeastConditions.Contains(ConditionID.Confused)){
+                            defender.NewBeastConditions.Add(ConditionID.Confused);
+                            Beast.BattleDialog.Enqueue($"{Beast.FoeString(defender)} {defender.Name} was confused");
+                            defender.confusionCounter = UnityEngine.Random.Range(1,5);
+                        //}
+                        
                     }
                 },
                 OnRemoveCondition = (Beast beast) =>
@@ -118,6 +135,9 @@ public class ConditionDB
                         Debug.Log("Speed atk " + attacker.ModifiedStats[StatID.Speed]);
                         Debug.Log("Speed def " + defender.ModifiedStats[StatID.Speed]);
 
+                        Debug.Log("while contains flinch");
+                        attacker.NewBeastConditions.Remove(ConditionID.Flinched);
+
                         if(confusedNum == 2)
                         {
                             
@@ -131,6 +151,17 @@ public class ConditionDB
                             return false;
                         }
                     
+                },
+                OnSecondaryEffect = (Beast defender, Beast attacker, Move moveUsed) => {
+
+                    Debug.Log("Count Howdy ");
+
+                    if((attacker.ModifiedStats[StatID.Speed] > defender.ModifiedStats[StatID.Speed]))
+                    {
+                        defender.NewBeastConditions.Add(ConditionID.Flinched);
+                    }
+
+
                 },
                 OnRemoveCondition = (Beast beast) =>
                 {

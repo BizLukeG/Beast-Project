@@ -16,7 +16,7 @@ public class Condition
 
     public Action<Beast, Beast> OnConditionActivated { get; set; } = (Beast defender, Beast attacker) => { };
 
-    public Action<Beast, Move> OnSecondaryEffect { get; set; }
+    public Action<Beast, Beast, Move> OnSecondaryEffect { get; set; }
 
     public Func<Beast, Beast, bool> OnBeforeMove { get; set; }
 

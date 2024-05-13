@@ -24,21 +24,21 @@ public class StatusDB
                 {
                         return false;                  
                 },
-                OnSecondaryEffect = (Beast defender, Move moveUsed) =>
+                OnSecondaryEffect = (Beast defender, Beast attacker, Move moveUsed) =>
                 {
-                    int randNum= UnityEngine.Random.Range(1, 101);
+                    int randNum = UnityEngine.Random.Range(1, 101);
                     
-                    if(randNum > moveUsed.SecondaryEffectChance)
+                    if(randNum < moveUsed.SecondaryEffectChance)
                     {
                         
                         Debug.Log("while burned ");
-                        if(defender.NewBeastStatuses.Count == 0){
+                        //if(defender.NewBeastStatuses.Count == 0){
                             defender.NewBeastStatuses.Add(StatusID.Burned);
                             defender.ModifiedStats[StatID.Attack] = (int)Math.Round(.5 * defender.ModifiedStats[StatID.Attack], MidpointRounding.AwayFromZero);
                             Beast.BattleDialog.Enqueue($"{Beast.FoeString(defender)} {defender.Name} was burned");
                             defender.AfterTurnDamage = (int)Math.Round(defender.ModifiedStats[StatID.HP]*(1/8f), MidpointRounding.AwayFromZero);
                             defender.AfterTurnDamageName = "burn";
-                        }
+                        //}
                     }
                 },
             }
