@@ -230,7 +230,9 @@ public class Beast
             defender = firstUnitToMove;
         }
 
-        int damage = 0;
+        
+
+            int damage = 0;
         float effectiveness = 1;
         //int confusedNum = 0;
         bool IsBeforeMoveActivated = false;
@@ -292,7 +294,7 @@ public class Beast
                 statusPrio = 100;
             }
             //need to check status for lowest prio also then compare the results PrioResponse of Condition and Statuses to see which is smaller and continue the process after
-            //StatusID PrioStatusResponse = attacker.TempNewBeastStatuses.Aggregate((smallest, next) => StatusDB.Statuses[next].Priority < StatusDB.Statuses[smallest].Priority ? next : smallest);
+           
             Debug.Log("while conditionPrio" + conditionPrio);
             Debug.Log("while statusPrio" + statusPrio);
 
@@ -329,20 +331,26 @@ public class Beast
         
         Debug.Log("Response " + Response);
 
+        
+
         //if statusConditionActivated is true skip turn essentailly
         if (!statusConditionActivated)
         {
             BattleDialog.Enqueue($"{FoeString(attacker)} {attacker.Name} used {moveUsed.Name}");
 
+            int randNum = UnityEngine.Random.Range(1, 101);
 
-            if (moveUsed.Category == MoveCategory.Status)
+            if (randNum >= moveUsed.Accuracy)
             {
-                if (defender.NewBeastStatuses.Count == 0/*defender.Status == StatusID.None*/)
+                BattleDialog.Enqueue($"{FoeString(attacker)} {attacker.Name}'s attack missed");
+            }
+            else if (moveUsed.Category == MoveCategory.Status)
+            {
+                if (defender.NewBeastStatuses.Count == 0)
                 {
                     //defender.Status = moveUsed.Status;
                     StatusDB.Statuses[moveUsed.Status].OnStatusActivated(defender);
-                    //StatusDB.Statuses[defender.Status].OnStatusActivated(defender);
-                    //BattleDialog.Enqueue($"{FoeString(defender)} {defender.Name} {StatusDB.Statuses[defender.Status].ActivationMessage}");
+                    
                 }
                 else
                 {
@@ -351,20 +359,12 @@ public class Beast
             }
             else if (moveUsed.Category == MoveCategory.Condition)
             {
-                if (!defender.NewBeastConditions.Contains(moveUsed.Condition)) //!defender.BeastConditions.Contains(moveUsed.Condition))
+                if (!defender.NewBeastConditions.Contains(moveUsed.Condition)) 
                 {
                     Debug.Log("Count Activated ");
                     ConditionDB.Conditions[moveUsed.Condition].OnConditionActivated(defender, attacker);
 
-                    //ConditionDB.Conditions[defender.NewBeastConditions[defender.BeastConditions.Count - 1]].OnConditionActivated(defender);
-
-                    //defender.BeastConditions.Add(moveUsed.Condition);
-
-                    //if (moveUsed.Condition != ConditionID.Flinched)
-                    //{
-                    //ConditionDB.Conditions[defender.BeastConditions[defender.BeastConditions.Count - 1]].OnConditionActivated(defender);
-                    //BattleDialog.Enqueue($"{FoeString(defender)} {defender.Name} {ConditionDB.Conditions[defender.BeastConditions[defender.BeastConditions.Count - 1]].ActivationMessage}");
-                    //}
+                    
                 }
                 else
                 {
@@ -404,13 +404,28 @@ public class Beast
             }
             else if (moveUsed.Category == MoveCategory.Physical)
             {
+                int randNum2 = UnityEngine.Random.Range(1, 101);
+
+                //check if crit. If it did multiply damage * 2 and queue phrase "it was a critical hit!"
                 effectiveness = TypeChart.GetEffectiveness(moveUsed.Typing, BeastBaseDB.BeastBases[defender.Name].Typing1, BeastBaseDB.BeastBases[defender.Name].Typing2);
                 damage = (int)Math.Round(moveUsed.Power / 100f * (attacker.ModifiedStats[StatID.Attack] - defender.ModifiedStats[StatID.Defense]) * effectiveness, MidpointRounding.AwayFromZero);
+                if (randNum2 <= 50)
+                {
+                    BattleDialog.Enqueue($"it was a critical hit!");
+                    damage *= 2;
+                }
             }
             else if (moveUsed.Category == MoveCategory.Special)
             {
+                int randNum3 = UnityEngine.Random.Range(1, 101);
+                //check if crit. If it did multiply damage * 2 and queue phrase "it was a critical hit!"
                 effectiveness = TypeChart.GetEffectiveness(moveUsed.Typing, BeastBaseDB.BeastBases[defender.Name].Typing1, BeastBaseDB.BeastBases[defender.Name].Typing2);
                 damage = (int)Math.Round(moveUsed.Power / 100f * (attacker.ModifiedStats[StatID.SpecialAttack] - defender.ModifiedStats[StatID.SpecialDefense]) * effectiveness, MidpointRounding.AwayFromZero);
+                if (randNum3 <= 50)
+                {
+                    BattleDialog.Enqueue($"it was a critical hit!");
+                    damage *= 2;
+                }
             }
 
             if (effectiveness != 1)
@@ -430,10 +445,7 @@ public class Beast
                 {
                     StatusDB.Statuses[moveUsed.SecondaryEffectStatus].OnSecondaryEffect(defender, attacker, moveUsed);
                 }
-                //check if move has a secondary effect and if it does call OnSecondaryEffectChance(). Then in the condition or status DB inside OnSecondaryEffectChance roll to see if the
-                //secondary effect should be applied
-                //Move DB SecondaryEffectCategory = MoveCategory.Condition or MoveCategory.Status and SecondaryEffectCondition = ConditionID.Burned or SecondaryEffectStatus = StatusID.Paralyzed
-                //OnSecondaryEffectChance() should give beast.AfterTurn damage a damage number to apply in damageCalcAfterTurn
+               
 
                 if (damage <= 0)
                     damage = 1;

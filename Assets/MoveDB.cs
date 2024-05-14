@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum MoveID
 {
-    Smack, Pound, Tackle, LeafStorm, FlameWheel, RockSlide, Harden, Agility, Scorch, ConfuseRay, ThunderWave, Bite, SleepPowder, Attract, Freeze, FlameBurst, Psybeam, PoisonSting
+    Smack, Pound, Tackle, LeafStorm, FlameWheel, RockSlide, Harden, Agility, Scorch, ConfuseRay, ThunderWave, Bite, SleepPowder, Attract, Freeze, FlameBurst, Psybeam, PoisonSting, Pollute
 }
 
 public enum MoveCategory
@@ -50,7 +50,7 @@ public class MoveDB
         {MoveID.RockSlide, new Move(){ Power = 70, Accuracy = 100, Typing = Typing.Rock, Category = MoveCategory.Physical}},
         {MoveID.Harden, new Move(){ Power = 0, Accuracy = 100, Typing = Typing.Rock, Category = MoveCategory.ModifyStats, BuffedStats = new List<StatID>{StatID.Attack}, NerfedStats = new List<StatID>{StatID.Defense}, TargetSelf = true}},
         {MoveID.Agility, new Move(){ Power = 0, Accuracy = 100, Typing = Typing.Rock, Category = MoveCategory.ModifyStats, BuffedStats = new List<StatID>{StatID.Speed}, TargetSelf = true}},
-        {MoveID.Scorch, new Move(){ Power = 0, Accuracy = 100, Typing = Typing.Sacred, Category = MoveCategory.Status, Status = StatusID.Burned}},
+        {MoveID.Scorch, new Move(){ Power = 0, Accuracy = 50, Typing = Typing.Sacred, Category = MoveCategory.Status, Status = StatusID.Burned}},
         {MoveID.ConfuseRay, new Move(){ Power = 0, Accuracy = 100, Typing = Typing.Native, Category = MoveCategory.Condition, Condition = ConditionID.Confused}},
         {MoveID.ThunderWave, new Move(){ Power = 0, Accuracy = 100, Typing = Typing.Static, Category = MoveCategory.Status, Status = StatusID.Paralyzed}},
         {MoveID.Bite, new Move(){ Power = 60, Accuracy = 100, Typing = Typing.Corrupt, Category = MoveCategory.Physical, SecondaryEffectCategory = MoveCategory.Condition, SecondaryEffectCondition = ConditionID.Flinched, SecondaryEffectChance = 50}},
@@ -60,6 +60,7 @@ public class MoveDB
         {MoveID.FlameBurst, new Move(){ Power = 60, Accuracy = 100, Typing = Typing.Sacred, Category = MoveCategory.Physical, SecondaryEffectCategory = MoveCategory.Status, SecondaryEffectStatus = StatusID.Burned, SecondaryEffectChance = 50}},
         {MoveID.Psybeam, new Move(){ Power = 60, Accuracy = 100, Typing = Typing.Native, Category = MoveCategory.Special, SecondaryEffectCategory = MoveCategory.Condition, SecondaryEffectCondition = ConditionID.Confused, SecondaryEffectChance = 50}},
         {MoveID.PoisonSting, new Move(){ Power = 60, Accuracy = 100, Typing = Typing.Toxic, Category = MoveCategory.Special, SecondaryEffectCategory = MoveCategory.Status, SecondaryEffectStatus = StatusID.Poisoned, SecondaryEffectChance = 50}},
+        {MoveID.Pollute, new Move(){ Power = 0, Accuracy = 50, Typing = Typing.Toxic, Category = MoveCategory.Status, Status = StatusID.Poisoned}},
     };
     
 }

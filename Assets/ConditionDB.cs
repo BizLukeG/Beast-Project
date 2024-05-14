@@ -30,20 +30,16 @@ public class ConditionDB
                 FullyConfusedMessage = "hurt itself in Confusion",
                 Priority = 3,
 
-                //change name to on conditionApplied seems better and then if fully confused the be Condition Activated
+                
                 OnConditionActivated = (Beast defender, Beast attacker) => {
-                    //beast.Condition = ConditionID.Confused;
-
-                    //confusionCounter needs to be on the instance of beast to keep track of each beast's confusion turns
-                    //determines how many moves beast will be confused for
+                   
                     defender.confusionCounter = UnityEngine.Random.Range(1,5);
                     Beast.BattleDialog.Enqueue($"{Beast.FoeString(defender)} {defender.Name} was confused");
-
-                    //beast.ConditionCounter = UnityEngine.Random.Range(1,5);
+              
                     Debug.Log("Count Howdy ");
-                    //NewBeastCondtions and NewBeastStatuses need to be on the instance of beast to keep track of each beast's conditions/statuses
+                    
                     defender.NewBeastConditions.Add(ConditionID.Confused);
-                    //beast.ModifiedStats[StatID.Attack] = (int)Math.Round(.5 * beast.ModifiedStats[StatID.Attack], MidpointRounding.AwayFromZero);
+                    
                 },
                 OnBeforeMove = (Beast attacker, Beast defender) =>
                 {
