@@ -64,6 +64,7 @@ public class GameController : MonoBehaviour
             Debug.Log("OverWorld");
             if (Input.GetKeyDown(KeyCode.V))
             {
+                BattleSystemMB.BattleStateStack.Clear();
                 BattleSystemMB.WildBeast = Area.getBeastPerRoute(AreaID.Route101);
                 BattleSystemMB.BattleStateStack.Push(BattleState.StartBattle);
                 GameStateStack.Push(GameState.Battle);

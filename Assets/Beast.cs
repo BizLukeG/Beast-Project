@@ -340,7 +340,7 @@ public class Beast
 
             int randNum = UnityEngine.Random.Range(1, 101);
 
-            if (randNum >= moveUsed.Accuracy)
+            if (randNum > moveUsed.Accuracy)
             {
                 BattleDialog.Enqueue($"{FoeString(attacker)} {attacker.Name}'s attack missed");
             }
@@ -426,6 +426,29 @@ public class Beast
                     BattleDialog.Enqueue($"it was a critical hit!");
                     damage *= 2;
                 }
+
+
+            }
+
+            if (!statusConditionActivated)
+            {
+                if (randNum <= moveUsed.Accuracy && (moveUsed.Category == MoveCategory.Physical || moveUsed.Category == MoveCategory.Special))
+                {
+
+                    if (moveUsed.SecondaryEffectCategory == MoveCategory.Condition && !defender.NewBeastConditions.Contains(moveUsed.SecondaryEffectCondition))
+                    {
+                        ConditionDB.Conditions[moveUsed.SecondaryEffectCondition].OnSecondaryEffect(defender, attacker, moveUsed);
+                    }
+                    else if (moveUsed.SecondaryEffectCategory == MoveCategory.Status && defender.NewBeastStatuses.Count == 0)
+                    {
+                        StatusDB.Statuses[moveUsed.SecondaryEffectStatus].OnSecondaryEffect(defender, attacker, moveUsed);
+                    }
+
+                    
+                    if (damage <= 0) { damage = 1; }
+                        
+                }
+                else { damage = 0; }
             }
 
             if (effectiveness != 1)
@@ -433,25 +456,6 @@ public class Beast
                 string effectivenessPhrase = TypeChart.GetEffectivenessPhrase(effectiveness);
                 BattleDialog.Enqueue($"{effectivenessPhrase}");
             }
-
-            if (moveUsed.Category == MoveCategory.Physical || moveUsed.Category == MoveCategory.Special)
-            {
-
-                if (moveUsed.SecondaryEffectCategory == MoveCategory.Condition && !defender.NewBeastConditions.Contains(moveUsed.SecondaryEffectCondition))
-                {
-                    ConditionDB.Conditions[moveUsed.SecondaryEffectCondition].OnSecondaryEffect(defender, attacker, moveUsed);
-                }
-                else if (moveUsed.SecondaryEffectCategory == MoveCategory.Status && defender.NewBeastStatuses.Count == 0)
-                {
-                    StatusDB.Statuses[moveUsed.SecondaryEffectStatus].OnSecondaryEffect(defender, attacker, moveUsed);
-                }
-               
-
-                if (damage <= 0)
-                    damage = 1;
-            }
-            else { damage = 0; }
-
 
             defender.ModifiedStats[StatID.HP] -= damage;
         }

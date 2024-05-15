@@ -21,7 +21,7 @@ public class ConditionDB
     {
         //Beast have multiple conditions and can have conditions and statuses, but can't have multiple statuses at the same time
         
-        //beastBase to take values from 
+        
         {
             ConditionID.Confused,
             new Condition(){
@@ -57,13 +57,10 @@ public class ConditionDB
                     {
                         Debug.Log("OnBeforeMove2 ");
                         confusedNum = UnityEngine.Random.Range(1, 3); 
-                        //Debug.Log("confusedNum1 " + confusedNum);
-                        //Beast.BattleDialog.Enqueue($"{Beast.FoeString(beast)} {beast.Name} is {beast.Condition.ToString()}");
-                        //beast.ConditionCounter--;
+                        
                         if(confusedNum == 2)
                         {
                             Beast.ConfusionDamage = true;
-                            //Beast.statusConditionActivated = true;
                             Beast.BattleDialog.Enqueue($"{Beast.FoeString(attacker)} {attacker.Name} is confused");
                             Beast.BattleDialog.Enqueue($"{Beast.FoeString(attacker)} {attacker.Name} hurt itself in confusion");
                             return true;
@@ -124,9 +121,6 @@ public class ConditionDB
                     
                         Debug.Log("OnBeforeMove2 ");
                         confusedNum = UnityEngine.Random.Range(1, 3); 
-                        //Debug.Log("confusedNum1 " + confusedNum);
-                        //Beast.BattleDialog.Enqueue($"{Beast.FoeString(beast)} {beast.Name} is {beast.Condition.ToString()}");
-                        //beast.ConditionCounter--;
                         
                         Debug.Log("Speed atk " + attacker.ModifiedStats[StatID.Speed]);
                         Debug.Log("Speed def " + defender.ModifiedStats[StatID.Speed]);
