@@ -56,6 +56,8 @@ public class Beast
     public int AfterTurnDamage { get; set; } = 0;
     public string AfterTurnDamageName { get; set; }
     public static bool ConfusionDamage { get; set; }
+    public AbilityID Ability { get; set; }
+    public bool AbilityActivated { get; set; }
 
     public Beast()
     {
@@ -70,7 +72,7 @@ public class Beast
         createAllStats();
         createMoveSet(name, level);
         FrontSprite = Resources.Load<Sprite>($"Sprites/{name.ToString()} FrontSprite");
-
+        Ability = BeastBaseDB.BeastBases[name].Ability;
     }
 
     //public Beast CreateNewBeast(string name, int level, int maxBaseStats)
@@ -230,9 +232,12 @@ public class Beast
             defender = firstUnitToMove;
         }
 
-        
-
-            int damage = 0;
+        Debug.Log("while ability " + attacker.Ability);
+        //Check Ability
+        AbilityDB.Abilities[defender.Ability].OnCheckAbility(defender);
+        AbilityDB.Abilities[attacker.Ability].OnCheckAbility(attacker);
+   
+        int damage = 0;
         float effectiveness = 1;
         //int confusedNum = 0;
         bool IsBeforeMoveActivated = false;
@@ -449,6 +454,25 @@ public class Beast
                         
                 }
                 else { damage = 0; }
+
+                if (randNum <= moveUsed.Accuracy && moveUsed.Category == MoveCategory.Heal)
+                {
+                    if(attacker.ModifiedStats[StatID.HP] == attacker.Stats[StatID.HP])
+                    {
+                        BattleDialog.Enqueue($"{FoeString(attacker)} {attacker.Name} is already at full health");
+                    }
+                    else
+                    {
+                        attacker.ModifiedStats[StatID.HP] += (int)Math.Round(attacker.Stats[StatID.HP] * moveUsed.HealPercent);
+                        if (attacker.ModifiedStats[StatID.HP] > attacker.Stats[StatID.HP])
+                        {
+                            attacker.ModifiedStats[StatID.HP] = attacker.Stats[StatID.HP];
+                        }
+                        BattleDialog.Enqueue($"{FoeString(attacker)} {attacker.Name}'s health has been restored");
+                    }
+        
+                }
+                
             }
 
             if (effectiveness != 1)
@@ -474,6 +498,8 @@ public class Beast
         if(attacker.confusionCounter != 0) attacker.confusionCounter--;
         statusConditionActivated = false;
 
+        AbilityDB.Abilities[defender.Ability].OnCheckAbility(defender);
+        AbilityDB.Abilities[defender.Ability].OnCheckAbility(attacker);
 
         return effectiveness;
 

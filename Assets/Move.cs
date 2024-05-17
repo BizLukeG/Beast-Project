@@ -23,6 +23,7 @@ public class Move
     public ConditionID SecondaryEffectCondition { get; set; }
     public MoveCategory SecondaryEffectCategory { get; set; }
     public int SecondaryEffectChance { get; set; }
+    public double HealPercent { get; set; }
 
     public Move()
     {

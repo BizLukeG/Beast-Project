@@ -31,12 +31,14 @@ public class Area
     {
         System.Random r = new System.Random();
         int rLevel = r.Next(AreaDB.Areas[Route].LevelRange[0], AreaDB.Areas[Route].LevelRange[1]);
+        //needs to be changed for needs of specific routes (getrandomavailablebeasts)
         int rBeastIndex = r.Next(0, Enum.GetNames(typeof(BeastID)).Length);
         Debug.Log("NameIDLength " + Enum.GetNames(typeof(BeastID)).Length);
         Debug.Log("rBeastIndex " + rBeastIndex);
         Debug.Log("BeastID2 " + (BeastID)rBeastIndex);
         Debug.Log("BeastName " + BeastBaseDB.BeastBases[(BeastID)rBeastIndex].Name);
-        Beast beast = new Beast(BeastID.Pugba, rLevel, BeastBaseDB.BeastBases[(BeastID)rBeastIndex].MaxBaseStats);
+        Debug.Log("BeastAbility " + BeastBaseDB.BeastBases[(BeastID)rBeastIndex].Ability);
+        Beast beast = new Beast(BeastID.Pugba, rLevel, BeastBaseDB.BeastBases[/*(BeastID)rBeastIndex*/BeastID.Pugba].MaxBaseStats);
         //BeastBaseDB.BeastBases[(BeastID)rBeastIndex].Name
 
         return beast;

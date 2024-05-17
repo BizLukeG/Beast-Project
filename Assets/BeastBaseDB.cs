@@ -47,11 +47,12 @@ public class BeastBaseDB : MonoBehaviour
                 //Name = "Pugba",
                 FrontSprite = Resources.Load<Sprite>("Sprites/Brown"),
                 MaxBaseStats = 200,
+                Ability = AbilityID.Blaze,
                 Typing1 = Typing.Rock,
                 Typing2 = Typing.None,
                 LearnSet = new Dictionary<int, MoveID>()
                 {
-                    { 1, MoveID./*Smack*/Bite }, {3, MoveID.Pollute}, {4, MoveID.Scorch}, {5, MoveID.PoisonSting}/*, {5, MoveID.LeafStorm},  {6, MoveID.FlameWheel}, {7, MoveID.RockSlide}*/
+                    { 1, MoveID./*Smack*/Bite }, {3, MoveID.Replenish}, {4, MoveID.Scorch}, {5, MoveID.PoisonSting}/*, {5, MoveID.LeafStorm},  {6, MoveID.FlameWheel}, {7, MoveID.RockSlide}*/
 
                 }
             }

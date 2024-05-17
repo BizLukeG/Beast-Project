@@ -43,6 +43,7 @@ public class GameController : MonoBehaviour
         BeastBaseDB.Init();
         MoveDB.Init();
         ConditionDB.Init();
+        AbilityDB.Init();
         Debug.Log("Howdy");
 
 
