@@ -57,6 +57,7 @@ public class ActionSelector : MonoBehaviour
             else if (currentAction == 3)
             {
                 // Run
+                BattleSystemMB.BattleStateStack.Push(BattleState.BattleOver);
                 //StartCoroutine(RunTurns(BattleAction.Run));
             }
 

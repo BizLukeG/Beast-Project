@@ -54,7 +54,7 @@ public class MoveDB
         {MoveID.Scorch, new Move(){ Power = 0, Accuracy = 80, Typing = Typing.Sacred, Category = MoveCategory.Status, Status = StatusID.Burned}},
         {MoveID.ConfuseRay, new Move(){ Power = 0, Accuracy = 100, Typing = Typing.Native, Category = MoveCategory.Condition, Condition = ConditionID.Confused}},
         {MoveID.ThunderWave, new Move(){ Power = 0, Accuracy = 100, Typing = Typing.Static, Category = MoveCategory.Status, Status = StatusID.Paralyzed}},
-        {MoveID.Bite, new Move(){ Power = 50, Accuracy = 90, Typing = Typing.Corrupt, Category = MoveCategory.Physical, SecondaryEffectCategory = MoveCategory.Condition, SecondaryEffectCondition = ConditionID.Flinched, SecondaryEffectChance = 50}},
+        {MoveID.Bite, new Move(){ Power = 500, Accuracy = 90, Typing = Typing.Corrupt, Category = MoveCategory.Physical, SecondaryEffectCategory = MoveCategory.Condition, SecondaryEffectCondition = ConditionID.Flinched, SecondaryEffectChance = 50}},
         {MoveID.SleepPowder, new Move(){ Power = 0, Accuracy = 100, Typing = Typing.Nature, Category = MoveCategory.Status, Status = StatusID.Asleep}},
         {MoveID.Attract, new Move(){ Power = 0, Accuracy = 100, Typing = Typing.Nature, Category = MoveCategory.Condition, Condition = ConditionID.Enamored}},
         {MoveID.Freeze, new Move(){ Power = 0, Accuracy = 100, Typing = Typing.Nature, Category = MoveCategory.Status, Status = StatusID.Frozen}},

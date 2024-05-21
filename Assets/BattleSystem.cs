@@ -5,7 +5,7 @@ using System;
 
 public enum BattleState
 {
-    StartBattle, Typing, RunMoves, Hold, FinishDialog, ActionSelection, MoveSelection, ExecuteMoves, Dialog, BattleOver
+    StartBattle, Typing, RunMoves, Hold, FinishDialog, ActionSelection, MoveSelection, ExecuteMoves, Dialog, BattleOver, Run
 }
 
 public class BattleSystem : MonoBehaviour
@@ -84,6 +84,8 @@ public class BattleSystem : MonoBehaviour
                 
 
             GameController.GameStateStack.Pop();
+            ActionSelectorMB.gameObject.SetActive(false);
+            MoveSelectorMB.gameObject.SetActive(false);
             Debug.Log("Does this ever get called??");
         }
         else if (BattleStateStack.Peek() == BattleState.Hold)
@@ -96,6 +98,11 @@ public class BattleSystem : MonoBehaviour
             }
             
         }
+        //else if (BattleStateStack.Peek() == BattleState.Run)
+        //{
+            
+
+        //}
 
 
     }

@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 780.8
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Git for Unity
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 64
+  controlID: 39
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -395,7 +395,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -461,7 +461,7 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: b2300000
+      m_SelectedIDs: 
       m_LastClickedID: 0
       m_ExpandedIDs: 1afbffff
       m_RenameOverlay:
@@ -507,9 +507,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 302.4
+    x: 300
     y: 73.6
-    width: 919.6
+    width: 906
     height: 419
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -1100,10 +1100,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 0
-    y: 513.60004
-    width: 1207
-    height: 269.8
+    x: 7.2000003
+    y: 512
+    width: 1195.8
+    height: 264.2
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1134,9 +1134,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1224
+    x: 1208
     y: 73.6
-    width: 311
+    width: 327
     height: 709.8
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -1254,61 +1254,11 @@ MonoBehaviour:
         isContainer: 0
         isCollapsed: 0
         isHidden: 0
-        isActive: 0
-        treeIsCheckable: 0
-        checkState: 0
-      - path: battlesystem-features
-        label: battlesystem-features
-        level: 1
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 0
-        checkState: 0
-      - path: Beasts-feature
-        label: Beasts-feature
-        level: 1
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 0
-        checkState: 0
-      - path: create-moves
-        label: create-moves
-        level: 1
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 0
-        checkState: 0
-      - path: individual-beast
-        label: individual-beast
-        level: 1
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 0
-        checkState: 0
-      - path: move-conditions-effects
-        label: move-conditions-effects
-        level: 1
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
         isActive: 1
         treeIsCheckable: 0
         checkState: 0
-      - path: move-effects-queue
-        label: move-effects-queue
+      - path: hp-animations
+        label: hp-animations
         level: 1
         isFolder: 0
         isContainer: 0
@@ -1317,28 +1267,8 @@ MonoBehaviour:
         isActive: 0
         treeIsCheckable: 0
         checkState: 0
-      - path: move-list-feature
-        label: move-list-feature
-        level: 1
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 0
-        checkState: 0
-      - path: moves-feature
-        label: moves-feature
-        level: 1
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 0
-        checkState: 0
-      - path: refactor-beast-organization
-        label: refactor-beast-organization
+      - path: real-backup
+        label: real-backup
         level: 1
         isFolder: 0
         isContainer: 0
@@ -1358,8 +1288,8 @@ MonoBehaviour:
         treeIsCheckable: 0
         checkState: 0
       selectedNode:
-        path: battlesystem-features
-        label: battlesystem-features
+        path: switch-to-monobehaviour-system
+        label: switch-to-monobehaviour-system
         level: 1
         isFolder: 0
         isContainer: 0
@@ -1474,6 +1404,16 @@ MonoBehaviour:
         isActive: 0
         treeIsCheckable: 0
         checkState: 0
+      - path: origin/move-conditions-effects
+        label: move-conditions-effects
+        level: 2
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 0
+        checkState: 0
       - path: origin/move-list-feature
         label: move-list-feature
         level: 2
@@ -1486,6 +1426,16 @@ MonoBehaviour:
         checkState: 0
       - path: origin/moves-feature
         label: moves-feature
+        level: 2
+        isFolder: 0
+        isContainer: 0
+        isCollapsed: 0
+        isHidden: 0
+        isActive: 0
+        treeIsCheckable: 0
+        checkState: 0
+      - path: origin/real-backup
+        label: real-backup
         level: 2
         isFolder: 0
         isContainer: 0
@@ -1531,14 +1481,14 @@ MonoBehaviour:
     disableDelete: 0
     disableCreate: 0
     lastLocalAndRemoteBranchListChangedEvent:
-      updatedTimeString: 2024-05-09T16:46:29.484-05:00
+      updatedTimeString: 2024-05-17T18:12:40.859-05:00
       cacheType: 2
     lastCurrentBranchAndRemoteChange:
-      updatedTimeString: 2024-05-09T16:46:28.220-05:00
+      updatedTimeString: 2024-05-17T18:12:19.274-05:00
       cacheType: 1
     currentBranch:
-      name: move-conditions-effects
-      tracking: 
+      name: master
+      tracking: origin/master
     currentRemote:
       name: origin
       url: https://github.com/BizLukeG/Beast-Project
@@ -1550,24 +1500,10 @@ MonoBehaviour:
     localBranches:
     - name: master
       tracking: origin/master
-    - name: battlesystem-features
-      tracking: origin/battlesystem-features
-    - name: Beasts-feature
-      tracking: origin/Beasts-feature
-    - name: create-moves
-      tracking: origin/create-moves
-    - name: individual-beast
-      tracking: origin/individual-beast
-    - name: move-conditions-effects
+    - name: hp-animations
       tracking: 
-    - name: move-effects-queue
-      tracking: 
-    - name: move-list-feature
-      tracking: origin/move-list-feature
-    - name: moves-feature
-      tracking: origin/moves-feature
-    - name: refactor-beast-organization
-      tracking: origin/refactor-beast-organization
+    - name: real-backup
+      tracking: origin/real-backup
     - name: switch-to-monobehaviour-system
       tracking: origin/switch-to-monobehaviour-system
     remoteBranches:
@@ -1581,9 +1517,13 @@ MonoBehaviour:
       tracking: '[None]'
     - name: origin/master
       tracking: '[None]'
+    - name: origin/move-conditions-effects
+      tracking: '[None]'
     - name: origin/move-list-feature
       tracking: '[None]'
     - name: origin/moves-feature
+      tracking: '[None]'
+    - name: origin/real-backup
       tracking: '[None]'
     - name: origin/refactor-beast-organization
       tracking: '[None]'
@@ -1595,169 +1535,17 @@ MonoBehaviour:
     currentLocksHasUpdate: 0
     commitBody: 
     commitMessage: 
-    currentBranch: move-conditions-effects
+    currentBranch: master
     treeScroll: {x: 0, y: 0}
     treeChanges:
       assets:
-        keys:
-        - 00000000000000001000000000000000
-        - edba4aa813bdb2f48be8984d70e572c1
-        - 378577f87258f3543baec9c3953ae9a7
-        - 282da29a0635a3d49894ca2c053e457b
-        - 5996725764ab02b4f8b9f686f0460334
-        - 956202c8e1bf7404992f2399be208e39
-        - 287549f63ed225a4b88e96620af2e262
-        values:
-        - path: Assets
-          label: Assets
-          level: 0
-          isFolder: 1
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 0
-          isLocked: 0
-          gitStatusEntry:
-            path: 
-            fullPath: 
-            projectPath: 
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 0
-        - path: Assets\Ability.cs
-          label: Ability.cs
-          level: 1
-          isFolder: 0
-          isContainer: 1
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 0
-          isLocked: 0
-          gitStatusEntry:
-            path: Assets\Ability.cs
-            fullPath: D:\Unity\Beast-Project\Assets\Ability.cs
-            projectPath: Assets\Ability.cs
-            originalPath: 
-            indexStatus: 1
-            workTreeStatus: 1
-        - path: Assets\AbilityDB.cs
-          label: AbilityDB.cs
-          level: 1
-          isFolder: 0
-          isContainer: 1
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 0
-          isLocked: 0
-          gitStatusEntry:
-            path: Assets\AbilityDB.cs
-            fullPath: D:\Unity\Beast-Project\Assets\AbilityDB.cs
-            projectPath: Assets\AbilityDB.cs
-            originalPath: 
-            indexStatus: 1
-            workTreeStatus: 1
-        - path: Assets\Area.cs
-          label: Area.cs
-          level: 1
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 0
-          isLocked: 0
-          gitStatusEntry:
-            path: Assets\Area.cs
-            fullPath: D:\Unity\Beast-Project\Assets\Area.cs
-            projectPath: Assets\Area.cs
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 3
-        - path: Assets\Beast.cs
-          label: Beast.cs
-          level: 1
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 0
-          isLocked: 0
-          gitStatusEntry:
-            path: Assets\Beast.cs
-            fullPath: D:\Unity\Beast-Project\Assets\Beast.cs
-            projectPath: Assets\Beast.cs
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 3
-        - path: Assets\BeastBaseDB.cs
-          label: BeastBaseDB.cs
-          level: 1
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 0
-          isLocked: 0
-          gitStatusEntry:
-            path: Assets\BeastBaseDB.cs
-            fullPath: D:\Unity\Beast-Project\Assets\BeastBaseDB.cs
-            projectPath: Assets\BeastBaseDB.cs
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 3
-        - path: Assets\GameController.cs
-          label: GameController.cs
-          level: 1
-          isFolder: 0
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 0
-          isLocked: 0
-          gitStatusEntry:
-            path: Assets\GameController.cs
-            fullPath: D:\Unity\Beast-Project\Assets\GameController.cs
-            projectPath: Assets\GameController.cs
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 3
+        keys: []
+        values: []
       folders:
         keys:
-        - Assets
         - UserSettings
         - UserSettings\Layouts
         values:
-        - path: Assets
-          label: Assets
-          level: 0
-          isFolder: 1
-          isContainer: 0
-          isCollapsed: 0
-          isHidden: 0
-          isActive: 0
-          treeIsCheckable: 1
-          checkState: 0
-          isLocked: 0
-          gitStatusEntry:
-            path: 
-            fullPath: 
-            projectPath: 
-            originalPath: 
-            indexStatus: 0
-            workTreeStatus: 0
         - path: UserSettings
           label: UserSettings
           level: 0
@@ -1822,168 +1610,6 @@ MonoBehaviour:
           originalPath: 
           indexStatus: 0
           workTreeStatus: 0
-      - path: Assets
-        label: Assets
-        level: 0
-        isFolder: 1
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 0
-        isLocked: 0
-        gitStatusEntry:
-          path: 
-          fullPath: 
-          projectPath: 
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 0
-      - path: Assets\Ability.cs
-        label: Ability.cs
-        level: 1
-        isFolder: 0
-        isContainer: 1
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 0
-        isLocked: 0
-        gitStatusEntry:
-          path: Assets\Ability.cs
-          fullPath: D:\Unity\Beast-Project\Assets\Ability.cs
-          projectPath: Assets\Ability.cs
-          originalPath: 
-          indexStatus: 1
-          workTreeStatus: 1
-      - path: Assets\Ability.cs.meta
-        label: Ability.cs.meta
-        level: 2
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 0
-        isLocked: 0
-        gitStatusEntry:
-          path: Assets\Ability.cs.meta
-          fullPath: D:\Unity\Beast-Project\Assets\Ability.cs.meta
-          projectPath: Assets\Ability.cs.meta
-          originalPath: 
-          indexStatus: 1
-          workTreeStatus: 1
-      - path: Assets\AbilityDB.cs
-        label: AbilityDB.cs
-        level: 1
-        isFolder: 0
-        isContainer: 1
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 0
-        isLocked: 0
-        gitStatusEntry:
-          path: Assets\AbilityDB.cs
-          fullPath: D:\Unity\Beast-Project\Assets\AbilityDB.cs
-          projectPath: Assets\AbilityDB.cs
-          originalPath: 
-          indexStatus: 1
-          workTreeStatus: 1
-      - path: Assets\AbilityDB.cs.meta
-        label: AbilityDB.cs.meta
-        level: 2
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 0
-        isLocked: 0
-        gitStatusEntry:
-          path: Assets\AbilityDB.cs.meta
-          fullPath: D:\Unity\Beast-Project\Assets\AbilityDB.cs.meta
-          projectPath: Assets\AbilityDB.cs.meta
-          originalPath: 
-          indexStatus: 1
-          workTreeStatus: 1
-      - path: Assets\Area.cs
-        label: Area.cs
-        level: 1
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 0
-        isLocked: 0
-        gitStatusEntry:
-          path: Assets\Area.cs
-          fullPath: D:\Unity\Beast-Project\Assets\Area.cs
-          projectPath: Assets\Area.cs
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 3
-      - path: Assets\Beast.cs
-        label: Beast.cs
-        level: 1
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 0
-        isLocked: 0
-        gitStatusEntry:
-          path: Assets\Beast.cs
-          fullPath: D:\Unity\Beast-Project\Assets\Beast.cs
-          projectPath: Assets\Beast.cs
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 3
-      - path: Assets\BeastBaseDB.cs
-        label: BeastBaseDB.cs
-        level: 1
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 0
-        isLocked: 0
-        gitStatusEntry:
-          path: Assets\BeastBaseDB.cs
-          fullPath: D:\Unity\Beast-Project\Assets\BeastBaseDB.cs
-          projectPath: Assets\BeastBaseDB.cs
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 3
-      - path: Assets\GameController.cs
-        label: GameController.cs
-        level: 1
-        isFolder: 0
-        isContainer: 0
-        isCollapsed: 0
-        isHidden: 0
-        isActive: 0
-        treeIsCheckable: 1
-        checkState: 0
-        isLocked: 0
-        gitStatusEntry:
-          path: Assets\GameController.cs
-          fullPath: D:\Unity\Beast-Project\Assets\GameController.cs
-          projectPath: Assets\GameController.cs
-          originalPath: 
-          indexStatus: 0
-          workTreeStatus: 3
       - path: UserSettings
         label: UserSettings
         level: 0
@@ -2058,74 +1684,279 @@ MonoBehaviour:
           indexStatus: 0
           workTreeStatus: 0
     gitStatusEntries:
-    - path: Assets\Ability.cs
-      fullPath: D:\Unity\Beast-Project\Assets\Ability.cs
-      projectPath: Assets\Ability.cs
-      originalPath: 
-      indexStatus: 1
-      workTreeStatus: 1
-    - path: Assets\Ability.cs.meta
-      fullPath: D:\Unity\Beast-Project\Assets\Ability.cs.meta
-      projectPath: Assets\Ability.cs.meta
-      originalPath: 
-      indexStatus: 1
-      workTreeStatus: 1
-    - path: Assets\AbilityDB.cs
-      fullPath: D:\Unity\Beast-Project\Assets\AbilityDB.cs
-      projectPath: Assets\AbilityDB.cs
-      originalPath: 
-      indexStatus: 1
-      workTreeStatus: 1
-    - path: Assets\AbilityDB.cs.meta
-      fullPath: D:\Unity\Beast-Project\Assets\AbilityDB.cs.meta
-      projectPath: Assets\AbilityDB.cs.meta
-      originalPath: 
-      indexStatus: 1
-      workTreeStatus: 1
-    - path: Assets\Area.cs
-      fullPath: D:\Unity\Beast-Project\Assets\Area.cs
-      projectPath: Assets\Area.cs
-      originalPath: 
-      indexStatus: 0
-      workTreeStatus: 3
-    - path: Assets\Beast.cs
-      fullPath: D:\Unity\Beast-Project\Assets\Beast.cs
-      projectPath: Assets\Beast.cs
-      originalPath: 
-      indexStatus: 0
-      workTreeStatus: 3
-    - path: Assets\BeastBaseDB.cs
-      fullPath: D:\Unity\Beast-Project\Assets\BeastBaseDB.cs
-      projectPath: Assets\BeastBaseDB.cs
-      originalPath: 
-      indexStatus: 0
-      workTreeStatus: 3
-    - path: Assets\GameController.cs
-      fullPath: D:\Unity\Beast-Project\Assets\GameController.cs
-      projectPath: Assets\GameController.cs
-      originalPath: 
-      indexStatus: 0
-      workTreeStatus: 3
     - path: UserSettings\Layouts\default-2022.dwlt
       fullPath: D:\Unity\Beast-Project\UserSettings\Layouts\default-2022.dwlt
       projectPath: UserSettings\Layouts\default-2022.dwlt
       originalPath: 
       indexStatus: 0
       workTreeStatus: 3
-    changedFilesText: 9 changed files
+    changedFilesText: 1 changed file
     lastCurrentBranchChangedEvent:
-      updatedTimeString: 2024-05-16T18:49:02.472-05:00
+      updatedTimeString: 2024-05-17T18:12:19.274-05:00
       cacheType: 1
     lastStatusEntriesChangedEvent:
-      updatedTimeString: 2024-05-16T18:49:04.658-05:00
+      updatedTimeString: 2024-05-17T18:12:21.140-05:00
       cacheType: 6
     lastLocksChangedEvent:
-      updatedTimeString: 2024-05-16T17:53:47.902-05:00
+      updatedTimeString: 2024-05-17T18:12:21.250-05:00
       cacheType: 7
   historyView:
     currentLogHasUpdate: 0
     currentTrackingStatusHasUpdate: 0
     logEntries:
+    - commitID: 742efc04c3b2a46f1c40f27f486d467834467cc5
+      mergeA: 
+      mergeB: 
+      authorName: BizLukeG
+      authorEmail: bizlukeg@gmail.com
+      commitEmail: bizlukeg@gmail.com
+      commitName: BizLukeG
+      summary: Added Ability DB and healing
+      description: 
+      timeString: 2024-05-17T01:39:39.000-05:00
+      commitTimeString: 2024-05-17T01:39:39.000-05:00
+      changes:
+      - path: Assets\Ability.cs
+        fullPath: D:\Unity\Beast-Project\Assets\Ability.cs
+        projectPath: Assets\Ability.cs
+        originalPath: 
+        indexStatus: 4
+        workTreeStatus: 0
+      - path: Assets\Ability.cs.meta
+        fullPath: D:\Unity\Beast-Project\Assets\Ability.cs.meta
+        projectPath: Assets\Ability.cs.meta
+        originalPath: 
+        indexStatus: 4
+        workTreeStatus: 0
+      - path: Assets\AbilityDB.cs
+        fullPath: D:\Unity\Beast-Project\Assets\AbilityDB.cs
+        projectPath: Assets\AbilityDB.cs
+        originalPath: 
+        indexStatus: 4
+        workTreeStatus: 0
+      - path: Assets\AbilityDB.cs.meta
+        fullPath: D:\Unity\Beast-Project\Assets\AbilityDB.cs.meta
+        projectPath: Assets\AbilityDB.cs.meta
+        originalPath: 
+        indexStatus: 4
+        workTreeStatus: 0
+      - path: Assets\Area.cs
+        fullPath: D:\Unity\Beast-Project\Assets\Area.cs
+        projectPath: Assets\Area.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\Beast.cs
+        fullPath: D:\Unity\Beast-Project\Assets\Beast.cs
+        projectPath: Assets\Beast.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\BeastBaseDB.cs
+        fullPath: D:\Unity\Beast-Project\Assets\BeastBaseDB.cs
+        projectPath: Assets\BeastBaseDB.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\GameController.cs
+        fullPath: D:\Unity\Beast-Project\Assets\GameController.cs
+        projectPath: Assets\GameController.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\Move.cs
+        fullPath: D:\Unity\Beast-Project\Assets\Move.cs
+        projectPath: Assets\Move.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\MoveDB.cs
+        fullPath: D:\Unity\Beast-Project\Assets\MoveDB.cs
+        projectPath: Assets\MoveDB.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: UserSettings\Layouts\default-2022.dwlt
+        fullPath: D:\Unity\Beast-Project\UserSettings\Layouts\default-2022.dwlt
+        projectPath: UserSettings\Layouts\default-2022.dwlt
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+    - commitID: 71f9d311fef4b4b9938976de50b292aff9f48fe8
+      mergeA: 
+      mergeB: 
+      authorName: BizLukeG
+      authorEmail: bizlukeg@gmail.com
+      commitEmail: bizlukeg@gmail.com
+      commitName: BizLukeG
+      summary: Fixed Bugs Starting Battle after Battle & Missed Attacks
+      description: Missed Attacks were still doing damage and having secondary conditions
+        happen.
+      timeString: 2024-05-15T00:56:55.000-05:00
+      commitTimeString: 2024-05-15T00:56:55.000-05:00
+      changes:
+      - path: Assets\BattleSystem.cs
+        fullPath: D:\Unity\Beast-Project\Assets\BattleSystem.cs
+        projectPath: Assets\BattleSystem.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\Beast.cs
+        fullPath: D:\Unity\Beast-Project\Assets\Beast.cs
+        projectPath: Assets\Beast.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\ConditionDB.cs
+        fullPath: D:\Unity\Beast-Project\Assets\ConditionDB.cs
+        projectPath: Assets\ConditionDB.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\GameController.cs
+        fullPath: D:\Unity\Beast-Project\Assets\GameController.cs
+        projectPath: Assets\GameController.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\MoveDB.cs
+        fullPath: D:\Unity\Beast-Project\Assets\MoveDB.cs
+        projectPath: Assets\MoveDB.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: UserSettings\Layouts\default-2022.dwlt
+        fullPath: D:\Unity\Beast-Project\UserSettings\Layouts\default-2022.dwlt
+        projectPath: UserSettings\Layouts\default-2022.dwlt
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+    - commitID: 052cad5249f514bb3a2d5922e2d8fc44cb4b1766
+      mergeA: 
+      mergeB: 
+      authorName: BizLukeG
+      authorEmail: bizlukeg@gmail.com
+      commitEmail: bizlukeg@gmail.com
+      commitName: BizLukeG
+      summary: Implement Attack Miss and Attack Crit
+      description: 
+      timeString: 2024-05-13T21:47:43.000-05:00
+      commitTimeString: 2024-05-13T21:47:43.000-05:00
+      changes:
+      - path: Assets\Beast.cs
+        fullPath: D:\Unity\Beast-Project\Assets\Beast.cs
+        projectPath: Assets\Beast.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\BeastBaseDB.cs
+        fullPath: D:\Unity\Beast-Project\Assets\BeastBaseDB.cs
+        projectPath: Assets\BeastBaseDB.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\ConditionDB.cs
+        fullPath: D:\Unity\Beast-Project\Assets\ConditionDB.cs
+        projectPath: Assets\ConditionDB.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\MoveDB.cs
+        fullPath: D:\Unity\Beast-Project\Assets\MoveDB.cs
+        projectPath: Assets\MoveDB.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\StatusDB.cs
+        fullPath: D:\Unity\Beast-Project\Assets\StatusDB.cs
+        projectPath: Assets\StatusDB.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+    - commitID: 4c3791b07fd7e94970b4b7ebbb8fc622262e5da4
+      mergeA: 
+      mergeB: 
+      authorName: BizLukeG
+      authorEmail: bizlukeg@gmail.com
+      commitEmail: bizlukeg@gmail.com
+      commitName: BizLukeG
+      summary: Created Poison
+      description: 
+      timeString: 2024-05-13T00:19:47.000-05:00
+      commitTimeString: 2024-05-13T00:19:47.000-05:00
+      changes:
+      - path: Assets\BeastBaseDB.cs
+        fullPath: D:\Unity\Beast-Project\Assets\BeastBaseDB.cs
+        projectPath: Assets\BeastBaseDB.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\MoveDB.cs
+        fullPath: D:\Unity\Beast-Project\Assets\MoveDB.cs
+        projectPath: Assets\MoveDB.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\StatusDB.cs
+        fullPath: D:\Unity\Beast-Project\Assets\StatusDB.cs
+        projectPath: Assets\StatusDB.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+    - commitID: 34465dfc8c161017a81f37559ad5367ca1ee8e0d
+      mergeA: 
+      mergeB: 
+      authorName: BizLukeG
+      authorEmail: bizlukeg@gmail.com
+      commitEmail: bizlukeg@gmail.com
+      commitName: BizLukeG
+      summary: Implement Confusion and Bite damage
+      description: 
+      timeString: 2024-05-12T22:36:17.000-05:00
+      commitTimeString: 2024-05-12T22:36:17.000-05:00
+      changes:
+      - path: Assets\Beast.cs
+        fullPath: D:\Unity\Beast-Project\Assets\Beast.cs
+        projectPath: Assets\Beast.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\BeastBaseDB.cs
+        fullPath: D:\Unity\Beast-Project\Assets\BeastBaseDB.cs
+        projectPath: Assets\BeastBaseDB.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\Condition.cs
+        fullPath: D:\Unity\Beast-Project\Assets\Condition.cs
+        projectPath: Assets\Condition.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\ConditionDB.cs
+        fullPath: D:\Unity\Beast-Project\Assets\ConditionDB.cs
+        projectPath: Assets\ConditionDB.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\MoveDB.cs
+        fullPath: D:\Unity\Beast-Project\Assets\MoveDB.cs
+        projectPath: Assets\MoveDB.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\Status.cs
+        fullPath: D:\Unity\Beast-Project\Assets\Status.cs
+        projectPath: Assets\Status.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
+      - path: Assets\StatusDB.cs
+        fullPath: D:\Unity\Beast-Project\Assets\StatusDB.cs
+        projectPath: Assets\StatusDB.cs
+        originalPath: 
+        indexStatus: 3
+        workTreeStatus: 0
     - commitID: 5befecbba288e4780e35bf69c1f60eac669c6673
       mergeA: 
       mergeB: 
@@ -4736,16 +4567,269 @@ MonoBehaviour:
         originalPath: 
         indexStatus: 4
         workTreeStatus: 0
-    statusAhead: 1
+    statusAhead: 0
     lastLogChangedEvent:
-      updatedTimeString: 2024-05-10T22:51:48.126-05:00
+      updatedTimeString: 2024-05-17T18:12:41.900-05:00
       cacheType: 3
     lastTrackingStatusChangedEvent:
-      updatedTimeString: 2024-05-10T22:51:48.091-05:00
+      updatedTimeString: 2024-05-17T18:12:41.905-05:00
       cacheType: 5
     historyControl:
-      scroll: {x: 0, y: 240}
+      scroll: {x: 0, y: 80}
       entries:
+      - commitID: 742efc04c3b2a46f1c40f27f486d467834467cc5
+        mergeA: 
+        mergeB: 
+        authorName: BizLukeG
+        authorEmail: bizlukeg@gmail.com
+        commitEmail: bizlukeg@gmail.com
+        commitName: BizLukeG
+        summary: Added Ability DB and healing
+        description: 
+        timeString: 2024-05-17T01:39:39.000-05:00
+        commitTimeString: 2024-05-17T01:39:39.000-05:00
+        changes:
+        - path: Assets\Ability.cs
+          fullPath: D:\Unity\Beast-Project\Assets\Ability.cs
+          projectPath: Assets\Ability.cs
+          originalPath: 
+          indexStatus: 4
+          workTreeStatus: 0
+        - path: Assets\Ability.cs.meta
+          fullPath: D:\Unity\Beast-Project\Assets\Ability.cs.meta
+          projectPath: Assets\Ability.cs.meta
+          originalPath: 
+          indexStatus: 4
+          workTreeStatus: 0
+        - path: Assets\AbilityDB.cs
+          fullPath: D:\Unity\Beast-Project\Assets\AbilityDB.cs
+          projectPath: Assets\AbilityDB.cs
+          originalPath: 
+          indexStatus: 4
+          workTreeStatus: 0
+        - path: Assets\AbilityDB.cs.meta
+          fullPath: D:\Unity\Beast-Project\Assets\AbilityDB.cs.meta
+          projectPath: Assets\AbilityDB.cs.meta
+          originalPath: 
+          indexStatus: 4
+          workTreeStatus: 0
+        - path: Assets\Area.cs
+          fullPath: D:\Unity\Beast-Project\Assets\Area.cs
+          projectPath: Assets\Area.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\Beast.cs
+          fullPath: D:\Unity\Beast-Project\Assets\Beast.cs
+          projectPath: Assets\Beast.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\BeastBaseDB.cs
+          fullPath: D:\Unity\Beast-Project\Assets\BeastBaseDB.cs
+          projectPath: Assets\BeastBaseDB.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\GameController.cs
+          fullPath: D:\Unity\Beast-Project\Assets\GameController.cs
+          projectPath: Assets\GameController.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\Move.cs
+          fullPath: D:\Unity\Beast-Project\Assets\Move.cs
+          projectPath: Assets\Move.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\MoveDB.cs
+          fullPath: D:\Unity\Beast-Project\Assets\MoveDB.cs
+          projectPath: Assets\MoveDB.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: UserSettings\Layouts\default-2022.dwlt
+          fullPath: D:\Unity\Beast-Project\UserSettings\Layouts\default-2022.dwlt
+          projectPath: UserSettings\Layouts\default-2022.dwlt
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+      - commitID: 71f9d311fef4b4b9938976de50b292aff9f48fe8
+        mergeA: 
+        mergeB: 
+        authorName: BizLukeG
+        authorEmail: bizlukeg@gmail.com
+        commitEmail: bizlukeg@gmail.com
+        commitName: BizLukeG
+        summary: Fixed Bugs Starting Battle after Battle & Missed Attacks
+        description: Missed Attacks were still doing damage and having secondary
+          conditions happen.
+        timeString: 2024-05-15T00:56:55.000-05:00
+        commitTimeString: 2024-05-15T00:56:55.000-05:00
+        changes:
+        - path: Assets\BattleSystem.cs
+          fullPath: D:\Unity\Beast-Project\Assets\BattleSystem.cs
+          projectPath: Assets\BattleSystem.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\Beast.cs
+          fullPath: D:\Unity\Beast-Project\Assets\Beast.cs
+          projectPath: Assets\Beast.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\ConditionDB.cs
+          fullPath: D:\Unity\Beast-Project\Assets\ConditionDB.cs
+          projectPath: Assets\ConditionDB.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\GameController.cs
+          fullPath: D:\Unity\Beast-Project\Assets\GameController.cs
+          projectPath: Assets\GameController.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\MoveDB.cs
+          fullPath: D:\Unity\Beast-Project\Assets\MoveDB.cs
+          projectPath: Assets\MoveDB.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: UserSettings\Layouts\default-2022.dwlt
+          fullPath: D:\Unity\Beast-Project\UserSettings\Layouts\default-2022.dwlt
+          projectPath: UserSettings\Layouts\default-2022.dwlt
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+      - commitID: 052cad5249f514bb3a2d5922e2d8fc44cb4b1766
+        mergeA: 
+        mergeB: 
+        authorName: BizLukeG
+        authorEmail: bizlukeg@gmail.com
+        commitEmail: bizlukeg@gmail.com
+        commitName: BizLukeG
+        summary: Implement Attack Miss and Attack Crit
+        description: 
+        timeString: 2024-05-13T21:47:43.000-05:00
+        commitTimeString: 2024-05-13T21:47:43.000-05:00
+        changes:
+        - path: Assets\Beast.cs
+          fullPath: D:\Unity\Beast-Project\Assets\Beast.cs
+          projectPath: Assets\Beast.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\BeastBaseDB.cs
+          fullPath: D:\Unity\Beast-Project\Assets\BeastBaseDB.cs
+          projectPath: Assets\BeastBaseDB.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\ConditionDB.cs
+          fullPath: D:\Unity\Beast-Project\Assets\ConditionDB.cs
+          projectPath: Assets\ConditionDB.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\MoveDB.cs
+          fullPath: D:\Unity\Beast-Project\Assets\MoveDB.cs
+          projectPath: Assets\MoveDB.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\StatusDB.cs
+          fullPath: D:\Unity\Beast-Project\Assets\StatusDB.cs
+          projectPath: Assets\StatusDB.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+      - commitID: 4c3791b07fd7e94970b4b7ebbb8fc622262e5da4
+        mergeA: 
+        mergeB: 
+        authorName: BizLukeG
+        authorEmail: bizlukeg@gmail.com
+        commitEmail: bizlukeg@gmail.com
+        commitName: BizLukeG
+        summary: Created Poison
+        description: 
+        timeString: 2024-05-13T00:19:47.000-05:00
+        commitTimeString: 2024-05-13T00:19:47.000-05:00
+        changes:
+        - path: Assets\BeastBaseDB.cs
+          fullPath: D:\Unity\Beast-Project\Assets\BeastBaseDB.cs
+          projectPath: Assets\BeastBaseDB.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\MoveDB.cs
+          fullPath: D:\Unity\Beast-Project\Assets\MoveDB.cs
+          projectPath: Assets\MoveDB.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\StatusDB.cs
+          fullPath: D:\Unity\Beast-Project\Assets\StatusDB.cs
+          projectPath: Assets\StatusDB.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+      - commitID: 34465dfc8c161017a81f37559ad5367ca1ee8e0d
+        mergeA: 
+        mergeB: 
+        authorName: BizLukeG
+        authorEmail: bizlukeg@gmail.com
+        commitEmail: bizlukeg@gmail.com
+        commitName: BizLukeG
+        summary: Implement Confusion and Bite damage
+        description: 
+        timeString: 2024-05-12T22:36:17.000-05:00
+        commitTimeString: 2024-05-12T22:36:17.000-05:00
+        changes:
+        - path: Assets\Beast.cs
+          fullPath: D:\Unity\Beast-Project\Assets\Beast.cs
+          projectPath: Assets\Beast.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\BeastBaseDB.cs
+          fullPath: D:\Unity\Beast-Project\Assets\BeastBaseDB.cs
+          projectPath: Assets\BeastBaseDB.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\Condition.cs
+          fullPath: D:\Unity\Beast-Project\Assets\Condition.cs
+          projectPath: Assets\Condition.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\ConditionDB.cs
+          fullPath: D:\Unity\Beast-Project\Assets\ConditionDB.cs
+          projectPath: Assets\ConditionDB.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\MoveDB.cs
+          fullPath: D:\Unity\Beast-Project\Assets\MoveDB.cs
+          projectPath: Assets\MoveDB.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\Status.cs
+          fullPath: D:\Unity\Beast-Project\Assets\Status.cs
+          projectPath: Assets\Status.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
+        - path: Assets\StatusDB.cs
+          fullPath: D:\Unity\Beast-Project\Assets\StatusDB.cs
+          projectPath: Assets\StatusDB.cs
+          originalPath: 
+          indexStatus: 3
+          workTreeStatus: 0
       - commitID: 5befecbba288e4780e35bf69c1f60eac669c6673
         mergeA: 
         mergeB: 
@@ -7359,7 +7443,7 @@ MonoBehaviour:
           originalPath: 
           indexStatus: 4
           workTreeStatus: 0
-      statusAhead: 1
+      statusAhead: 0
       selectedIndex: -1
     selectedEntry:
       commitID: 
@@ -7524,7 +7608,7 @@ MonoBehaviour:
       changingManually: 0
     hasRemote: 1
     lastCurrentRemoteChangedEvent:
-      updatedTimeString: 2024-05-09T16:46:28.220-05:00
+      updatedTimeString: 2024-05-17T17:55:48.664-05:00
       cacheType: 1
     newRepositoryRemoteUrl: https://github.com/BizLukeG/Beast-Project
     repositoryRemoteName: origin
@@ -7537,7 +7621,7 @@ MonoBehaviour:
       newGitEmail: bizlukeg@gmail.com
       needsSaving: 0
       lastCheckUserChangedEvent:
-        updatedTimeString: 2024-05-09T16:47:47.445-05:00
+        updatedTimeString: 2024-05-17T17:55:58.684-05:00
         cacheType: 8
     webTimeout: 100000
     gitTimeout: 5000
@@ -7566,16 +7650,22 @@ MonoBehaviour:
         gitFileStatus: 0
         lockedAt: 1 Jan 0001, 00:00
     lastCurrentRemoteChangedEvent:
-      updatedTimeString: 2024-05-09T18:39:17.576-05:00
+      updatedTimeString: 2024-05-17T17:55:48.664-05:00
       cacheType: 1
     lastLocksChangedEvent:
-      updatedTimeString: 0001-01-01T00:00:00.000+00:00
+      updatedTimeString: 2024-05-17T17:55:27.737-05:00
       cacheType: 7
     lastStatusEntriesChangedEvent:
-      updatedTimeString: 2024-05-09T18:46:18.409-05:00
+      updatedTimeString: 2024-05-17T17:55:49.524-05:00
       cacheType: 6
     lockedFiles: []
-    gitStatusEntries: []
+    gitStatusEntries:
+    - path: UserSettings\Layouts\default-2022.dwlt
+      fullPath: D:\Unity\Beast-Project\UserSettings\Layouts\default-2022.dwlt
+      projectPath: UserSettings\Layouts\default-2022.dwlt
+      originalPath: 
+      indexStatus: 0
+      workTreeStatus: 3
     currentUsername: 
     unlockFileMenuContent:
       m_Text: Release Lock
@@ -7587,14 +7677,14 @@ MonoBehaviour:
       m_Tooltip: 
   hasRemote: 1
   currentRemoteName: origin
-  currentBranch: move-conditions-effects
+  currentBranch: master
   currentRemoteUrl: https://github.com/BizLukeG/Beast-Project
   statusAhead: 0
   statusBehind: 0
   hasItemsToCommit: 1
   isTrackingRemoteBranch: 1
   currentBranchContent:
-    m_Text: move-conditions-effects
+    m_Text: master
     m_Image: {fileID: 0}
     m_Tooltip: Active branch
   currentRemoteUrlContent:
@@ -7602,13 +7692,13 @@ MonoBehaviour:
     m_Image: {fileID: 0}
     m_Tooltip: Url of the origin remote
   lastCurrentBranchAndRemoteChangedEvent:
-    updatedTimeString: 2024-05-16T18:49:02.472-05:00
+    updatedTimeString: 2024-05-17T18:12:19.274-05:00
     cacheType: 1
   lastTrackingStatusChangedEvent:
-    updatedTimeString: 2024-05-16T18:49:04.667-05:00
+    updatedTimeString: 2024-05-17T18:12:41.905-05:00
     cacheType: 5
   lastStatusEntriesChangedEvent:
-    updatedTimeString: 2024-05-16T18:49:04.658-05:00
+    updatedTimeString: 2024-05-17T18:12:21.140-05:00
     cacheType: 6
   pullButtonContent:
     m_Text: Pull
