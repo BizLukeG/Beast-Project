@@ -24,6 +24,7 @@ public class BattleSystem : MonoBehaviour
     public BattleDialogBox BattleDialogBoxMB;
     public ActionSelector ActionSelectorMB;
     public MoveSelector MoveSelectorMB;
+    public HPBar HPBarMB;
     //public Queue<string> BattleDialog { set; get; } = new Queue<string>();
 
 
@@ -46,6 +47,7 @@ public class BattleSystem : MonoBehaviour
         BattleDialogBoxMB = GameObject.Find("Battle DialogBox").GetComponent<BattleDialogBox>();
         ActionSelectorMB = GameObject.Find("Battle Action Selector").GetComponent<ActionSelector>();
         MoveSelectorMB = GameObject.Find("Battle Move Selector").GetComponent<MoveSelector>();
+        HPBarMB = GameObject.Find("HP Bar").GetComponent<HPBar>();
     }
 
     public void HandleGameStateBattle()
@@ -117,7 +119,9 @@ public class BattleSystem : MonoBehaviour
             //WildBeast = Area.getBeastPerRoute(AreaID.Route101);
             PlayerActiveBeast = Player.Party[0];
 
-            
+            Debug.Log("HP Ratio " + (float)PlayerActiveBeast.ModifiedStats[StatID.HP] / PlayerActiveBeast.Stats[StatID.HP]);
+            HPBarMB.SetHP((float)PlayerActiveBeast.ModifiedStats[StatID.HP] / PlayerActiveBeast.Stats[StatID.HP]);
+            HPBarMB.SetEnemyHP((float)WildBeast.ModifiedStats[StatID.HP] / WildBeast.Stats[StatID.HP]);
             BattleUnitUI.SetupEnemy(WildBeast);
             BattleUnitUI.SetupPlayer(PlayerActiveBeast);
 
@@ -192,6 +196,15 @@ public class BattleSystem : MonoBehaviour
         }
 
         //displays stat change
+        //setHP
+        //Debug.Log("HP Ratio " + PlayerActiveBeast.ModifiedStats[StatID.HP] / PlayerActiveBeast.Stats[StatID.HP]);
+
+        //set HP smooth
+        Debug.Log("HP Ratio " + ((float)PlayerActiveBeast.ModifiedStats[StatID.HP] / PlayerActiveBeast.Stats[StatID.HP]));
+        //HPBarMB.SetHP(((float)PlayerActiveBeast.ModifiedStats[StatID.HP] / PlayerActiveBeast.Stats[StatID.HP]));
+        yield return HPBarMB.SetHPSmoothly(((float)PlayerActiveBeast.ModifiedStats[StatID.HP] / PlayerActiveBeast.Stats[StatID.HP]));
+        yield return HPBarMB.SetEnemyHPSmoothly((float)WildBeast.ModifiedStats[StatID.HP] / WildBeast.Stats[StatID.HP]);
+        //HPBarMB.SetEnemyHP((float)WildBeast.ModifiedStats[StatID.HP] / WildBeast.Stats[StatID.HP]);
         BattleUnitUI.SetupEnemy(WildBeast);
         BattleUnitUI.SetupPlayer(PlayerActiveBeast);
 
@@ -226,6 +239,11 @@ public class BattleSystem : MonoBehaviour
                 yield return new WaitForSeconds(1.5f);
             }
 
+            Debug.Log("HP Ratio " + ((float)PlayerActiveBeast.ModifiedStats[StatID.HP] / PlayerActiveBeast.Stats[StatID.HP]));
+            //HPBarMB.SetHP(((float)PlayerActiveBeast.ModifiedStats[StatID.HP] / PlayerActiveBeast.Stats[StatID.HP]));
+            //HPBarMB.SetEnemyHP((float)WildBeast.ModifiedStats[StatID.HP] / WildBeast.Stats[StatID.HP]);
+            yield return HPBarMB.SetHPSmoothly(((float)PlayerActiveBeast.ModifiedStats[StatID.HP] / PlayerActiveBeast.Stats[StatID.HP]));
+            yield return HPBarMB.SetEnemyHPSmoothly((float)WildBeast.ModifiedStats[StatID.HP] / WildBeast.Stats[StatID.HP]);
             BattleUnitUI.SetupEnemy(WildBeast);
             BattleUnitUI.SetupPlayer(PlayerActiveBeast);
 
@@ -257,6 +275,10 @@ public class BattleSystem : MonoBehaviour
                 yield return BattleDialogBoxMB.DisplayBattleDialogText(Beast.BattleDialog.Dequeue());
                 yield return new WaitForSeconds(1.5f);
             }
+            //HPBarMB.SetHP(((float)PlayerActiveBeast.ModifiedStats[StatID.HP] / PlayerActiveBeast.Stats[StatID.HP]));
+            //HPBarMB.SetEnemyHP((float)WildBeast.ModifiedStats[StatID.HP] / WildBeast.Stats[StatID.HP]);
+            yield return HPBarMB.SetHPSmoothly(((float)PlayerActiveBeast.ModifiedStats[StatID.HP] / PlayerActiveBeast.Stats[StatID.HP]));
+            yield return HPBarMB.SetEnemyHPSmoothly((float)WildBeast.ModifiedStats[StatID.HP] / WildBeast.Stats[StatID.HP]);
             BattleUnitUI.SetupEnemy(WildBeast);
             if (IsBattleOver())
             {
