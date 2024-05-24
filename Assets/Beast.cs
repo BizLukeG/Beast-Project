@@ -58,6 +58,13 @@ public class Beast
     public static bool ConfusionDamage { get; set; }
     public AbilityID Ability { get; set; }
     public bool AbilityActivated { get; set; }
+    //static BattleSystem BattleSystemMB;
+    public bool IsPlayer { get; set; } = false;
+
+    //void Awake()
+    //{
+    //    BattleSystemMB = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
+    //}
 
     public Beast()
     {
@@ -218,7 +225,7 @@ public class Beast
 
 
 
-    public static float DamageCalc(Move moveUsed, Beast firstUnitToMove, Beast secondUnitToMove, bool firstMove)
+    public static IEnumerator DamageCalc(Move moveUsed, Beast firstUnitToMove, Beast secondUnitToMove, bool firstMove)
     {
         Beast attacker; Beast defender;
         if (firstMove)
@@ -231,6 +238,8 @@ public class Beast
             attacker = secondUnitToMove;
             defender = firstUnitToMove;
         }
+
+        yield return null;
 
         Debug.Log("while ability " + attacker.Ability);
         //Check Ability
@@ -410,26 +419,80 @@ public class Beast
             else if (moveUsed.Category == MoveCategory.Physical)
             {
                 int randNum2 = UnityEngine.Random.Range(1, 101);
+                //Dequeue everything in battledialog before doing damage then keep everything else the same
+
+                while (BattleDialog.Count > 0)
+                {
+                    yield return BattleSystem.BattleDialogBoxMB.DisplayBattleDialogText(BattleDialog.Dequeue());
+                    yield return new WaitForSeconds(1.5f);
+                }
 
                 //check if crit. If it did multiply damage * 2 and queue phrase "it was a critical hit!"
+                if (randNum2 <= 50)
+                {
+                    damage *= 2;
+                }
+
                 effectiveness = TypeChart.GetEffectiveness(moveUsed.Typing, BeastBaseDB.BeastBases[defender.Name].Typing1, BeastBaseDB.BeastBases[defender.Name].Typing2);
                 damage = (int)Math.Round(moveUsed.Power / 100f * (attacker.ModifiedStats[StatID.Attack] - defender.ModifiedStats[StatID.Defense]) * effectiveness, MidpointRounding.AwayFromZero);
+
+                if (damage < 0) damage = 1;
+                defender.ModifiedStats[StatID.HP] -= damage;
+
+                //yield return HPBarMB.SetHPSmoothly(((float)PlayerActiveBeast.ModifiedStats[StatID.HP] / PlayerActiveBeast.Stats[StatID.HP]));               
+                yield return BattleSystem.HPBarMB.SetTheHPSmoothly((float)defender.ModifiedStats[StatID.HP] / defender.Stats[StatID.HP], defender);
+                yield return new WaitForSeconds(1.5f);
+
+
+                if (effectiveness != 1)
+                {
+                    string effectivenessPhrase = TypeChart.GetEffectivenessPhrase(effectiveness);
+                    BattleDialog.Enqueue($"{effectivenessPhrase}");
+                }
                 if (randNum2 <= 50)
                 {
                     BattleDialog.Enqueue($"it was a critical hit!");
-                    damage *= 2;
+                    //damage *= 2;
                 }
+
+
             }
             else if (moveUsed.Category == MoveCategory.Special)
             {
                 int randNum3 = UnityEngine.Random.Range(1, 101);
+
+                while (BattleDialog.Count > 0)
+                {
+                    yield return BattleSystem.BattleDialogBoxMB.DisplayBattleDialogText(BattleDialog.Dequeue());
+                    yield return new WaitForSeconds(1.5f);
+                }
+
                 //check if crit. If it did multiply damage * 2 and queue phrase "it was a critical hit!"
+                if (randNum3 <= 50)
+                {
+                    damage *= 2;
+                }
+
                 effectiveness = TypeChart.GetEffectiveness(moveUsed.Typing, BeastBaseDB.BeastBases[defender.Name].Typing1, BeastBaseDB.BeastBases[defender.Name].Typing2);
                 damage = (int)Math.Round(moveUsed.Power / 100f * (attacker.ModifiedStats[StatID.SpecialAttack] - defender.ModifiedStats[StatID.SpecialDefense]) * effectiveness, MidpointRounding.AwayFromZero);
+
+                if (damage < 0) damage = 1;
+                defender.ModifiedStats[StatID.HP] -= damage;
+
+                //yield return HPBarMB.SetHPSmoothly(((float)PlayerActiveBeast.ModifiedStats[StatID.HP] / PlayerActiveBeast.Stats[StatID.HP]));
+                yield return BattleSystem.HPBarMB.SetTheHPSmoothly((float)defender.ModifiedStats[StatID.HP] / defender.Stats[StatID.HP], defender);
+
+                yield return new WaitForSeconds(1.5f);
+
+                if (effectiveness != 1)
+                {
+                    string effectivenessPhrase = TypeChart.GetEffectivenessPhrase(effectiveness);
+                    BattleDialog.Enqueue($"{effectivenessPhrase}");
+                }
                 if (randNum3 <= 50)
                 {
                     BattleDialog.Enqueue($"it was a critical hit!");
-                    damage *= 2;
+                    //damage *= 2;
                 }
 
 
@@ -468,6 +531,16 @@ public class Beast
                         {
                             attacker.ModifiedStats[StatID.HP] = attacker.Stats[StatID.HP];
                         }
+
+                        while (BattleDialog.Count > 0)
+                        {
+                            yield return BattleSystem.BattleDialogBoxMB.DisplayBattleDialogText(BattleDialog.Dequeue());
+                            yield return new WaitForSeconds(1.5f);
+                        }
+
+                        yield return BattleSystem.HPBarMB.SetTheHPSmoothlyHeal((float)attacker.ModifiedStats[StatID.HP] / attacker.Stats[StatID.HP], attacker);
+
+                        yield return new WaitForSeconds(1.5f);
                         BattleDialog.Enqueue($"{FoeString(attacker)} {attacker.Name}'s health has been restored");
                     }
         
@@ -475,12 +548,14 @@ public class Beast
                 
             }
 
-            if (effectiveness != 1)
-            {
-                string effectivenessPhrase = TypeChart.GetEffectivenessPhrase(effectiveness);
-                BattleDialog.Enqueue($"{effectivenessPhrase}");
-            }
+            //if (effectiveness != 1)
+            //{
+            //    string effectivenessPhrase = TypeChart.GetEffectivenessPhrase(effectiveness);
+            //    BattleDialog.Enqueue($"{effectivenessPhrase}");
+            //}
 
+
+            //potentially remove 
             defender.ModifiedStats[StatID.HP] -= damage;
         }
         //       }
@@ -501,17 +576,21 @@ public class Beast
         AbilityDB.Abilities[defender.Ability].OnCheckAbility(defender);
         AbilityDB.Abilities[defender.Ability].OnCheckAbility(attacker);
 
-        return effectiveness;
+        //return effectiveness;
 
     }
 
-    public static void DamageCalcAfterTurn(Beast enemy, Beast player)
+    public static IEnumerator DamageCalcAfterTurn(Beast enemy, Beast player)
     {
         Debug.Log("While DamageCalcAfterTurn " + enemy.AfterTurnDamage);
         if (enemy.AfterTurnDamage != 0)
         {
-            enemy.ModifiedStats[StatID.HP] -= enemy.AfterTurnDamage;
             BattleDialog.Enqueue($"{FoeString(enemy)} {enemy.Name} was hurt by {enemy.AfterTurnDamageName}");
+            yield return BattleSystem.BattleDialogBoxMB.DisplayBattleDialogText(BattleDialog.Dequeue());
+            yield return new WaitForSeconds(1.5f);
+            enemy.ModifiedStats[StatID.HP] -= enemy.AfterTurnDamage;
+            yield return BattleSystem.HPBarMB.SetTheHPSmoothly((float)enemy.ModifiedStats[StatID.HP] / enemy.Stats[StatID.HP], enemy);
+            
         }
     }
     //if beast.AfterTurn damage

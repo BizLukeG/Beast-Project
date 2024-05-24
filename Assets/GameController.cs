@@ -61,7 +61,7 @@ public class GameController : MonoBehaviour
     {
         if(GameStateStack.Peek() == GameState.OverWorld)
         {
-            BattleSystemMB.BattleDialogBoxMB.DisplayBattleDialogTextNoAnimation("Press V To Start New Battle");
+            BattleSystem.BattleDialogBoxMB.DisplayBattleDialogTextNoAnimation("Press V To Start New Battle");
             Debug.Log("OverWorld");
             if (Input.GetKeyDown(KeyCode.V))
             {

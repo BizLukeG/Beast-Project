@@ -72,4 +72,103 @@ public class HPBar : MonoBehaviour
 
         //IsUpdating = false;
     }
+
+    public IEnumerator SetTheHPSmoothly(float newHP, Beast beast)
+    {
+        //IsUpdating = true;
+
+        if (beast.IsPlayer)
+        {
+            float curHP = HPBarGO.transform.localScale.x;
+            float changeAmt = curHP - newHP;
+            Debug.Log("changeAmt Enemy" + changeAmt);
+            Debug.Log("changeAmt Enemy newHP " + newHP);
+            Debug.Log("changeAmt Enemy curHP " + curHP);
+
+            while (curHP - newHP > Mathf.Epsilon/*curHP != newHP*/)
+            {
+                curHP -= changeAmt * Time.deltaTime;
+                HPBarGO.transform.localScale = new Vector3(curHP, 1f);
+                if (curHP < 0) break;
+                //HPBarGO.transform.localScale = new Vector3(curHP, 1f);
+                //stop Coroutine and start it again in the next frame
+                yield return null;
+            }
+            if (newHP < 0) newHP = 0;
+            HPBarGO.transform.localScale = new Vector3(newHP, 1f);
+        }
+        else
+        {
+
+            float curHP = EnemyHPBarGO.transform.localScale.x;
+            float changeAmt = curHP - newHP;
+            Debug.Log("changeAmt Enemy" + changeAmt);
+            Debug.Log("changeAmt Enemy newHP " + newHP);
+            Debug.Log("changeAmt Enemy curHP " + curHP);
+
+            while (curHP - newHP > Mathf.Epsilon)
+            {
+                curHP -= changeAmt * Time.deltaTime;
+                EnemyHPBarGO.transform.localScale = new Vector3(curHP, 1f);
+                if (curHP < 0) break;
+                //EnemyHPBarGO.transform.localScale = new Vector3(curHP, 1f);
+                //stop Coroutine and start it again in the next frame
+                yield return null;
+            }
+            if (newHP < 0) newHP = 0;
+            EnemyHPBarGO.transform.localScale = new Vector3(newHP, 1f);
+        }
+
+        //IsUpdating = false;
+    }
+
+    public IEnumerator SetTheHPSmoothlyHeal(float newHP, Beast beast)
+    {
+        //IsUpdating = true;
+
+        if (beast.IsPlayer)
+        {
+            float curHP = HPBarGO.transform.localScale.x;
+            float changeAmt = curHP - newHP;
+            Debug.Log("changeAmt " + changeAmt);
+            Debug.Log("changeAmt newHP " + newHP);
+            Debug.Log("changeAmt curHP " + curHP);
+
+            while (curHP - newHP < Mathf.Epsilon/*curHP != newHP*/)
+            {
+                Debug.Log("changeAmt curHP " + curHP);
+                curHP -= changeAmt * Time.deltaTime;
+                HPBarGO.transform.localScale = new Vector3(curHP, 1f);
+                if (curHP < 0) break;
+                //HPBarGO.transform.localScale = new Vector3(curHP, 1f);
+                //stop Coroutine and start it again in the next frame
+                yield return null;
+            }
+            if (newHP < 0) newHP = 0;
+            HPBarGO.transform.localScale = new Vector3(newHP, 1f);
+        }
+        else
+        {
+
+            float curHP = EnemyHPBarGO.transform.localScale.x;
+            float changeAmt = curHP - newHP;
+            Debug.Log("changeAmt Enemy" + changeAmt);
+            Debug.Log("changeAmt Enemy newHP " + newHP);
+            Debug.Log("changeAmt Enemy curHP " + curHP);
+
+            while (curHP - newHP > Mathf.Epsilon)
+            {
+                curHP -= changeAmt * Time.deltaTime;
+                EnemyHPBarGO.transform.localScale = new Vector3(curHP, 1f);
+                if (curHP < 0) break;
+                //EnemyHPBarGO.transform.localScale = new Vector3(curHP, 1f);
+                //stop Coroutine and start it again in the next frame
+                yield return null;
+            }
+            if (newHP < 0) newHP = 0;
+            EnemyHPBarGO.transform.localScale = new Vector3(newHP, 1f);
+        }
+
+        //IsUpdating = false;
+    }
 }
