@@ -438,7 +438,7 @@ public class Beast
 
                 if (damage < 0) damage = 1;
                 defender.ModifiedStats[StatID.HP] -= damage;
-
+                Debug.Log("damage " + damage);
                 //yield return HPBarMB.SetHPSmoothly(((float)PlayerActiveBeast.ModifiedStats[StatID.HP] / PlayerActiveBeast.Stats[StatID.HP]));               
                 yield return BattleSystem.HPBarMB.SetTheHPSmoothly((float)defender.ModifiedStats[StatID.HP] / defender.Stats[StatID.HP], defender);
                 yield return new WaitForSeconds(1.5f);
@@ -556,16 +556,24 @@ public class Beast
 
 
             //potentially remove 
-            defender.ModifiedStats[StatID.HP] -= damage;
+            //defender.ModifiedStats[StatID.HP] -= damage;
         }
         //       }
 
         if (ConfusionDamage)
         {
+            while (BattleDialog.Count > 0)
+            {
+                yield return BattleSystem.BattleDialogBoxMB.DisplayBattleDialogText(BattleDialog.Dequeue());
+                yield return new WaitForSeconds(1.5f);
+            }
+
             damage = (int)Math.Round(moveUsed.Power / 100f * attacker.ModifiedStats[StatID.Attack] - attacker.ModifiedStats[StatID.Defense]);
             if (damage <= 0)
                 damage = 1;
             attacker.ModifiedStats[StatID.HP] -= damage;
+            yield return BattleSystem.HPBarMB.SetTheHPSmoothly((float)attacker.ModifiedStats[StatID.HP] / attacker.Stats[StatID.HP], attacker);
+
             ConfusionDamage = false;
         }
         

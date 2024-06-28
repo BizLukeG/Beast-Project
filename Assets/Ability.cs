@@ -11,7 +11,8 @@ public class Ability
     public AbilityID Name { set; get; }
 
     public Action<Beast> OnCheckAbility { get; set; }
-
+    
+    public int Lol;
     //public Action<Beast> OnAfterFullTurn { get; set; }
 
     //public Action<Beast, Beast, Move> OnSecondaryEffect { get; set; }

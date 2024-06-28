@@ -24,7 +24,7 @@ public class BattleUnitUI
     static public void SetupEnemy(Beast beast)
     {
         //EnemyHPObject = GameObject.Find("Enemy HP");
-        GameObject.Find("Enemy HP").GetComponent<TMPro.TextMeshProUGUI>().text = "HP " + beast.ModifiedStats[StatID.HP].ToString();
+        GameObject.Find("Enemy HP").GetComponent<TMPro.TextMeshProUGUI>().text = beast.ModifiedStats[StatID.HP].ToString();
         GameObject.Find("Enemy Att").GetComponent<TMPro.TextMeshProUGUI>().text = "Att " + beast.ModifiedStats[StatID.Attack].ToString();
         GameObject.Find("Enemy Def").GetComponent<TMPro.TextMeshProUGUI>().text = "Def " + beast.ModifiedStats[StatID.Defense].ToString();
         GameObject.Find("Enemy SpAtt").GetComponent<TMPro.TextMeshProUGUI>().text = "SpAtt " + beast.ModifiedStats[StatID.SpecialAttack].ToString();
@@ -39,7 +39,7 @@ public class BattleUnitUI
     static public void SetupPlayer(Beast beast)
     {
         
-        GameObject.Find("Player HP").GetComponent<TMPro.TextMeshProUGUI>().text = "HP " + beast.ModifiedStats[StatID.HP].ToString();
+        GameObject.Find("Player HP").GetComponent<TMPro.TextMeshProUGUI>().text = beast.ModifiedStats[StatID.HP].ToString();
         GameObject.Find("Player Att").GetComponent<TMPro.TextMeshProUGUI>().text = "Att " + beast.ModifiedStats[StatID.Attack].ToString();
         GameObject.Find("Player Def").GetComponent<TMPro.TextMeshProUGUI>().text = "Def " + beast.ModifiedStats[StatID.Defense].ToString();
         GameObject.Find("Player SpAtt").GetComponent<TMPro.TextMeshProUGUI>().text = "SpAtt " + beast.ModifiedStats[StatID.SpecialAttack].ToString();

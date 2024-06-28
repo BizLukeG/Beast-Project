@@ -206,8 +206,9 @@ public class BattleSystem : MonoBehaviour
         //yield return HPBarMB.SetHPSmoothly(((float)PlayerActiveBeast.ModifiedStats[StatID.HP] / PlayerActiveBeast.Stats[StatID.HP]));
         //yield return HPBarMB.SetEnemyHPSmoothly((float)WildBeast.ModifiedStats[StatID.HP] / WildBeast.Stats[StatID.HP]);
         //HPBarMB.SetEnemyHP((float)WildBeast.ModifiedStats[StatID.HP] / WildBeast.Stats[StatID.HP]);
-        BattleUnitUI.SetupEnemy(WildBeast);
-        BattleUnitUI.SetupPlayer(PlayerActiveBeast);
+        
+        //BattleUnitUI.SetupEnemy(WildBeast);
+        //BattleUnitUI.SetupPlayer(PlayerActiveBeast);
 
         //yield return new WaitForSeconds(1f);
 
@@ -245,8 +246,9 @@ public class BattleSystem : MonoBehaviour
             //HPBarMB.SetEnemyHP((float)WildBeast.ModifiedStats[StatID.HP] / WildBeast.Stats[StatID.HP]);
             //yield return HPBarMB.SetHPSmoothly(((float)PlayerActiveBeast.ModifiedStats[StatID.HP] / PlayerActiveBeast.Stats[StatID.HP]));
             //yield return HPBarMB.SetEnemyHPSmoothly((float)WildBeast.ModifiedStats[StatID.HP] / WildBeast.Stats[StatID.HP]);
-            BattleUnitUI.SetupEnemy(WildBeast);
-            BattleUnitUI.SetupPlayer(PlayerActiveBeast);
+            
+            //BattleUnitUI.SetupEnemy(WildBeast);
+            //BattleUnitUI.SetupPlayer(PlayerActiveBeast);
 
             //yield return new WaitForSeconds(1f);
 

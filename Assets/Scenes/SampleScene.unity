@@ -3109,10 +3109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20bb1f9cddd48cb4a97cd4eecea74f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BattleDialogBoxMB: {fileID: 0}
   ActionSelectorMB: {fileID: 0}
   MoveSelectorMB: {fileID: 0}
-  HPBarMB: {fileID: 0}
   NoMatter: 0
 --- !u!1 &1323778956
 GameObject:
