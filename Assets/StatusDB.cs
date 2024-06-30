@@ -19,7 +19,7 @@ public class StatusDB
                     defender.NewBeastStatuses.Add(StatusID.Burned);
                     defender.ModifiedStats[StatID.Attack] = (int)Math.Round(.5 * defender.ModifiedStats[StatID.Attack], MidpointRounding.AwayFromZero);
                     Beast.BattleDialog.Enqueue($"{Beast.FoeString(defender)} {defender.Name} was burned");
-                    defender.AfterTurnDamage = (int)Math.Round(defender.ModifiedStats[StatID.HP]*(1/8f), MidpointRounding.AwayFromZero);
+                    defender.AfterTurnDamage = (int)Math.Round(defender.Stats[StatID.HP]*(1/8f), MidpointRounding.AwayFromZero);
                     defender.AfterTurnDamageName = "burn";
                 },
                 OnBeforeMove = (Beast attacker) =>
@@ -38,7 +38,7 @@ public class StatusDB
                             defender.NewBeastStatuses.Add(StatusID.Burned);
                             defender.ModifiedStats[StatID.Attack] = (int)Math.Round(.5 * defender.ModifiedStats[StatID.Attack], MidpointRounding.AwayFromZero);
                             Beast.BattleDialog.Enqueue($"{Beast.FoeString(defender)} {defender.Name} was burned");
-                            defender.AfterTurnDamage = (int)Math.Round(defender.ModifiedStats[StatID.HP]*(1/8f), MidpointRounding.AwayFromZero);
+                            defender.AfterTurnDamage = (int)Math.Round(defender.Stats[StatID.HP]*(1/8f), MidpointRounding.AwayFromZero);
                             defender.AfterTurnDamageName = "burn";
                         //}
                     }
@@ -153,7 +153,7 @@ public class StatusDB
                 Priority = 5,
                 OnStatusActivated = (Beast defender) => {
                     defender.NewBeastStatuses.Add(StatusID.Poisoned);
-                    defender.AfterTurnDamage = (int)Math.Round(defender.ModifiedStats[StatID.HP]*(1/8f), MidpointRounding.AwayFromZero);
+                    defender.AfterTurnDamage = (int)Math.Round(defender.Stats[StatID.HP]*(1/8f), MidpointRounding.AwayFromZero);
                     Beast.BattleDialog.Enqueue($"{Beast.FoeString(defender)} {defender.Name} was poisoned");
                     defender.AfterTurnDamageName = "poison";
                 },
@@ -172,7 +172,7 @@ public class StatusDB
                         //if(defender.NewBeastStatuses.Count == 0){
                             defender.NewBeastStatuses.Add(StatusID.Poisoned);                          
                             Beast.BattleDialog.Enqueue($"{Beast.FoeString(defender)} {defender.Name} was poisoned");
-                            defender.AfterTurnDamage = (int)Math.Round(defender.ModifiedStats[StatID.HP]*(1/8f), MidpointRounding.AwayFromZero);
+                            defender.AfterTurnDamage = (int)Math.Round(defender.Stats[StatID.HP]*(1/8f), MidpointRounding.AwayFromZero);
                             defender.AfterTurnDamageName = "poison";
                         //}
                     }

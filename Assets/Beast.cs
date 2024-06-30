@@ -568,7 +568,7 @@ public class Beast
                 yield return new WaitForSeconds(1.5f);
             }
 
-            damage = (int)Math.Round(moveUsed.Power / 100f * attacker.ModifiedStats[StatID.Attack] - attacker.ModifiedStats[StatID.Defense]);
+            damage = (int)Math.Round(moveUsed.Power / 100f * (attacker.ModifiedStats[StatID.Attack] - attacker.ModifiedStats[StatID.Defense]));
             if (damage <= 0)
                 damage = 1;
             attacker.ModifiedStats[StatID.HP] -= damage;
