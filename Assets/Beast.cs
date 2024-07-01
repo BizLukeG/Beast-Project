@@ -434,7 +434,7 @@ public class Beast
                 }
 
                 effectiveness = TypeChart.GetEffectiveness(moveUsed.Typing, BeastBaseDB.BeastBases[defender.Name].Typing1, BeastBaseDB.BeastBases[defender.Name].Typing2);
-                damage = (int)Math.Round(moveUsed.Power / 100f * (attacker.ModifiedStats[StatID.Attack] - defender.ModifiedStats[StatID.Defense]) * effectiveness, MidpointRounding.AwayFromZero);
+                damage = (int)Math.Round(moveUsed.Power / 100f * (1.5 * attacker.ModifiedStats[StatID.Attack] - defender.ModifiedStats[StatID.Defense]) * effectiveness, MidpointRounding.AwayFromZero);
 
                 if (damage < 0) damage = 1;
                 defender.ModifiedStats[StatID.HP] -= damage;
@@ -474,7 +474,7 @@ public class Beast
                 }
 
                 effectiveness = TypeChart.GetEffectiveness(moveUsed.Typing, BeastBaseDB.BeastBases[defender.Name].Typing1, BeastBaseDB.BeastBases[defender.Name].Typing2);
-                damage = (int)Math.Round(moveUsed.Power / 100f * (attacker.ModifiedStats[StatID.SpecialAttack] - defender.ModifiedStats[StatID.SpecialDefense]) * effectiveness, MidpointRounding.AwayFromZero);
+                damage = (int)Math.Round(moveUsed.Power / 100f * (1.5 * attacker.ModifiedStats[StatID.SpecialAttack] - defender.ModifiedStats[StatID.SpecialDefense]) * effectiveness, MidpointRounding.AwayFromZero);
 
                 if (damage < 0) damage = 1;
                 defender.ModifiedStats[StatID.HP] -= damage;
@@ -582,13 +582,13 @@ public class Beast
         statusConditionActivated = false;
 
         AbilityDB.Abilities[defender.Ability].OnCheckAbility(defender);
-        AbilityDB.Abilities[defender.Ability].OnCheckAbility(attacker);
+        AbilityDB.Abilities[attacker.Ability].OnCheckAbility(attacker);
 
         //return effectiveness;
 
     }
 
-    public static IEnumerator DamageCalcAfterTurn(Beast enemy, Beast player)
+    public static IEnumerator DamageCalcAfterTurn(Beast enemy)
     {
         Debug.Log("While DamageCalcAfterTurn " + enemy.AfterTurnDamage);
         if (enemy.AfterTurnDamage != 0)
@@ -598,7 +598,8 @@ public class Beast
             yield return new WaitForSeconds(1.5f);
             enemy.ModifiedStats[StatID.HP] -= enemy.AfterTurnDamage;
             yield return BattleSystem.HPBarMB.SetTheHPSmoothly((float)enemy.ModifiedStats[StatID.HP] / enemy.Stats[StatID.HP], enemy);
-            
+            yield return new WaitForSeconds(1.5f);
+            AbilityDB.Abilities[enemy.Ability].OnCheckAbility(enemy);
         }
     }
     //if beast.AfterTurn damage

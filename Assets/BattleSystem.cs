@@ -179,39 +179,18 @@ public class BattleSystem : MonoBehaviour
         }
         Debug.Log($"FirstUnitToMove {firstUnitToMove.Name} \nSecondUnitToMove {secondUnitToMove.Name}");
 
-        //Calcs damage
+        
         Move moveUsed = MoveDB.Moves[MovesQueue.Dequeue()];
         
-
-        /*float effectiveness =*/ yield return Beast.DamageCalc(moveUsed, firstUnitToMove, secondUnitToMove, true);
-        //string effectivenessPhrase = TypeChart.GetEffectivenessPhrase(effectiveness);
-
-
-
-
+        //first move is done and damage applied
+        yield return Beast.DamageCalc(moveUsed, firstUnitToMove, secondUnitToMove, true);
+        
 
         while (Beast.BattleDialog.Count > 0)
         {
             yield return BattleDialogBoxMB.DisplayBattleDialogText(Beast.BattleDialog.Dequeue());
             yield return new WaitForSeconds(1.5f);
         }
-
-        //displays stat change
-        //setHP
-        //Debug.Log("HP Ratio " + PlayerActiveBeast.ModifiedStats[StatID.HP] / PlayerActiveBeast.Stats[StatID.HP]);
-
-        //set HP smooth
-        //Debug.Log("HP Ratio " + ((float)PlayerActiveBeast.ModifiedStats[StatID.HP] / PlayerActiveBeast.Stats[StatID.HP]));
-        //HPBarMB.SetHP(((float)PlayerActiveBeast.ModifiedStats[StatID.HP] / PlayerActiveBeast.Stats[StatID.HP]));
-        //yield return HPBarMB.SetHPSmoothly(((float)PlayerActiveBeast.ModifiedStats[StatID.HP] / PlayerActiveBeast.Stats[StatID.HP]));
-        //yield return HPBarMB.SetEnemyHPSmoothly((float)WildBeast.ModifiedStats[StatID.HP] / WildBeast.Stats[StatID.HP]);
-        //HPBarMB.SetEnemyHP((float)WildBeast.ModifiedStats[StatID.HP] / WildBeast.Stats[StatID.HP]);
-        
-        //BattleUnitUI.SetupEnemy(WildBeast);
-        //BattleUnitUI.SetupPlayer(PlayerActiveBeast);
-
-        //yield return new WaitForSeconds(1f);
-
 
 
         if (IsBattleOver())
@@ -229,9 +208,9 @@ public class BattleSystem : MonoBehaviour
         {
             moveUsed = MoveDB.Moves[MovesQueue.Dequeue()];
 
-
-            /*effectiveness = */ yield return Beast.DamageCalc(moveUsed, firstUnitToMove, secondUnitToMove, false);
-            //effectivenessPhrase = TypeChart.GetEffectivenessPhrase(effectiveness);
+            //second move is done and damage applied
+           yield return Beast.DamageCalc(moveUsed, firstUnitToMove, secondUnitToMove, false);
+            
 
 
             //put all in Beast.damageCalc
@@ -240,19 +219,6 @@ public class BattleSystem : MonoBehaviour
                 yield return BattleDialogBoxMB.DisplayBattleDialogText(Beast.BattleDialog.Dequeue());
                 yield return new WaitForSeconds(1.5f);
             }
-
-            //Debug.Log("HP Ratio " + ((float)PlayerActiveBeast.ModifiedStats[StatID.HP] / PlayerActiveBeast.Stats[StatID.HP]));
-            //HPBarMB.SetHP(((float)PlayerActiveBeast.ModifiedStats[StatID.HP] / PlayerActiveBeast.Stats[StatID.HP]));
-            //HPBarMB.SetEnemyHP((float)WildBeast.ModifiedStats[StatID.HP] / WildBeast.Stats[StatID.HP]);
-            //yield return HPBarMB.SetHPSmoothly(((float)PlayerActiveBeast.ModifiedStats[StatID.HP] / PlayerActiveBeast.Stats[StatID.HP]));
-            //yield return HPBarMB.SetEnemyHPSmoothly((float)WildBeast.ModifiedStats[StatID.HP] / WildBeast.Stats[StatID.HP]);
-            
-            //BattleUnitUI.SetupEnemy(WildBeast);
-            //BattleUnitUI.SetupPlayer(PlayerActiveBeast);
-
-            //yield return new WaitForSeconds(1f);
-
-
 
 
             if (IsBattleOver())
@@ -269,20 +235,19 @@ public class BattleSystem : MonoBehaviour
         }
 
         Debug.Log("While BattleSystem Count " + Beast.BattleDialog.Count);
+        
+        //if battle isn't over after both moves, do after turn damage
         if (!IsBattleOver())
         {
-            yield return Beast.DamageCalcAfterTurn(WildBeast, PlayerActiveBeast);
+            yield return Beast.DamageCalcAfterTurn(PlayerActiveBeast);
             while (Beast.BattleDialog.Count > 0)
             {
                 Debug.Log("While BattleDialog ");
                 yield return BattleDialogBoxMB.DisplayBattleDialogText(Beast.BattleDialog.Dequeue());
                 yield return new WaitForSeconds(1.5f);
             }
-            //HPBarMB.SetHP(((float)PlayerActiveBeast.ModifiedStats[StatID.HP] / PlayerActiveBeast.Stats[StatID.HP]));
-            //HPBarMB.SetEnemyHP((float)WildBeast.ModifiedStats[StatID.HP] / WildBeast.Stats[StatID.HP]);
-            //yield return HPBarMB.SetHPSmoothly(((float)PlayerActiveBeast.ModifiedStats[StatID.HP] / PlayerActiveBeast.Stats[StatID.HP]));
-            //yield return HPBarMB.SetEnemyHPSmoothly((float)WildBeast.ModifiedStats[StatID.HP] / WildBeast.Stats[StatID.HP]);
-            BattleUnitUI.SetupEnemy(WildBeast);
+            
+            //BattleUnitUI.SetupEnemy(WildBeast);
             if (IsBattleOver())
             {
                 yield return BattleDialogBoxMB.DisplayBattleDialogText("Battle is over. Press X To Continue");
@@ -293,7 +258,30 @@ public class BattleSystem : MonoBehaviour
                 PlayerActiveBeast.ResetStats();
                 BattleStateStack.Push(BattleState.BattleOver);
 
+            }else{
+                yield return Beast.DamageCalcAfterTurn(WildBeast);
+                while (Beast.BattleDialog.Count > 0)
+                {
+                    Debug.Log("While BattleDialog ");
+                    yield return BattleDialogBoxMB.DisplayBattleDialogText(Beast.BattleDialog.Dequeue());
+                    yield return new WaitForSeconds(1.5f);
+                }
+
+                //BattleUnitUI.SetupEnemy(WildBeast);
+                if (IsBattleOver())
+                {
+                    yield return BattleDialogBoxMB.DisplayBattleDialogText("Battle is over. Press X To Continue");
+                    BattleStateStack.Push(BattleState.Hold);
+                    yield return new WaitUntil(() => hold == false);
+                    BattleStateStack.Pop();
+                    hold = true;
+                    PlayerActiveBeast.ResetStats();
+                    BattleStateStack.Push(BattleState.BattleOver);
+
+                }
             }
+
+            //yield return Beast.DamageCalcAfterTurn(WildBeast);
         }
 
         Debug.Log("BSS Count " + BattleStateStack.Count);
