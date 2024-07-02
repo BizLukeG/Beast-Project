@@ -56,6 +56,8 @@ public class MoveSelector : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Z))
         {
+            GameObject.Find("Battle Move Selector").SetActive(false);
+            BattleSystemMB.BattleStateStack.Pop();
             //dialogBox.EnableMoveSelector(false);
             //dialogBox.EnableDialogText(true);
             //ActionSelection();

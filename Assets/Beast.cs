@@ -598,7 +598,7 @@ public class Beast
             yield return new WaitForSeconds(1.5f);
             enemy.ModifiedStats[StatID.HP] -= enemy.AfterTurnDamage;
             yield return BattleSystem.HPBarMB.SetTheHPSmoothly((float)enemy.ModifiedStats[StatID.HP] / enemy.Stats[StatID.HP], enemy);
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1.0f);
             AbilityDB.Abilities[enemy.Ability].OnCheckAbility(enemy);
         }
     }

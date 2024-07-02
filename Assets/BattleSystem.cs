@@ -5,7 +5,7 @@ using System;
 
 public enum BattleState
 {
-    StartBattle, Typing, RunMoves, Hold, FinishDialog, ActionSelection, MoveSelection, ExecuteMoves, Dialog, BattleOver, Run
+    StartBattle, Typing, RunMoves, Hold, FinishDialog, ActionSelection, MoveSelection, ExecuteMoves, Dialog, BattleOver, Run, PartyScreen
 }
 
 public class BattleSystem : MonoBehaviour
@@ -25,6 +25,8 @@ public class BattleSystem : MonoBehaviour
     public ActionSelector ActionSelectorMB;
     public MoveSelector MoveSelectorMB;
     static public HPBar HPBarMB;
+    public GameObject PartyScreen;
+
     //public Queue<string> BattleDialog { set; get; } = new Queue<string>();
 
 
@@ -48,6 +50,7 @@ public class BattleSystem : MonoBehaviour
         ActionSelectorMB = GameObject.Find("Battle Action Selector").GetComponent<ActionSelector>();
         MoveSelectorMB = GameObject.Find("Battle Move Selector").GetComponent<MoveSelector>();
         HPBarMB = GameObject.Find("HP Bar").GetComponent<HPBar>();
+        PartyScreen = GameObject.Find("PartyScreen");
     }
 
     public void HandleGameStateBattle()
@@ -99,6 +102,14 @@ public class BattleSystem : MonoBehaviour
                 
             }
             
+        }else if(BattleStateStack.Peek() == BattleState.PartyScreen){
+            PartyScreen.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                PartyScreen.SetActive(false);
+                BattleStateStack.Pop();
+            }
+            //PartyScreen.gameObject.SetActive(true);
         }
         //else if (BattleStateStack.Peek() == BattleState.Run)
         //{
@@ -247,7 +258,7 @@ public class BattleSystem : MonoBehaviour
                 yield return new WaitForSeconds(1.5f);
             }
             
-            //BattleUnitUI.SetupEnemy(WildBeast);
+           
             if (IsBattleOver())
             {
                 yield return BattleDialogBoxMB.DisplayBattleDialogText("Battle is over. Press X To Continue");
@@ -267,7 +278,7 @@ public class BattleSystem : MonoBehaviour
                     yield return new WaitForSeconds(1.5f);
                 }
 
-                //BattleUnitUI.SetupEnemy(WildBeast);
+                
                 if (IsBattleOver())
                 {
                     yield return BattleDialogBoxMB.DisplayBattleDialogText("Battle is over. Press X To Continue");

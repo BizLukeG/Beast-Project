@@ -53,6 +53,7 @@ public class ActionSelector : MonoBehaviour
                 // Party
                 //prevState = state;
                 //OpenPartyScreen();
+                BattleSystemMB.BattleStateStack.Push(BattleState.PartyScreen);
             }
             else if (currentAction == 3)
             {

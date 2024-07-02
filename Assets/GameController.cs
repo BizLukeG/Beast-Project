@@ -38,6 +38,7 @@ public class GameController : MonoBehaviour
     {
         BattleSystemMB.ActionSelectorMB.gameObject.SetActive(false);
         BattleSystemMB.MoveSelectorMB.gameObject.SetActive(false);
+        BattleSystemMB.PartyScreen.SetActive(false);
 
         GameStateStack.Push(GameState.OverWorld);
         BeastBaseDB.Init();
